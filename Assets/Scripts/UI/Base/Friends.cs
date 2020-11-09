@@ -95,7 +95,7 @@ public class Friends : BaseUI
         lastdayGo.SetActive(!noFriend);
         nofriend_tipGo.SetActive(noFriend);
         bool inviteRewardCash = Save.data.task_list.invite_receive <= 7;
-        invite_reward_numText.text = string.Format("Invite friends to get <color=#FF9732>{0}</color>", inviteRewardCash ? 1 : 50);
+        invite_reward_numText.text = string.Format("Invite friends to get <color=#FF9732>{0}</color>", inviteRewardCash ? "$1.00" : "50");
         invite_reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.Friend, inviteRewardCash ? "cash" : "ticket");
     }
 }

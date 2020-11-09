@@ -13,7 +13,7 @@ public class FriendInviteRecordItem : MonoBehaviour
     {
         head_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + head_icon_id);
         nameText.text = name;
-        idText.text = "ID:" + id;
+        idText.text = id;
         reward_pt_numText.text = string.Format("+{0} <size=40>Pt</size>", rewardPtNum.GetTokenShowString());
     }
 }

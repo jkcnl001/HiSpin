@@ -68,34 +68,41 @@ public class TaskItem : MonoBehaviour
                     case PlayerTaskTarget.BuyTicketByGoldOnce:
                         adGo.SetActive(false);
                         button_contentText.text = "BUY";
+                        getButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Task, "button");
                         getButton.gameObject.SetActive(true);
                         break;
                     case PlayerTaskTarget.BuyTicketByRvOnce:
                         adGo.SetActive(true);
-                        button_contentText.text = "    GET";
+                        button_contentText.text = "    CLAIM";
+                        getButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Task, "button");
+                        getButton.gameObject.SetActive(true);
+                        break;
+                    case PlayerTaskTarget.InviteAFriend:
+                    case PlayerTaskTarget.WritePaypalEmail:
+                        adGo.SetActive(false);
+                        button_contentText.text = "GO TO";
+                        getButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Task, "button");
                         getButton.gameObject.SetActive(true);
                         break;
                     case PlayerTaskTarget.OwnSomeGold:
                     case PlayerTaskTarget.WatchRvOnce:
-                        getButton.gameObject.SetActive(false);
-                        break;
                     case PlayerTaskTarget.PlaySlotsOnce:
                     case PlayerTaskTarget.PlayBettingOnce:
                     case PlayerTaskTarget.CashoutOnce:
-                    case PlayerTaskTarget.WritePaypalEmail:
                     case PlayerTaskTarget.WinnerOnce:
-                    case PlayerTaskTarget.InviteAFriend:
                     case PlayerTaskTarget.GetTicketFromSlotsOnce:
                     default:
                         adGo.SetActive(false);
-                        button_contentText.text = "GO TO";
+                        button_contentText.text = "CLAIM";
+                        getButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Task, "button_grey");
                         getButton.gameObject.SetActive(true);
                         break;
                 }
             else
             {
                 adGo.SetActive(false);
-                button_contentText.text = "GET";
+                getButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Task, "button");
+                button_contentText.text = "CLAIM";
             }
         }
     }
@@ -105,29 +112,11 @@ public class TaskItem : MonoBehaviour
         {
             switch (TaskTarget)
             {
-                case PlayerTaskTarget.PlaySlotsOnce:
-                    UI.ShowBasePanel(BasePanel.Slots);
-                    break;
-                case PlayerTaskTarget.PlayBettingOnce:
-                    UI.ShowBasePanel(BasePanel.Betting);
-                    break;
-                case PlayerTaskTarget.OwnSomeGold:
-                case PlayerTaskTarget.WatchRvOnce:
-                    break;
-                case PlayerTaskTarget.CashoutOnce:
-                    UI.ShowBasePanel(BasePanel.Cashout);
-                    break;
                 case PlayerTaskTarget.WritePaypalEmail:
                     UI.ShowBasePanel(BasePanel.Cashout);
                     break;
-                case PlayerTaskTarget.WinnerOnce:
-                    UI.ShowBasePanel(BasePanel.Betting);
-                    break;
                 case PlayerTaskTarget.InviteAFriend:
                     UI.ShowBasePanel(BasePanel.Friend);
-                    break;
-                case PlayerTaskTarget.GetTicketFromSlotsOnce:
-                    UI.ShowBasePanel(BasePanel.Slots);
                     break;
                 case PlayerTaskTarget.BuyTicketByGoldOnce:
                     if (Save.data.mainData.user_gold_live >= 800)

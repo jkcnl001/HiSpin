@@ -254,8 +254,8 @@ public class Server : MonoBehaviour
     IEnumerator ConnectToGetData(Server_RequestType _RequestType, Action successCallback, Action failCallback, bool needShowConnecting)
     {
         isConnecting = true;
-        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         iparams.Add(new MultipartFormDataSection("device_id", deviceID));
         switch (_RequestType)
         {
@@ -267,9 +267,9 @@ public class Server : MonoBehaviour
             default:
                 break;
         }
-        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[_RequestType], iparams);
         if (needShowConnecting)
             OnConnectingServer();
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[_RequestType], iparams);
         yield return www.SendWebRequest();
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
@@ -290,8 +290,10 @@ public class Server : MonoBehaviour
                 else
                 {
                     failCallback?.Invoke();
-                    OnConnectServerFail();
-                    Master.Instance.ShowTip("Error code : " + downText);
+                    if (downText == "-1")
+                        OnConnectServerFail();
+                    else
+                        ShowConnectErrorTip(downText);
                 }
             }
             else
@@ -344,16 +346,17 @@ public class Server : MonoBehaviour
                 OnConnectServerSuccess();
             }
         }
+        www.Dispose();
     }
     IEnumerator ConnectToClickSlotsCard(Action successCallback, Action failCallback,int slotsIndex)
     {
         isConnecting = true;
-        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         iparams.Add(new MultipartFormDataSection("device_id", deviceID));
         iparams.Add(new MultipartFormDataSection("lucky_id", slotsIndex.ToString()));
-        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.ClickSlotsCard], iparams);
         OnConnectingServer();
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.ClickSlotsCard], iparams);
         yield return www.SendWebRequest();
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
@@ -364,11 +367,13 @@ public class Server : MonoBehaviour
         else
         {
             string downText = www.downloadHandler.text;
-            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5")
+            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
                 failCallback?.Invoke();
-                OnConnectServerFail();
-                Master.Instance.ShowTip("Error code : " + downText);
+                if (downText == "-1")
+                    OnConnectServerFail();
+                else
+                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -378,17 +383,18 @@ public class Server : MonoBehaviour
                 OnConnectServerSuccess();
             }
         }
+        www.Dispose();
     }
     IEnumerator ConnectToGetSlotsReward(Action successCallback ,Action  failCallback,int reward_type,int reward_num)
     {
         isConnecting = true;
-        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         iparams.Add(new MultipartFormDataSection("device_id", deviceID));
         iparams.Add(new MultipartFormDataSection("reward_type", reward_type.ToString()));
         iparams.Add(new MultipartFormDataSection("reward_num", reward_num.ToString()));
-        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.GetSlotsReward], iparams);
         OnConnectingServer();
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.GetSlotsReward], iparams);
         yield return www.SendWebRequest();
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
@@ -399,11 +405,13 @@ public class Server : MonoBehaviour
         else
         {
             string downText = www.downloadHandler.text;
-            if (downText=="-1"|| downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5")
+            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
                 failCallback?.Invoke();
-                OnConnectServerFail();
-                Master.Instance.ShowTip("Error code : " + downText);
+                if (downText == "-1")
+                    OnConnectServerFail();
+                else
+                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -419,17 +427,18 @@ public class Server : MonoBehaviour
                 OnConnectServerSuccess();
             }
         }
+        www.Dispose();
     }
     IEnumerator ConnectToFinishTask(Action successCallback,Action failCallback,int taskID, bool double_reward,params Reward[] opTypes)
     {
         isConnecting = true;
-        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         iparams.Add(new MultipartFormDataSection("device_id", deviceID));
         iparams.Add(new MultipartFormDataSection("task_id", taskID.ToString()));
         iparams.Add(new MultipartFormDataSection("double", double_reward ? "2" : "1"));
-        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.FinishTask], iparams);
         OnConnectingServer();
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.FinishTask], iparams);
         yield return www.SendWebRequest();
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
@@ -440,11 +449,13 @@ public class Server : MonoBehaviour
         else
         {
             string downText = www.downloadHandler.text;
-            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5")
+            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
                 failCallback?.Invoke();
-                OnConnectServerFail();
-                Master.Instance.ShowTip("Error code : " + downText);
+                if (downText == "-1")
+                    OnConnectServerFail();
+                else
+                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -474,16 +485,17 @@ public class Server : MonoBehaviour
                 OnConnectServerSuccess();
             }
         }
+        www.Dispose();
     }
     IEnumerator ConnectToBuyTicket(Action successCallback,Action failCallback,bool isRv)
     {
         isConnecting = true;
-        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         iparams.Add(new MultipartFormDataSection("device_id", deviceID));
         iparams.Add(new MultipartFormDataSection("reward_type", isRv ? "1" : "0"));
-        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.BuyTickets], iparams);
         OnConnectingServer();
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.BuyTickets], iparams);
         yield return www.SendWebRequest();
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
@@ -494,11 +506,13 @@ public class Server : MonoBehaviour
         else
         {
             string downText = www.downloadHandler.text;
-            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5")
+            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
                 failCallback?.Invoke();
-                OnConnectServerFail();
-                Master.Instance.ShowTip("Error code : " + downText);
+                if (downText == "-1")
+                    OnConnectServerFail();
+                else
+                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -519,15 +533,16 @@ public class Server : MonoBehaviour
                 OnConnectServerSuccess();
             }
         }
+        www.Dispose();
     }
     IEnumerator ConnectToSendRVEvent(Action successCallback,Action failCallback)
     {
         isConnecting = true;
-        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         iparams.Add(new MultipartFormDataSection("device_id", deviceID));
-        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.WatchRvEvent], iparams);
         OnConnectingServer();
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.WatchRvEvent], iparams);
         yield return www.SendWebRequest();
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
@@ -542,7 +557,8 @@ public class Server : MonoBehaviour
             {
                 failCallback?.Invoke();
                 OnConnectServerFail();
-                Master.Instance.ShowTip("Error code : " + downText);
+                if (downText != "-1")
+                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -550,16 +566,17 @@ public class Server : MonoBehaviour
                 OnConnectServerSuccess();
             }
         }
+        www.Dispose();
     }
     IEnumerator ConnectToBindPaypal(Action successCallback,Action failCallback,string paypal)
     {
         isConnecting = true;
-        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         iparams.Add(new MultipartFormDataSection("device_id", deviceID));
         iparams.Add(new MultipartFormDataSection("paypal", paypal));
-        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.BindPaypal], iparams);
         OnConnectingServer();
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.BindPaypal], iparams);
         yield return www.SendWebRequest();
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
@@ -570,11 +587,13 @@ public class Server : MonoBehaviour
         else
         {
             string downText = www.downloadHandler.text;
-            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5")
+            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
                 failCallback?.Invoke();
-                OnConnectServerFail();
-                Master.Instance.ShowTip("Error code : " + downText);
+                if (downText == "-1")
+                    OnConnectServerFail();
+                else
+                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -584,19 +603,20 @@ public class Server : MonoBehaviour
                 OnConnectServerSuccess();
             }
         }
+        www.Dispose();
     }
     IEnumerator ConnectToCashout(Action successCallback, Action failCallback,int type,int num,int cash)
     {
         isConnecting = true;
-        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         iparams.Add(new MultipartFormDataSection("device_id", deviceID));
         iparams.Add(new MultipartFormDataSection("app_name", Bi_name));
         iparams.Add(new MultipartFormDataSection("withdrawal_type", type.ToString()));
         iparams.Add(new MultipartFormDataSection("withdrawal", num.ToString()));
         iparams.Add(new MultipartFormDataSection("doller", cash.ToString()));
-        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.Cashout], iparams);
         OnConnectingServer();
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.Cashout], iparams);
         yield return www.SendWebRequest();
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
@@ -607,11 +627,13 @@ public class Server : MonoBehaviour
         else
         {
             string downText = www.downloadHandler.text;
-            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5")
+            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
                 failCallback?.Invoke();
-                OnConnectServerFail();
-                Master.Instance.ShowTip("Error code : " + downText);
+                if (downText == "-1")
+                    OnConnectServerFail();
+                else
+                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -632,6 +654,7 @@ public class Server : MonoBehaviour
                 OnConnectServerSuccess();
             }
         }
+        www.Dispose();
     }
     private string localCountry = "";
     IEnumerator ConnectToGetlocalcountry(Action<string> successCallback, Action failCallback)
@@ -642,8 +665,8 @@ public class Server : MonoBehaviour
             yield break;
         }
         isConnecting = true;
-        UnityWebRequest www = UnityWebRequest.Get(getdata_uri_dic[Server_RequestType.GetLocalCountry]);
         OnConnectingServer();
+        UnityWebRequest www = UnityWebRequest.Get(getdata_uri_dic[Server_RequestType.GetLocalCountry]);
         yield return www.SendWebRequest();
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
@@ -654,17 +677,26 @@ public class Server : MonoBehaviour
         else
         {
             string downText = www.downloadHandler.text;
+            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
+            {
+                failCallback?.Invoke();
+                if (downText == "-1")
+                    OnConnectServerFail();
+                else
+                    ShowConnectErrorTip(downText);
+            }
             LocalCountryData countryData = JsonMapper.ToObject<LocalCountryData>(downText);
             localCountry = countryData.country.ToLower();
             successCallback?.Invoke(localCountry);
             OnConnectServerSuccess();
         }
+        www.Dispose();
     }
     IEnumerator ConnectToGetBettingLeftTime(Action successCallback, Action failCallback)
     {
         isConnecting = true;
-        UnityWebRequest www = UnityWebRequest.Get(getdata_uri_dic[Server_RequestType.GetBettingLeftTime]);
         OnConnectingServer();
+        UnityWebRequest www = UnityWebRequest.Get(getdata_uri_dic[Server_RequestType.GetBettingLeftTime]);
         yield return www.SendWebRequest();
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
@@ -675,13 +707,42 @@ public class Server : MonoBehaviour
         else
         {
             string downText = www.downloadHandler.text;
+            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
+            {
+                failCallback?.Invoke();
+                if (downText == "-1")
+                    OnConnectServerFail();
+                else
+                    ShowConnectErrorTip(downText);
+            }
             BettingLeftTime bettinglefttimeData = JsonMapper.ToObject<BettingLeftTime>(downText);
             Save.data.betting_lefttime = bettinglefttimeData;
             successCallback?.Invoke();
             OnConnectServerSuccess();
         }
+        www.Dispose();
     }
     #endregion
+    private void ShowConnectErrorTip(string errorCode)
+    {
+        string errorString;
+        switch (errorCode)
+        {
+            case "-2":
+                errorString = "Coin reaches the limit. Come back tomorrow.";
+                break;
+            case "-3":
+                errorString = "The reward has been claimed.";
+                break;
+            case "-6":
+                errorString = "Abnormal behavior, try again later.";
+                break;
+            default:
+                errorString = "Error code :" + errorCode;
+                break;
+        }
+        Master.Instance.ShowTip(errorString);
+    }
     #region connecting state
     const string errorTitle = "ERROR";
     const string connectingTilte = "";

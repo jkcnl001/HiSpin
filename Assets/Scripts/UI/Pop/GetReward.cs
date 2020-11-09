@@ -8,6 +8,7 @@ public class GetReward : PopUI
     public Image reward_iconImage;
     public Text tipText;
     public Text reward_numText;
+    public Text double_getText;
     public Button double_getButton;
     public Button nothanksButton;
     protected override void Awake()
@@ -24,7 +25,7 @@ public class GetReward : PopUI
     }
     private void OnAdCallback()
     {
-        reward_num *= 2;
+        reward_num *= reward_type == Reward.Ticket ? 3 : 2;
         Get();
     }
     private void OnNothanksButtonClick()
@@ -64,10 +65,12 @@ public class GetReward : PopUI
             case Reward.Gold:
                 reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.GetReward, "gold");
                 tipText.text = GoldTip;
+                double_getText.text = "GET   x2";
                 break;
             case Reward.Ticket:
                 reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.GetReward, "ticket");
                 tipText.text = TicketTip;
+                double_getText.text = "GET   x3";
                 break;
             default:
                 Debug.LogError("奖励类型错误");

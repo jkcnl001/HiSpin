@@ -43,11 +43,11 @@ public class Betting : BaseUI
     {
         canStarBetting = true;
         if (Save.data.mainData.user_tickets >= JoinNeedTicketNum)
-            tipText.text = "More tickets, higher\nchange to win! ";
+            tipText.text = "More tickets, more\nchance to win! ";
         else
             tipText.text = string.Format("You need <color=#F4D10F>{0}</color> more Tickets\nto take part in this Lucky Draw", JoinNeedTicketNum);
 
-        ticket_numText.text = string.Format("You have <color=#FF8A01>{0}</color> ticket", Save.data.mainData.user_tickets);
+        ticket_numText.text = string.Format("You have <color=#FF8A01>{0}</color> tickets", Save.data.mainData.user_tickets);
 
         if (leftTime <= 0)
         {

@@ -1173,7 +1173,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -4, y: -126.14624}
-  m_SizeDelta: {x: 731.0698, y: 128.60205}
+  m_SizeDelta: {x: 802, y: 128.60205}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6739927896324055158
 CanvasRenderer:
@@ -1215,7 +1215,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Get Ticket, Win Cash!
+  m_Text: Get Tickets, Win Cash!
 --- !u!1 &6739927896404017322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,7 +1251,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 2.8, y: -1491.7762}
-  m_SizeDelta: {x: 1014.375, y: 121.80151}
+  m_SizeDelta: {x: 1049.9614, y: 121.80151}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6739927896404017317
 CanvasRenderer:
@@ -1282,7 +1282,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 273b5038ccad1a646895fe261cfaf8b7, type: 3}
-    m_FontSize: 100
+    m_FontSize: 92
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1293,7 +1293,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LAST DAY WINNER
+  m_Text: YESTERDAY WINNER
 --- !u!1 &6739927896642933898
 GameObject:
   m_ObjectHideFlags: 0

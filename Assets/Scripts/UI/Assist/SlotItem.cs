@@ -14,16 +14,21 @@ public class SlotItem : MonoBehaviour
     [NonSerialized]
     public bool isAd = false;
     private int index = 0;
+    private int cashNum;
     private void Awake()
     {
         button.AddClickEvent(OnClick);
     }
-    public void Init(int rewardedCashNum,bool isFree,int index)
+    public void Init(bool isFree,int index)
     {
         this.index = index;
         bgImage.sprite = Sprites.GetBGSprite("bg_" + index);
         titleImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.Slots, "title_" + index);
-        reward_numText.text = rewardedCashNum.GetTokenShowString();
+        if (index == 3 || index == 6)
+            cashNum = isFree ? 150 : 500;
+        else
+            cashNum = isFree ? 50 : 200;
+        reward_numText.text = cashNum.ToString();
         isAd = !isFree;
         ad_maskGo.SetActive(isAd);
     }
@@ -41,6 +46,6 @@ public class SlotItem : MonoBehaviour
     private void OnSuccessCallback()
     {
         Master.Instance.SendAdjustEnterSlotsEvent(isAd);
-        UI.ShowBasePanel(BasePanel.PlaySlots, index, isAd ? 1 : 0);
+        UI.ShowBasePanel(BasePanel.PlaySlots, index, isAd ? 1 : 0, cashNum);
     }
 }

@@ -9,14 +9,15 @@ public class PlaySlots : BaseUI
     public Button spinButton;
     public Button helpButton;
     public Text left_timeText;
+    public Text cash_numText;
     public Image left_rewardImage;
     public Image mid_rewardImage;
     public Image right_rewardImage;
     static readonly Dictionary<Reward, List<float>> type_offset_dic = new Dictionary<Reward, List<float>>()
     {
-        {Reward.Gold,new List<float>(){ 0.335f,0.45f,0.58f,0.71f,0.85f} },
-        {Reward.Ticket,new List<float>(){ 0.08f} },
-        {Reward.Cash,new List<float>(){ 0.22f} },
+        {Reward.Gold,new List<float>(){ 0.31f, 0.43f, 0.55f, 0.69f, 0.82f} },
+        {Reward.Ticket,new List<float>(){ 0.06f} },
+        {Reward.Cash,new List<float>(){ 0.186f} },
     };
 
     static readonly SlotsRandomData[] emptyData = new SlotsRandomData[2]
@@ -47,6 +48,15 @@ public class PlaySlots : BaseUI
         if (isSpining) return;
         isSpining = true;
         rewardType = RandomSlotsReward(out rewardNum);
+        if (spinTime == 3)
+        {
+            Ads._instance.ShowInterstialAd(OnIVCallback, "老虎机第三次");
+        }
+        else
+            OnIVCallback();
+    }
+    private void OnIVCallback()
+    {
         StartCoroutine(StartSpinSlots());
     }
     private void OnHelpButtonClick()
@@ -146,6 +156,7 @@ public class PlaySlots : BaseUI
         titleImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.Slots, "title_" + args[0]);
         Master.Instance.ChangeBg(args[0]);
         isAd = args[1];
+        cash_numText.text = "3 x     =     " + args[2].ToString();
         spinTime = 0;
         goldMustGetTime = goldData[isAd].mustGetRange == null ? -1 : goldData[isAd].mustGetRange.RandomIncludeMax();
         ticketMustGetTime = ticketData[isAd].mustGetRange == null ? -1 : ticketData[isAd].mustGetRange.RandomIncludeMax();

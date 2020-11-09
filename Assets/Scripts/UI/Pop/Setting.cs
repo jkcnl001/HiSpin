@@ -109,7 +109,7 @@ public class Setting : MonoBehaviour, IUIBase
         soundButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Setting, "sound_" + (Save.data.sound_on ? "on" : "off"));
         musicButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Setting, "music_" + (Save.data.music_on ? "on" : "off"));
         head_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + Save.data.mainData.user_title);
-        idText.text = "ID:" + Save.data.mainData.user_id;
+        idText.text = Save.data.mainData.user_id;
 
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;

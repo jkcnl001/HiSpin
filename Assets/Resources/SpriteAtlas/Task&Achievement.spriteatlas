@@ -31,11 +31,12 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 268d709bc0ef0b84d8d389033eda81a7, type: 3}
-    totalSpriteSurfaceArea: 350647
+    totalSpriteSurfaceArea: 375676
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 27b70970d868dbd40b22041c6ac4f361, type: 3}
+  - {fileID: 21300000, guid: 9b76f4619e78f6c4688412281f76369c, type: 3}
   - {fileID: 21300000, guid: af0a2af2e3b77f242815a0b30a0853d6, type: 3}
   - {fileID: 21300000, guid: 013b6ca5349d6344a91c188f624b9cf2, type: 3}
   - {fileID: 21300000, guid: 9100c0c9f11221c4c965d69bd636a2de, type: 3}
@@ -44,6 +45,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a8d50b2abe1c2654ca87b8d3f952820d, type: 3}
   m_PackedSpriteNamesToIndex:
   - ad
+  - button_grey
   - cash
   - button
   - ticket

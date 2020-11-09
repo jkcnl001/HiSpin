@@ -217,7 +217,14 @@ public class Menu : MonoBehaviour, IUIBase
                 break;
             case BasePanel.Rank:
                 OnChangeBottomButton(rankButton);
-                OnBottomBasePanelShow();
+                all_topGo.SetActive(true);
+                all_tokenGo.SetActive(false);
+                top_titleText.gameObject.SetActive(true);
+                top_titleText.text = "YESTERDAY RANKING";
+                backButton.gameObject.SetActive(false);
+                settingButton.gameObject.SetActive(true);
+                all_bottomGo.SetActive(true);
+                add_ticketButton.gameObject.SetActive(true);
                 break;
             case BasePanel.Slots:
                 OnChangeBottomButton(slotsButton);

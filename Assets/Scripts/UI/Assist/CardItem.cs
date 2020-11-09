@@ -9,12 +9,15 @@ public class CardItem : MonoBehaviour
     public Text idText;
     public Text numText;
     public CanvasGroup onCg;
+    public RectTransform cash_numRect;
+    public RectTransform cash_iconRect;
     public void Init(int head_icon_index,string id,int cashNum)
     {
         head_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + head_icon_index);
-        idText.text = "ID:\n" + id;
+        idText.text = id;
         numText.text = "$" + cashNum.GetCashShowString();
         StartCoroutine(AutoOn());
+        StartCoroutine(AutoDealyOrder());
     }
     public void SetOff()
     {
@@ -29,5 +32,13 @@ public class CardItem : MonoBehaviour
             onCg.alpha = progress;
             yield return null;
         }
+    }
+    IEnumerator AutoDealyOrder()
+    {
+        yield return null;
+        float totalWidth = cash_iconRect.sizeDelta.x + cash_numRect.sizeDelta.x + 10;
+        float x = totalWidth / 2;
+        cash_numRect.localPosition = new Vector3(x - cash_numRect.sizeDelta.x / 2, cash_numRect.localPosition.y);
+        cash_iconRect.localPosition = new Vector3(-(x - cash_iconRect.sizeDelta.x / 2), cash_iconRect.localPosition.y);
     }
 }

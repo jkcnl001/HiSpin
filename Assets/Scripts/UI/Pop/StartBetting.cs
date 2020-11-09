@@ -19,6 +19,12 @@ public class StartBetting : PopUI
         base.Awake();
         getButton.AddClickEvent(OnGetButtonClick);
         endPos = new Vector2(-473.27f-3, all_card_rootRect.localPosition.y);
+        if (Master.IsBigScreen)
+        {
+            yesterday_ticket_numText.transform.parent.localPosition -= new Vector3(0, 100, 0);
+            foreach (var rect in all_fly_cards)
+                rect.localPosition -= new Vector3(0, 100, 0);
+        }
     }
     private void OnGetButtonClick()
     {
@@ -66,22 +72,28 @@ public class StartBetting : PopUI
                 yield return null;
             }
         }
-        float turn = 10;
+        float turn = 5;
         float speed = 0;
         float maxSpeed = 3000;
+        float minSpeed = 500;
         all_card_rootRect.localPosition = new Vector3(0, all_card_rootRect.localPosition.y);
         while (turn > 0)
         {
             yield return null;
-            speed += 50;
-            if (speed > maxSpeed)
-                speed = maxSpeed;
             if (turn > 1)
+            {
+                speed += 50;
+                if (speed > maxSpeed)
+                    speed = maxSpeed;
                 all_card_rootRect.localPosition += new Vector3(-Time.deltaTime * speed, 0);
+            }
             else
             {
-                all_card_rootRect.localPosition = Vector3.Lerp(all_card_rootRect.localPosition, endPos, Time.deltaTime);
-                if (Vector3.Distance(all_card_rootRect.localPosition, endPos) < 10)
+                speed -= 50;
+                if (speed < minSpeed)
+                    speed = minSpeed;
+                all_card_rootRect.localPosition += new Vector3(-Time.deltaTime * speed, 0);
+                if (Vector3.Distance(all_card_rootRect.localPosition, endPos) < 20)
                 {
                     break;
                 }
@@ -92,7 +104,7 @@ public class StartBetting : PopUI
                 all_card_rootRect.localPosition -= 2 * endPosOffset;
             }
         }
-        tipText.text = "More tickets you have Higher chance to win!";
+        tipText.text = "More tickets you have, more chance to win!";
         get_button_contentText.text = "TRY YOUR LUCK";
         List<BettingWinnerInfo> bettingWinners = Save.data.betting_data.ranking;
         string selfId = Save.data.mainData.user_id;
@@ -108,6 +120,7 @@ public class StartBetting : PopUI
             }
         }
         single_card_item.Init(willShow.user_title, willShow.user_id, willShow.user_num);
+        yield return new WaitForSeconds(1);
         getButton.gameObject.SetActive(true);
     }
     IEnumerator AutoRatateLight()

@@ -39,7 +39,7 @@ public class Slots : BaseUI
         {
             int index = i;
             bool isFree = Save.data.slots_state.white_lucky[i] == 0;
-            allSlotsItems[i].Init(100, isFree, index);
+            allSlotsItems[i].Init(isFree, index);
         }
         if (Save.data.enter_slots_time >= 3&&!Save.data.hasRateus)
         {
