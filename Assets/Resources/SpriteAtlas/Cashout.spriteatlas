@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Cashout
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 684c48d5dc624b54ebf828021ff110a4, type: 3}
+    totalSpriteSurfaceArea: 977985
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 3dc1626093d127a4a91d83e25a7e5ee3, type: 3}
+  - {fileID: 21300000, guid: 5d17c6d0dbd19c64c941796fbd795d3c, type: 3}
+  - {fileID: 21300000, guid: 4d034ee1487a3134284d0e19b5e6fb09, type: 3}
+  - {fileID: 21300000, guid: 59957f332ad0a41479a1ea566cf41721, type: 3}
+  - {fileID: 21300000, guid: cfc10b83bf76acb40854f5416cca92ca, type: 3}
+  - {fileID: 21300000, guid: 25e0f5a3a76014f4bb65be3e60b48627, type: 3}
+  - {fileID: 21300000, guid: 59020b26a57f76147a5a922bdefd5da7, type: 3}
+  - {fileID: 21300000, guid: da3e439634bd7ab4c9b5cb3c254c9a2f, type: 3}
+  - {fileID: 21300000, guid: c0ccae6816f4e13488a67b4a3bd18199, type: 3}
+  - {fileID: 21300000, guid: 438c675a1a2efa0428c9cd7cd297a96b, type: 3}
+  - {fileID: 21300000, guid: 06d6a6eba3389dc46aa055351274fbae, type: 3}
+  - {fileID: 21300000, guid: 3ea7434c9b634a74cad6420a15fb959e, type: 3}
+  - {fileID: 21300000, guid: 1346cd1fb3c605c48960829dd8e4156e, type: 3}
+  - {fileID: 21300000, guid: 05266c7f6dd58654d9bdfd5220ef70e2, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - help
+  - Cash
+  - email line
+  - cashout line
+  - PaypalEmail
+  - Gold
+  - ownBG
+  - recordbg
+  - PT
+  - RECORD
+  - niu2
+  - niu1
+  - recordline
+  - button
+  m_Tag: Cashout
+  m_IsVariant: 0

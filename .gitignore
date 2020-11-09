@@ -1,0 +1,11 @@
+Temp/
+Library/
+Library_And/
+Library_PC/
+obj/
+Packages/
+.vs/
+*.csproj
+*.sln
+build_info.txt
+Logs/Packages-Update.log

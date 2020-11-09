@@ -1,0 +1,1815 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &51373887201788577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 129281613709926890}
+  - component: {fileID: 6015091651773582886}
+  - component: {fileID: 9180690458936728468}
+  - component: {fileID: 1563749689308535747}
+  - component: {fileID: 2894304578171401895}
+  m_Layer: 5
+  m_Name: RuleViewArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &129281613709926890
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51373887201788577}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2726120249911568991}
+  - {fileID: 5276950279458078845}
+  m_Father: {fileID: 9141602687935579871}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 28.124023, y: 457.84595}
+  m_SizeDelta: {x: 912.7528, y: 969.492}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &6015091651773582886
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51373887201788577}
+  m_CullTransparentMesh: 0
+--- !u!114 &9180690458936728468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51373887201788577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Content: {fileID: 2726120249911568991}
+  m_Horizontal: 0
+  m_Vertical: 1
+  m_MovementType: 1
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 129281613709926890}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 1222109174521113402}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 1
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1563749689308535747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51373887201788577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2894304578171401895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51373887201788577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 0
+--- !u!1 &195231710552323710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2534060185365447803}
+  - component: {fileID: 3053822009604421316}
+  - component: {fileID: 7795880392734822088}
+  m_Layer: 5
+  m_Name: content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2534060185365447803
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195231710552323710}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8094983467412653401}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -3.3, y: 11.799988}
+  m_SizeDelta: {x: 502.95813, y: 149.05798}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3053822009604421316
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195231710552323710}
+  m_CullTransparentMesh: 0
+--- !u!114 &7795880392734822088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195231710552323710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d3d624ce138797e4caf9c1563fbd203d, type: 3}
+    m_FontSize: 82
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 85
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "LET\u2019S  PLAY!"
+--- !u!1 &512902379857993960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5276950279458078845}
+  - component: {fileID: 7933120725955428943}
+  - component: {fileID: 6667575025263518573}
+  - component: {fileID: 1222109174521113402}
+  m_Layer: 5
+  m_Name: Scrollbar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5276950279458078845
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512902379857993960}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1353050147410009321}
+  m_Father: {fileID: 129281613709926890}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -39, y: 0}
+  m_SizeDelta: {x: 78.10626, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7933120725955428943
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512902379857993960}
+  m_CullTransparentMesh: 0
+--- !u!114 &6667575025263518573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512902379857993960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1222109174521113402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512902379857993960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 4137248809560754705}
+  m_HandleRect: {fileID: 5696788594484104343}
+  m_Direction: 2
+  m_Value: 1
+  m_Size: 0.023316305
+  m_NumberOfSteps: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &1109699515746291123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8783918046541057544}
+  - component: {fileID: 2913025810545812385}
+  - component: {fileID: 4610950410317361742}
+  m_Layer: 5
+  m_Name: InviteFriendRules
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &8783918046541057544
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109699515746291123}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9141602687935579871}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 411.4572}
+  m_SizeDelta: {x: 915.2787, y: 736.6528}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &2913025810545812385
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109699515746291123}
+  m_CullTransparentMesh: 0
+--- !u!114 &4610950410317361742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109699515746291123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d3d624ce138797e4caf9c1563fbd203d, type: 3}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 100
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "1.  You can earn points by friends watch\n    ad and complete tasks, and
+    you can\n    also get  points from a friends of\n    friends.\n2. Every day UTC
+    10:00:00, you can\n    review yesterday\u2019s income from\n    friends.\n3.
+    Points can be exchanged for money,\n    100,000 points equals 1 USD."
+--- !u!1 &2212808755424918464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6193197124493602859}
+  - component: {fileID: 8117697205927741622}
+  - component: {fileID: 3570417829044451883}
+  m_Layer: 5
+  m_Name: BettingRules1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &6193197124493602859
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212808755424918464}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7838152275795684442}
+  m_Father: {fileID: 9141602687935579871}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.00036621, y: 491}
+  m_SizeDelta: {x: 996.0896, y: 1155}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &8117697205927741622
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212808755424918464}
+  m_CullTransparentMesh: 0
+--- !u!114 &3570417829044451883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2212808755424918464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d3d624ce138797e4caf9c1563fbd203d, type: 3}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 100
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: '1. There is a prize of 1,000 USD in the Lucky
+
+    Draw every day.
+
+    2.
+    You must have 200 tickets to participate in the Lucky Draw. More tickets you
+    have, more chance to win.
+
+    3. Every day at UTC 08:00:00, all your tickets
+    will be automatically put into the prize pool, and  the Lucky Draw will be done.
+
+    4.
+    There will be many winners with different bonus.'
+--- !u!1 &4925321548883505185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8094983467412653401}
+  - component: {fileID: 218497887743126739}
+  - component: {fileID: 2215934927103409119}
+  - component: {fileID: 2214987625784667186}
+  m_Layer: 5
+  m_Name: sure
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8094983467412653401
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925321548883505185}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2534060185365447803}
+  m_Father: {fileID: 9141602687935579871}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -584}
+  m_SizeDelta: {x: 699, y: 199}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &218497887743126739
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925321548883505185}
+  m_CullTransparentMesh: 0
+--- !u!114 &2215934927103409119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925321548883505185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 987685f3ad95b5b4d9f07c50f88bd044, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2214987625784667186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925321548883505185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2215934927103409119}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &5273311290218054473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2726120249911568991}
+  - component: {fileID: 5470809035863031466}
+  - component: {fileID: 3259391350393962560}
+  - component: {fileID: 2640306926152164659}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2726120249911568991
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5273311290218054473}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 129281613709926890}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 417.22, y: -0}
+  m_SizeDelta: {x: 834.9524, y: 41580}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &5470809035863031466
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5273311290218054473}
+  m_CullTransparentMesh: 0
+--- !u!114 &3259391350393962560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5273311290218054473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d3d624ce138797e4caf9c1563fbd203d, type: 3}
+    m_FontSize: 62
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 63
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: "Effective date: October 25st 2020\nGeneral\nTo win in HI SPIN Contest
+    (the \u201CContest\u201D), there is no purchase or payment of any kind necessary
+    to enter the Contest or win. No payment or purchase will increase an entrants
+    chances of winning. Void where prohibited.\nBy entering the contest, all entrants
+    and winners agree to abide by and be bound by these official contest rules and
+    consent to the use of their personal information to administer the contest.\nParticipants\nThe
+    Contest is open to all registered users of HI SPIN, legal residents of all countries
+    with HI SPIN app distribution on Google Play Store and AppStore, who have reached
+    the age of 18 or the applicable age of majority (which is higher) at the time
+    of entry (\u201CParticipants\u201D) and where local regulation does not prevent
+    in any other way participation in free contest with cash or other real world
+    prizes. Participants are not eligible to enter or win the Contest if they are
+    (a) an employee, officer, director, representative or agent of HI SPIN Mobile
+    s.r.o. (the \"Contest Sponsor\"), its parent, subsidiaries, related or affiliated
+    companies or, if applicable, any of their respective advertising or promotion
+    agencies, or any other company or individual engaged in the provision of goods
+    or services related to this Contest (collectively, the \"Contest Parties\"\u2019);
+    or (b) a member of the immediate family (parent, child, sibling, spouse, grandparent,
+    grandchild, cousin, aunt or uncle, whether related through blood, marriage, common
+    law, civil union or adoption, regardless of where they live) or household (whether
+    related or not), of any of the above individuals, directly or indirectly related.\nContest
+    Period\nThe Contest is announced in HI SPIN application and/or on HI SPIN web
+    as a countdown, that displays the time until the next Contest. It is HI SPIN's
+    sole discretion to announce a new contest with countdown or cancel upcoming contests,
+    any time, without any reason whatsoever.\nParticipation\nTo enter a Contest,
+    user needs to:\nFollowing Contest App or Web instructions, register by connecting
+    with Facebook, phone number or by providing their e-mail address. In order to
+    register, Participants need to accept and agree to the Privacy Statement, Terms
+    of Use and these Contest Rules and be at least 18 years old.\nUse HI SPIN App
+    or Web to earn tickets (\"Tickets\") that are each worth one (1) entry into the
+    Contest. Tickets can be earned in various ways, including (i) playing games and
+    battles, (ii) completing quests or missions (iii) daily login, and (iv) sharing
+    HI SPIN with friends and (v) other defined activities in the application. Tickets
+    have no cash value.  In the event of a dispute over the identity of an entrant,
+    each entry will be considered to have been submitted by the Registered Owner
+    (as defined in below) of the email address associated with the entry. \u201CRegistered
+    Owner\u201D is defined as the natural person who is assigned an e-mail address
+    by an Internet access provider, on-line service provider or other organization/individual
+    that is responsible for assigning email addresses for the domain associated with
+    the submitted email address.\nPrizes and Winning a Contest\nAll cash prizes are
+    awarded to the winners by Contest Sponsor. Winners must accept the Prize as awarded
+    by the Contest Sponsor or the Prize will be forfeited. Prizes cannot be transferred
+    or substituted, except at the Contest Sponsor's sole discretion. Failure to verify
+    or declare a winner or otherwise unclaimed Prizes will result in such Prizes
+    being forfeited and not awarded.\nSelected entrants are notified after the contest
+    with in-app announcement and/or notification.\nMain Contest Draw\nAt the end
+    of each Contest Period (announced countdown through HI SPIN App and Web), a random
+    draw will be held from among all eligible entries received during the Contest
+    Period to select an entrant(s) eligible to win the main Prize(s).\nAll available
+    tickets at the moment of draw are entered into the main Contest draw.\nThe main
+    Prize winner is announced through HI SPIN App or/and HI SPIN Web, right after
+    the main Contest Draw.\nOdds of winning the Prize depend upon the number of eligible
+    entries received by the Contest Sponsor during the Contest Period.\nSecondary
+    prizes and Wheel of Fortune\nFor participants of the main Contest Draw, there
+    is a possibility to win secondary prizes, using a Wheel of Fortune. Wheel of
+    Fortune participation requires no purchase or payment of any kind to enter or
+    win. No payment or purchase will increase an entrant's chances of winning.\nWheel
+    of Fortune participation is offered right after the main Contest Draw has finished
+    as well as daily in the application. Wheel of Fortune offers secondary prizes
+    in a form of tickets and cash prizes. Winners of secondary Prizes are randomly
+    selected from all Participants.\nActivity & Loyalty Prizes\nContest Sponsor may
+    also offer prizes as a reward for activity and loyalty in two ways.\nWheel of
+    Fortune prize may be offered to users for specific activities, such as 7 days
+    consecutive activity in application.\nIn selected countries (subject to Contest
+    sponsor decisions), users may have the option to exchange their collected tickets
+    for cash prize reward or other real world rewards.\nContest sponsor reserves
+    the right to change the activity and loyalty program at its own discretion.\nBeing
+    granted an activity or loyalty prize requires no purchase or payment of any kind.\nWallet
+    & Withdrawal\nAll cash prizes are stored in the user application Wallet and can
+    be paid out on request using the \u201Cwithdraw\u201D button in the application,
+    only when reaching a minimum threshold $10. Contest sponsor reserves a right
+    to change the withdrawal threshold at any time.\nTo withdraw the cash prize after
+    reaching the $10 threshold, contest Participants are required to: (a) fill in
+    and confirm Declaration and Release form that (i) confirms compliance with the
+    Contest Rules, and (ii) releases the Contest Parties from any and all liability
+    in connection with the Contest or the acceptance, awarding, use or misuse of
+    any Prize (the \"Release Form\"); The Contest Sponsor reserve the right to verify
+    any of the foregoing requirements including, without limitation, proof of age
+    and jurisdiction of residence prior to awarding the Prize. If an entrant\u2019s
+    name is drawn and they are unqualified, the Prize may be forfeited in the Contest
+    Sponsor\u2019s sole discretion.\nWhen a user requests cash prize withdrawal and
+    all Contest rules and conditions are met, Contest Sponsor will pay out the cash
+    prize within 30 days after receiving a complete withdrawal request.\nContest
+    sponsor may return withdrawal requests if incomplete, wrongly filled-in or reject
+    the withdrawal request in case of any doubt or failing to comply with Contest
+    rules. In case Contest Sponsor decides to reject the withdrawal request, the
+    wallet balance is reset.\nExpiration period - any prize money added to the wallet
+    expires 12 months after the first prize grant and the user is no longer eligible
+    for the prize, prize money will be cancelled and removed from his wallet.\nThe\_App\_offers\_users\_the\_possibility\_of\_collecting\_coins\_for\_the\_use\_of\_the\_preset\_apps.\nThe\_preset\_apps\_for\_which\_coins\_can\_be\_collected;\_the\_number\_of\_coins\_which\_can\_be\_earned\_per\_app;\_and\_the\_time\_and\_content\_limitation\_of\_special\_offers\_or\_special\_campaigns\_relating\_to\_individual\_coins\_and\_rewards\_are\_established\_solely\_by\_the\_Provider\_and\_can\_be\_changed\_by\_the\_Provider\_at\_any\_time\_without\_giving\_reasons.\_The\_User\_has\_no\_legal\_entitlement\_in\_this\_respect.\nReferral
+    prize\nContest sponsor rewards existing users for inviting their friends to the
+    service. Users get $0.1 and 500 tickets added to their HI SPIN wallet for each
+    user that reaches level 3 on HI SPIN. Contest Sponsor reserves the right to evaluate
+    and reject such reward in case of fraud suspicion. The limit for such a reward
+    is set for maximum 5 referral rewards per day.\nRight to Suspend, Modify and
+    Terminate\nThe Contest Sponsor reserves the right, in its sole discretion, to
+    suspend or cancel the Contest at any time if, for any reason the Contest is not
+    capable of running as planned, including, without limitation, infection by computer
+    virus, bugs, tampering, unauthorized intervention, fraud, technical failures,
+    or any other causes which corrupt or affect the administration, security, fairness,
+    integrity or proper conduct of the Contest (\u201CInterruptions\u201D). The Contest
+    Sponsor reserves the right to cancel, in its sole discretion, to suspend and/or
+    modify the Contest, or any part of it and disqualify any individual who is responsible
+    for any Interruptions, tampering with the entry process, the operation of the
+    Contest Apps, or who is otherwise in violation of these Official Contest Rules.
+    If terminated, the Contest Sponsor may, in its sole discretion, determine the
+    winners from among all eligible Entries received up to time of such action using
+    the procedures outlined herein. Each prize will be awarded \u201Cas is\u201D
+    and without warranty of any kind, express or implied (including, without limitation,
+    any implied warranty of merchantability or fitness for a particular purpose).\nConfidentiality,
+    Publicity and Intellectual Property Rights\nFor purposes of these Official Contest
+    Rules, \u201CIntellectual Property Rights\u201D means any trade marks, copyright,
+    moral rights, performer\u2019s rights, confidential information, trade secrets
+    and all or any other intellectual or industrial property rights, both registered
+    and unregistered anywhere in the world, including any renewals and extensions
+    and including any such rights discovered or invented after the date hereof.\nEach
+    Participant shall to keep confidential any information which the Participant
+    knows or reasonably ought to know is confidential and relates to HI SPIN, HI
+    SPIN\u2019s business or the Contest.\nEach Participant agrees to participate,
+    at HI SPIN\u2019s request, in publicity (including interviews) and further agrees
+    that HI SPIN owns all Intellectual Property Rights in, and may use at HI SPIN\u2019s
+    absolute discretion, such publicity/interviews. HI SPIN may refer to the Participant\u2019s
+    association with the Contest in all publicity, marketing and materials.\nThe
+    Participant shall not publicise his or her involvement in the Contest or the
+    fact that the Participant has won any prize (including giving interviews) except
+    with HI SPIN\u2019s prior written consent.\nBy entering a Contest or submitting
+    a video, image, audio file or any other materials in relation to a Contest or
+    Prize (the \u201CProducts\u201D) each Participant: (i) confirms the grant by
+    the Participant to HI SPIN of a worldwide, perpetual, royalty free licence in
+    the Intellectual Property Rights in the Products or Contest entry, (ii) waives
+    any moral rights and like rights the Participant has in relation to the Products
+    or HI SPIN entry so that HI SPIN shall be entitled to use the Products or HI
+    SPIN entry in any and all media at no cost to HI SPIN and (iii) warrants to HI
+    SPIN that the Products or HI SPIN entry: (a) are personal and related specifically
+    to the Participant; (b) are owned and controlled by the Participant and that
+    the Participant has the right, power and authority to grant the rights set out
+    in these terms and conditions; (c) will not infringe the Intellectual Property
+    Rights, privacy or any other rights of any third party; (d) will not contain
+    anything which is untrue, defamatory, obscene, indecent, harassing or threatening;
+    (e) do not violate any applicable law or regulation (including any laws regarding
+    anti-discrimination or false advertising); (f) are not obscene or pornographic;
+    (g) do not, to the best of the Participant\u2019s knowledge, contain any viruses
+    or other computer programming routines that are intended to damage, detrimentally
+    interfere with, surreptitiously intercept or expropriate any system, data or
+    personal information; (h) are free from any encumbrances such that HI SPIN may
+    use the Products in accordance with and in the manner set out in these Official
+    Contest Rules.\nFor the avoidance of doubt, all rights relating to the Contest
+    (including the name, title and format of the Contest ) will vest exclusively
+    in HI SPIN for our own use (in our absolute discretion).  Unless otherwise stated,
+    Contest entries will not be returned to you.\nLimitation of Liability and Release\nNo
+    liability or responsibility is assumed by the Contest Parties resulting from
+    entrant's participation in or attempt to participate in the Contest, ability
+    or inability to upload or download any information in connection with the Contest,
+    or from the disruption of third-party services such as mail delivery. No responsibility
+    or liability is assumed by the Contest Parties for Interruptions, technical problems
+    or technical malfunction arising in connection with any of the following occurrences
+    which may affect the operation of the Contest: hardware or software errors; faulty
+    computer, cable, satellite, network, electronic, Internet connectivity or other
+    online or network communication problems; errors or limitations of any Internet
+    service providers, servers, hosts or other providers; garbled, jumbled or faulty
+    data transmissions; failure of any online transmissions to be sent or received;
+    lost, late, delayed or intercepted transmissions; inaccessibility of the Contest
+    App in whole or in part for any reason; traffic congestion on the Internet or
+    the Contest App's servers; unauthorized human or non-human intervention of the
+    operation of the Contest, including without limitation, unauthorized tampering,
+    hacking, theft, virus, bugs, or worms; or destruction of any aspect of the Contest,
+    or loss, miscount, misdirection, inaccessibility or unavailability of an email
+    account used in connection with the Contest. The Contest Parties is not responsible
+    for any printing, typographical, technical, computer, network or human error
+    which may occur in the administration of the Contest, the processing of Tickets
+    or entries, or in any Contest-related materials. Use of the Contest App is at
+    user's own risk. The Contest Parties are not responsible for any personal injury
+    or property damage or losses of any kind which may be sustained to user's or
+    any other person's computer equipment resulting from participation in the Contest. 
+    By participating in the Contest, entrants agree: (i) to release, hold harmless
+    and indemnify the Contest Parties, Facebook, Inc., Apple, Inc., and Google Inc.
+    from any and all claims, damages or liabilities arising from or relating to such
+    entrant's participation in the Contest; (ii) all causes of action arising out
+    of or connected with this Contest, or any Prize awarded, shall be resolved individually,
+    without resort to any form of class action; and (iii)any and all claims, judgments,
+    and award shall be limited to actual out-of-pocket costs incurred, excluding
+    legal fees and court costs.  By accepting a Prize, winner agrees that the Contest
+    Sponsor, its parent, subsidiaries, related or affiliated companies or, if applicable,
+    any of their respective advertising or promotion agencies, or any other company
+    or individual engaged in the provision of goods or services related to this Contest
+    and their officers, directors, employees, representatives and agents will have
+    no liability whatsoever for, and shall be held harmless by winner against, any
+    liability for injuries, losses or damages of any kind to persons or property
+    resulting in whole or in part, directly or indirectly, from participation in
+    the Contest or from the acceptance, possession, misuse or use of any Prize. 
+    ANY ATTEMPT BY AN INDIVIDUAL, WHETHER OR NOT AN ENTRANT, TO DELIBERATELY DAMAGE,
+    DESTROY, TAMPER OR VANDALIZE THE CONTEST APP OR INTERFERE WITH THE OPERATION
+    OF THE CONTEST IS A VIOLATION OF CRIMINAL AND CIVIL LAWS, AND THE CONTEST SPONSOR
+    RESERVES THE RIGHT TO SEEK DAMAGES AND DILIGENTLY PURSUE ALL REMEDIES AGAINST
+    ANY SUCH INDIVIDUAL TO THE FULLEST EXTENT PERMITTED BY LAW.\nPrivacy and Public
+    Release\nThe Contest Sponsor and its authorized agents will collect, use, and
+    disclose the personal information provided upon registration and entry into the
+    Contest for the purposes of administering the Contest and Prize fulfillment,
+    in accordance with the Contest Sponsor's Privacy Statement.  By accepting a Prize,
+    winners consent to the publication and use of their name, statements, profile
+    pictures, photographs, image and/or likeness in any form, manner or media whether
+    now known or hereafter devised, including, without limitation, in print, radio,
+    television, in the Contest App, and on the Internet for any purpose in connection
+    with the Contest including, without limitation, for the purposes of advertising
+    and trade, and promoting the Contest Sponsor and its services, without further
+    notice or compensation.\nGeneral Conditions\nThe Contest Sponsor is not responsible
+    for any other costs associated with claiming or using the Prize. The winners
+    are solely responsible for the reporting and payment of any and all taxes, if
+    any, that may result in claiming the prizes in this Contest. Contest Winner understands,
+    that the prize received might be reduced by tax obligations that arise for the
+    Contest Sponsor related to awarding such prize. Decisions of the Contest Sponsor
+    are final on all matters relating to the Contest, including matters of fact,
+    interpretation, eligibility, procedure and fulfillment in respect to the Contest.
+    The Contest Sponsor reserves the right at any time to cancel or modify the Contest
+    or to modify or supplement these Official Contest Rules without notice, in its
+    sole discretion, subject to applicable law.\nQuestions concerning the construction,
+    validity, interpretation and enforceability of these Official Rules, entrants'
+    rights and obligations, or the rights and obligations of the Contest Sponsor
+    in connection with the Contest, shall be governed by, and construed in accordance
+    with, the laws in effect in the Czech Republic, without giving effect to any
+    choice of law or conflict of law rules. Any waiver of any obligation hereunder
+    by the Contest Sponsor does not constitute a general waiver of any obligation
+    to entrants.  The Contest Sponsor reserves the right to update or modify these
+    Rules at any time, and without prior notice to you.\nThis promotion is in no
+    way sponsored, endorsed or administered by, or associated with, Facebook, Google
+    or Apple.\nThe Contest sponsor may be contacted at contest@HI SPIN.com\n"
+--- !u!114 &2640306926152164659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5273311290218054473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
+--- !u!1 &5736795335471587024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3085780170734592847}
+  - component: {fileID: 8478293802861835120}
+  - component: {fileID: 698935371744778854}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3085780170734592847
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5736795335471587024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5656988428952013811}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 2}
+  m_SizeDelta: {x: 0, y: 4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8478293802861835120
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5736795335471587024}
+  m_CullTransparentMesh: 0
+--- !u!114 &698935371744778854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5736795335471587024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: eff442045f5e016418710f7d8a7fb23b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6563546398751667432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1353050147410009321}
+  m_Layer: 5
+  m_Name: Sliding Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1353050147410009321
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6563546398751667432}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5696788594484104343}
+  m_Father: {fileID: 5276950279458078845}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &6909348345090884822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5696788594484104343}
+  - component: {fileID: 9146541089424561238}
+  - component: {fileID: 4137248809560754705}
+  m_Layer: 5
+  m_Name: Handle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5696788594484104343
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909348345090884822}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1353050147410009321}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.9766837}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9146541089424561238
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909348345090884822}
+  m_CullTransparentMesh: 0
+--- !u!114 &4137248809560754705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6909348345090884822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6990745749031375206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5656988428952013811}
+  - component: {fileID: 5735934255396803620}
+  - component: {fileID: 6981046685320234629}
+  - component: {fileID: 9104481806794022819}
+  - component: {fileID: 2592873360415251436}
+  m_Layer: 5
+  m_Name: terms
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5656988428952013811
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6990745749031375206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3085780170734592847}
+  m_Father: {fileID: 9141602686691059516}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -833}
+  m_SizeDelta: {x: 0, y: 81.320984}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5735934255396803620
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6990745749031375206}
+  m_CullTransparentMesh: 0
+--- !u!114 &6981046685320234629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6990745749031375206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d3d624ce138797e4caf9c1563fbd203d, type: 3}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 6
+    m_MaxSize: 64
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: TERMS & CONDITIONS
+--- !u!114 &9104481806794022819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6990745749031375206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
+--- !u!114 &2592873360415251436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6990745749031375206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 6981046685320234629}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &8017262896415536414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7838152275795684442}
+  - component: {fileID: 1827821222525752071}
+  - component: {fileID: 6962882573585357565}
+  m_Layer: 5
+  m_Name: BettingRules2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7838152275795684442
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8017262896415536414}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6193197124493602859}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -813}
+  m_SizeDelta: {x: 856.5055, y: 342}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &1827821222525752071
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8017262896415536414}
+  m_CullTransparentMesh: 0
+--- !u!114 &6962882573585357565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8017262896415536414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d3d624ce138797e4caf9c1563fbd203d, type: 3}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 100
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: '1st                          $200
+
+    2nd - 4th prize        $100
+
+    5nd
+    - 14th prize       $20
+
+    15nd - 44th prize      $10'
+--- !u!1 &9141602686691059515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9141602686691059516}
+  - component: {fileID: 9141602686691059518}
+  - component: {fileID: 9141602686691059517}
+  m_Layer: 5
+  m_Name: PlaySlotsRules
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9141602686691059516
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602686691059515}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5656988428952013811}
+  m_Father: {fileID: 9141602687935579871}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 411.4572}
+  m_SizeDelta: {x: 856.5055, y: 933.0471}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &9141602686691059518
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602686691059515}
+  m_CullTransparentMesh: 0
+--- !u!114 &9141602686691059517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602686691059515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d3d624ce138797e4caf9c1563fbd203d, type: 3}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 100
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Spin and match 3 X symbols to win coin or other reward.
+
+
+
+    <size=40>Google
+    are not sponsor are they involved in any Hi Spin sweepstakes or prize draws.
+
+
+    Hi
+    Spin is a sweepstakes application.
+
+    For offical rules, please see:</size>
+
+'
+--- !u!1 &9141602687539517649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9141602687539517650}
+  - component: {fileID: 4879387657866542142}
+  - component: {fileID: 6900460349073075208}
+  m_Layer: 5
+  m_Name: Pop_Rules
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9141602687539517650
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602687539517649}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 9141602687979077953}
+  - {fileID: 9141602687935579871}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &4879387657866542142
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602687539517649}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &6900460349073075208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602687539517649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3527959380d1c554f89bfd559a9f6fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleText: {fileID: 9141602687780912148}
+  play_slots_rulesRect: {fileID: 9141602686691059516}
+  betting_rulesRect: {fileID: 6193197124493602859}
+  game_rulesRect: {fileID: 129281613709926890}
+  invite_firend_rulesRect: {fileID: 8783918046541057544}
+  closeButton: {fileID: 9141602688492873319}
+  sureButton: {fileID: 2214987625784667186}
+  termsButton: {fileID: 2592873360415251436}
+--- !u!1 &9141602687780912146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9141602687780912147}
+  - component: {fileID: 9141602687780912149}
+  - component: {fileID: 9141602687780912148}
+  m_Layer: 5
+  m_Name: title
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9141602687780912147
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602687780912146}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9141602687935579871}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 4.7, y: 585.6}
+  m_SizeDelta: {x: 1024.6798, y: 128.90314}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9141602687780912149
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602687780912146}
+  m_CullTransparentMesh: 0
+--- !u!114 &9141602687780912148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602687780912146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 273b5038ccad1a646895fe261cfaf8b7, type: 3}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 100
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: How to win
+--- !u!1 &9141602687935579870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9141602687935579871}
+  m_Layer: 5
+  m_Name: All
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9141602687935579871
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602687935579870}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 9141602688492873318}
+  - {fileID: 9141602687780912147}
+  - {fileID: 9141602686691059516}
+  - {fileID: 6193197124493602859}
+  - {fileID: 129281613709926890}
+  - {fileID: 8783918046541057544}
+  - {fileID: 8094983467412653401}
+  m_Father: {fileID: 9141602687539517650}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &9141602687979077952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9141602687979077953}
+  - component: {fileID: 9141602687979077955}
+  - component: {fileID: 9141602687979077954}
+  m_Layer: 5
+  m_Name: BG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9141602687979077953
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602687979077952}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9141602687539517650}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9141602687979077955
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602687979077952}
+  m_CullTransparentMesh: 0
+--- !u!114 &9141602687979077954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602687979077952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &9141602688492873317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9141602688492873318}
+  - component: {fileID: 9141602688492873321}
+  - component: {fileID: 9141602688492873320}
+  - component: {fileID: 9141602688492873319}
+  m_Layer: 5
+  m_Name: close
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &9141602688492873318
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602688492873317}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9141602687935579871}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 434, y: 734.1}
+  m_SizeDelta: {x: 101, y: 101}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9141602688492873321
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602688492873317}
+  m_CullTransparentMesh: 0
+--- !u!114 &9141602688492873320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602688492873317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 78a5cdfdfb245524796fb5cd3d662f0b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9141602688492873319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141602688492873317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 9141602688492873320}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []

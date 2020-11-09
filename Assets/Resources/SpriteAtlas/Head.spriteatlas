@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Head
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 637ffd2e45841bc43bc2e524614cc0ef, type: 3}
+    totalSpriteSurfaceArea: 743424
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 765f0340496c6dc4a9ab23a6e8a3f92b, type: 3}
+  - {fileID: 21300000, guid: 19483f314d29bd747903d826cda2ec3f, type: 3}
+  - {fileID: 21300000, guid: 2486ef0308b05f44ea6bfdb3b10f1a96, type: 3}
+  - {fileID: 21300000, guid: cbdf0d9329dcbcb47b5fc40914ba4dff, type: 3}
+  - {fileID: 21300000, guid: 38cb91f3e773c284e87b920e19f2f165, type: 3}
+  - {fileID: 21300000, guid: 3e47cc254cc44c4419f27d1af704e3f2, type: 3}
+  - {fileID: 21300000, guid: f7c9cb1688cb4134ea8706a465a0772e, type: 3}
+  - {fileID: 21300000, guid: c1cc0bd6c73158141a26f11576df982d, type: 3}
+  - {fileID: 21300000, guid: e0227117c73cba84bae2f3a2607e962b, type: 3}
+  - {fileID: 21300000, guid: b4a7aa27a1628bb4e9dc7a17522a8ee2, type: 3}
+  - {fileID: 21300000, guid: c6b990e703848424ca38f56ded2c8ee5, type: 3}
+  - {fileID: 21300000, guid: 6f1633c89f04a2440861231742ac37b2, type: 3}
+  - {fileID: 21300000, guid: 05e37e399bb886245bea1caefed4476d, type: 3}
+  - {fileID: 21300000, guid: 5f41bfb9bc714e744ac0e8e8287675fb, type: 3}
+  - {fileID: 21300000, guid: aaed674a37d8e6342b42313383d6a854, type: 3}
+  - {fileID: 21300000, guid: c915a4aabcf03624184e0ee3c135a51e, type: 3}
+  - {fileID: 21300000, guid: c63a5e7bc32f19e499272f30035a99f6, type: 3}
+  - {fileID: 21300000, guid: 3a5defebffb503144a50e1a0550b0a22, type: 3}
+  - {fileID: 21300000, guid: a924bd5c212dedc488366df25126d101, type: 3}
+  - {fileID: 21300000, guid: 5f122d4d146aab84a984b25713d8240c, type: 3}
+  - {fileID: 21300000, guid: 77f75b6d475289345af30a11afc1b80b, type: 3}
+  - {fileID: 21300000, guid: 2db2537df4a346045884df354dd360ac, type: 3}
+  - {fileID: 21300000, guid: f381a5ae4a788bd46a5593882dbe68fb, type: 3}
+  - {fileID: 21300000, guid: 5c29c6cf25c670a428a5490e06ae312e, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - head_20
+  - head_0
+  - head_19
+  - head_13
+  - head_7
+  - head_16
+  - head_15
+  - head_2
+  - head_5
+  - head_23
+  - head_10
+  - head_17
+  - head_6
+  - head_18
+  - head_8
+  - head_1
+  - head_21
+  - head_9
+  - head_11
+  - head_12
+  - head_14
+  - head_22
+  - head_3
+  - head_4
+  m_Tag: Head
+  m_IsVariant: 0

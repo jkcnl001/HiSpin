@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Slots
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 493b8016b3885f6488598b83b99aad59, type: 3}
+    totalSpriteSurfaceArea: 8475867
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 44150630755c0ec499dff40dbe1d108b, type: 3}
+  - {fileID: 21300000, guid: 1120b121a069c6d4c8d5c51a9b3bb51d, type: 3}
+  - {fileID: 21300000, guid: 317a8712b1d33f94a81f478383e1f206, type: 3}
+  - {fileID: 21300000, guid: 68f5b1e233ab9f04885293dd0f0c71c7, type: 3}
+  - {fileID: 21300000, guid: 15bb8253f6a5131439be9b4fd0219de5, type: 3}
+  - {fileID: 21300000, guid: fb7a816307ac90244ab27e967740e295, type: 3}
+  - {fileID: 21300000, guid: a69eef8353bf2ac4b80e2a924e2f76f3, type: 3}
+  - {fileID: 21300000, guid: 53cf62a30b6eb854facc3e1de66544cd, type: 3}
+  - {fileID: 21300000, guid: 18fd1ca3290198b4ca4b5bc035275360, type: 3}
+  - {fileID: 21300000, guid: 420a0dd31b48bcf4786ecf50b668f8da, type: 3}
+  - {fileID: 21300000, guid: 9c0b6a04d83ab1d47a73d3729a51476e, type: 3}
+  - {fileID: 21300000, guid: e8dc1dc428dd8504dba0bf2b7ba34650, type: 3}
+  - {fileID: 21300000, guid: 132291c58a0c10b49997bef3132228ce, type: 3}
+  - {fileID: 21300000, guid: 9f6314f650fb5c2428da86d1ee6f7e7d, type: 3}
+  - {fileID: 21300000, guid: 884246870e6e28248a30b3be6842cac4, type: 3}
+  - {fileID: 21300000, guid: 0b0d4b481d501dc4791323dc945bd3f8, type: 3}
+  - {fileID: 21300000, guid: b6995be8694e16c428aa884f42bdd25e, type: 3}
+  - {fileID: 21300000, guid: 269773f899fc5784fb4377eb346aeeb6, type: 3}
+  - {fileID: 21300000, guid: 9b18d97994166ef48b68b932961acca7, type: 3}
+  - {fileID: 21300000, guid: 867d3be9eeb41cd4e8800d06e9bbf1d9, type: 3}
+  - {fileID: 21300000, guid: dac5447ab8c2e0b4b83585148337bd3d, type: 3}
+  - {fileID: 21300000, guid: 8709ddcaa71070d439fffdc607128774, type: 3}
+  - {fileID: 21300000, guid: 864030ead170c5c4cb3fbd24dd64112b, type: 3}
+  - {fileID: 21300000, guid: 22c35c8b1fdbe224eac5c70320da2ffc, type: 3}
+  - {fileID: 21300000, guid: a3c69acb2b56863468ab970da6dc806b, type: 3}
+  - {fileID: 21300000, guid: 20befa1c220d2a6498e593fd52488d7b, type: 3}
+  - {fileID: 21300000, guid: 8f4896ac0f4bb34408440691ca504bc3, type: 3}
+  - {fileID: 21300000, guid: 3bab252d253a1ab4d828a1ac20594ae4, type: 3}
+  - {fileID: 21300000, guid: 272475fd3418eb244b17ac3b59af4cae, type: 3}
+  - {fileID: 21300000, guid: 6a9b8c2e49eaec5439f389770248dd4d, type: 3}
+  - {fileID: 21300000, guid: b5c3f88e43485e34b844cd2e4c8b1640, type: 3}
+  - {fileID: 21300000, guid: dc5a5d9f843bd7047861c20e50be0f68, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - seven
+  - slots_bottom
+  - slots_base
+  - prizebg_yellow
+  - title_4
+  - slots_spin_down
+  - cash
+  - title_6
+  - title_11
+  - title_2
+  - slots_out_s
+  - slots_spin_up
+  - title_0
+  - slots_mask
+  - slots_tipbg
+  - slots_mask_s
+  - tip
+  - ad
+  - help
+  - title_9
+  - unlock
+  - slots_out_l
+  - prizebg_violet
+  - title_5
+  - title_8
+  - title_10
+  - title_1
+  - title_7
+  - cashout
+  - admask
+  - slots_mask_l
+  - title_3
+  m_Tag: Slots
+  m_IsVariant: 0

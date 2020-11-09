@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: InviteOk
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 1ed300484d999ba4babd01e913629dde, type: 3}
+    totalSpriteSurfaceArea: 1518788
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 1988323196bf10c41b3a2652c246062a, type: 3}
+  - {fileID: 21300000, guid: cbaf00a3e3c8845459805663e35267e0, type: 3}
+  - {fileID: 21300000, guid: d182b926f28c86642b59bb84b9227271, type: 3}
+  - {fileID: 21300000, guid: c228ff562827eb740bb6d7ab2306c24c, type: 3}
+  - {fileID: 21300000, guid: f06c6596fe4922b4bbcb1ef67ca77fe1, type: 3}
+  - {fileID: 21300000, guid: 5b5fe54a1d6e1f7479e2983ca55d4a4f, type: 3}
+  - {fileID: 21300000, guid: 16584d6a2e322694dba30d37fc08edf3, type: 3}
+  - {fileID: 21300000, guid: 4d5cb8acabafe0b49a2351254c2e4431, type: 3}
+  - {fileID: 21300000, guid: 7b4a748dabe1c51488b407344f46b7d8, type: 3}
+  - {fileID: 21300000, guid: 0493f67f94365f94d8675408ce2aa3c1, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - underline
+  - icon
+  - Ticket
+  - confirmBg
+  - ok
+  - close
+  - ad
+  - inputfiledBg
+  - Cash
+  - base
+  m_Tag: InviteOk
+  m_IsVariant: 0
