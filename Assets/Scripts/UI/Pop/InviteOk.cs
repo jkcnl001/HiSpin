@@ -10,6 +10,7 @@ public class InviteOk : PopUI
     public Text double_buttonText;
     public Button double_rewardButton;
     public Button single_rewardButton;
+    public GameObject adGo;
     protected override void Awake()
     {
         base.Awake();
@@ -18,7 +19,7 @@ public class InviteOk : PopUI
     }
     private void OnDoubleClick()
     {
-        OnGetTaskListCallback(true);
+        OnGetTaskListCallback(false);
     }
     private void OnGetTaskListCallback(bool doublReward)
     {
@@ -55,16 +56,15 @@ public class InviteOk : PopUI
         invite_ok_reward_type = (Reward)args[0];
         invite_ok_reward_num = args[1];
         reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.InviteOk, invite_ok_reward_type.ToString());
+        single_rewardButton.gameObject.SetActive(false);
+        adGo.SetActive(false);
+        double_buttonText.text = "GET";
         if (invite_ok_reward_type == Reward.Cash)
         {
-            single_rewardButton.gameObject.SetActive(false);
-            double_buttonText.text = "GET";
             reward_numText.text = "x " + invite_ok_reward_num.GetCashShowString();
         }
         else
         {
-            single_rewardButton.gameObject.SetActive(true);
-            double_buttonText.text = "GET x 2";
             reward_numText.text = "x " + invite_ok_reward_num;
         }
     }

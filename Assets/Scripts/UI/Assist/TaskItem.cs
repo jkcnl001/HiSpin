@@ -141,12 +141,30 @@ public class TaskItem : MonoBehaviour
         }
         else
         {
-            if (TaskTarget != PlayerTaskTarget.BuyTicketByRvOnce && TaskTarget != PlayerTaskTarget.BuyTicketByGoldOnce)
+            switch (TaskTarget)
             {
-                Server.Instance.OperationData_FinishTask(OnFinishTaskCallback, OnErrorCallback, Task_ID, false, RewardType);
+                case PlayerTaskTarget.PlaySlotsOnce:
+                case PlayerTaskTarget.PlayBettingOnce:
+                case PlayerTaskTarget.WatchRvOnce:
+                case PlayerTaskTarget.CashoutOnce:
+                case PlayerTaskTarget.OwnSomeGold:
+                case PlayerTaskTarget.WinnerOnce:
+                case PlayerTaskTarget.GetTicketFromSlotsOnce:
+                    Server.Instance.OperationData_FinishTask(OnFinishTaskCallback, OnErrorCallback, Task_ID, false, RewardType);
+                    break;
+                case PlayerTaskTarget.WritePaypalEmail:
+                    UI.ShowBasePanel(BasePanel.Cashout);
+                    break;
+                case PlayerTaskTarget.InviteAFriend:
+                    UI.ShowBasePanel(BasePanel.Friend);
+                    break;
+                case PlayerTaskTarget.BuyTicketByGoldOnce:
+                    break;
+                case PlayerTaskTarget.BuyTicketByRvOnce:
+                    break;
+                default:
+                    break;
             }
-            else
-                Debug.LogError("购买票任务状态错误");
         }
     }
     private void OnFinishTaskCallback()
