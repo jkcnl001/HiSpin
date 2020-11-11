@@ -32,6 +32,9 @@ public class Rules : PopUI
     const string BettingTitle = "How it works?";
     const string PlaySlotsTitle= "How to win";
     const string InviteFriendTitle = "How it works";
+    static string BettingContentTop = "1.  There is a prize of 1,000 USD in the Lucky\n    Draw every day.\n2. You must have {0} tickets to participate\n" +
+        "    in the Lucky Draw. More tickets you have,\n    more chance to win.\n3. Every day at UTC 08:00:00, all your\n    tickets will be automatically put into the\n" +
+        "    prize pool, and  the Lucky Draw will be\n    done.\n4. There will be many winners with different\n    bonus.";
     private RuleArea ruleArea;
     protected override void BeforeShowAnimation(params int[] args)
     {
@@ -53,6 +56,7 @@ public class Rules : PopUI
                 play_slots_rulesRect.gameObject.SetActive(false);
                 invite_firend_rulesRect.gameObject.SetActive(false);
                 sureButton.transform.localPosition = new Vector3(0, betting_rulesRect.localPosition.y - betting_rulesRect.sizeDelta.y - 50);
+                betting_rulesRect.GetComponent<Text>().text = string.Format(BettingContentTop, Save.data.allData.award_ranking.ticktes_flag);
                 break;
             case RuleArea.PlaySlots:
                 titleText.text = PlaySlotsTitle;

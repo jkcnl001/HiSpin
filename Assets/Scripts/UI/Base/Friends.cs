@@ -33,6 +33,7 @@ public class Friends : BaseUI
         {
             topRect.sizeDelta = new Vector2(topRect.sizeDelta.x, topRect.sizeDelta.y + 100);
         }
+        cashoutButton.gameObject.SetActive(Save.data.isPackB);
     }
     private void OnBackButtonClick()
     {
@@ -62,23 +63,33 @@ public class Friends : BaseUI
 #if UNITY_EDITOR
         return;
 #endif
-        _AJ.CallStatic("ShareString", string.Format("http://admin.crsdk.com:8000/invita?user={0}&app_name={1}", Save.data.mainData.user_id, "com.HiSpin.DailyCash.HugeRewards.FreeGame"));
+        _AJ.CallStatic("ShareString", string.Format("http://admin.crsdk.com:8000/invita?user={0}&irsource_name={2}&app_name={1}", Save.data.allData.user_panel.user_id, "com.HiSpin.DailyCash.HugeRewards.FreeGame", Server.Bi_name));
     }
     protected override void BeforeShowAnimation(params int[] args)
     {
-        Server.Instance.RequestData(Server.Server_RequestType.FriendData, Init, null);
+        RefreshFriendList();
+        int invite_people_num = Save.data.allData.fission_info.user_invite_people;
+        int invite_people_receive = Save.data.allData.lucky_schedule.invite_receive;
+        int not_received_invite_reward = invite_people_num - invite_people_receive;
+        for (int i = 0; i < not_received_invite_reward; i++)
+        {
+            bool isRewardCash = invite_people_receive + i <= 7;
+            UI.ShowPopPanel(PopPanel.InviteOk, (int)(isRewardCash ? Reward.Cash : Reward.Ticket), isRewardCash ? 100 : 50);
+        }
     }
-    private void Init()
+    public void RefreshFriendList()
     {
-        pt_numText.text = ((int)Save.data.friend_data.live_balance).GetTokenShowString() + " <size=70>Pt</size>";
-        myfriends_numText.text = string.Format("My friends: <color=#0596E4>{0}</color>", Save.data.friend_data.user_invite_people.GetTokenShowString());
-        yesterday_pt_numText.text = ((int)Save.data.friend_data.up_user_info.yestday_team_all).GetTokenShowString() + " <size=55>Pt</size>";
-        total_pt_numText.text = ((int)Save.data.friend_data.user_total).GetTokenShowString() +" <size=55>Pt</size>";
+        pt_numText.text = ((int)Save.data.allData.fission_info.live_balance).GetTokenShowString() + " <size=70>Pt</size>";
+        int invite_people_num = Save.data.allData.fission_info.user_invite_people;
+        int invite_people_receive = Save.data.allData.lucky_schedule.invite_receive;
+        myfriends_numText.text = string.Format("My friends: <color=#0596E4>{0}</color>", invite_people_num.GetTokenShowString());
+        yesterday_pt_numText.text = ((int)Save.data.allData.fission_info.up_user_info.yestday_team_all).GetTokenShowString() + " <size=55>Pt</size>";
+        total_pt_numText.text = ((int)Save.data.allData.fission_info.user_total).GetTokenShowString() +" <size=55>Pt</size>";
 
         foreach (var friend in all_invite_friend_items)
             friend.gameObject.SetActive(false);
 
-        List<FriendInfo> friend_Infos = Save.data.friend_data.up_user_info.two_user_list;
+        List<AllData_FriendData_Friend> friend_Infos = Save.data.allData.fission_info.up_user_info.two_user_list;
         int count = friend_Infos.Count;
         for(int i = 0; i < count; i++)
         {
@@ -87,15 +98,20 @@ public class Friends : BaseUI
                 FriendInviteRecordItem newRecordItem = Instantiate(single_invite_record_item, single_invite_record_item.transform.parent).GetComponent<FriendInviteRecordItem>();
                 all_invite_friend_items.Add(newRecordItem);
             }
-            FriendInfo friendInfo = friend_Infos[i];
+            AllData_FriendData_Friend friendInfo = friend_Infos[i];
             all_invite_friend_items[i].gameObject.SetActive(true);
             all_invite_friend_items[i].Init(friendInfo.user_img[0], friendInfo.user_name, friendInfo.user_id, (int)friendInfo.yestday_doller);
         }
         bool noFriend = count == 0;
         lastdayGo.SetActive(!noFriend);
         nofriend_tipGo.SetActive(noFriend);
-        bool inviteRewardCash = Save.data.task_list.invite_receive <= 7;
+        bool inviteRewardCash = invite_people_receive<= 7;
         invite_reward_numText.text = string.Format("Invite friends to get <color=#FF9732>{0}</color>", inviteRewardCash ? "$1.00" : "50");
         invite_reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.Friend, inviteRewardCash ? "cash" : "ticket");
+
+    }
+    public void OnChangePackB()
+    {
+        cashoutButton.gameObject.SetActive(true);
     }
 }

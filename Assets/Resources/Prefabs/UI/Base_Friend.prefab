@@ -1576,6 +1576,7 @@ GameObject:
   - component: {fileID: 2298948780147610209}
   - component: {fileID: 8349782355565655502}
   - component: {fileID: 1484280194320250641}
+  - component: {fileID: 9182664704762063783}
   m_Layer: 5
   m_Name: tip
   m_TagString: Untagged
@@ -1601,7 +1602,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -42.62, y: -116}
-  m_SizeDelta: {x: 402.85876, y: 62.72754}
+  m_SizeDelta: {x: 0, y: 62.72754}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8349782355565655502
 CanvasRenderer:
@@ -1644,6 +1645,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Invite friends to get <color=#FF9732>30</color>
+--- !u!114 &9182664704762063783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4738064253055817039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &5675460147720873204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2334,9 +2349,9 @@ RectTransform:
   m_Father: {fileID: 2298948780147610209}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250.1, y: 6.0109}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 52.100006, y: 6.0109}
   m_SizeDelta: {x: 77, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6824221554979617889

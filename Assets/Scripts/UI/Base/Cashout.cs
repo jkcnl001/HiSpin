@@ -36,8 +36,8 @@ public class Cashout : BaseUI
         about_feeButton.AddClickEvent(OnAboutFeeClick);
         if (Master.IsBigScreen)
         {
-            anchor_rect.localPosition -= new Vector3(0, 100, 0);
-            anchor_rect.sizeDelta += new Vector2(0, Screen.height - 1920 - 200);
+            anchor_rect.localPosition -= new Vector3(0, Master.TopMoveDownOffset, 0);
+            anchor_rect.sizeDelta += new Vector2(0, 1920 * (Master.ExpandCoe - 1) - Master.TopMoveDownOffset);
             anchor_rect.GetComponentInChildren<ScrollRect>().normalizedPosition = Vector2.one;
         }
 
@@ -72,7 +72,7 @@ public class Cashout : BaseUI
     }
     private void OnCashoutButtonClick(int cashoutNum)
     {
-        if (Save.data.mainData.user_doller_live >= cashoutNum * 100)
+        if (Save.data.allData.user_panel.user_doller_live >= cashoutNum * 100)
             UI.ShowPopPanel(PopPanel.CashoutPop, (int)AsCashoutArea.Cashout, cashoutNum, (int)CashoutType.Cash, cashoutNum * 100);
         else
             Master.Instance.ShowTip("Sorry, your balance is not enough.");
@@ -85,19 +85,19 @@ public class Cashout : BaseUI
     {
         Application.OpenURL(string.Format("https://www.paypal.com/{0}/webapps/mpp/paypal-fees", country));
     }
-    const int CashoutNeedGold = 500000;
+    const int CashoutNeedGold = 5000000;
     const int PtCashoutRate = 1000;
     protected override void BeforeShowAnimation(params int[] args)
     {
-        bool hasEmail = !string.IsNullOrEmpty(Save.data.mainData.user_paypal);
+        bool hasEmail = !string.IsNullOrEmpty(Save.data.allData.user_panel.user_paypal);
         if (hasEmail)
-            emailText.text = Save.data.mainData.user_paypal;
+            emailText.text = Save.data.allData.user_panel.user_paypal;
         else
             emailText.text = "Please bind paypal account";
-        pt_numText.text = "0<size=40>  PT</size>";
-        pt_cashout_numText.text = "≈$0.00";
-        cash_numText.text = "$ " + Save.data.mainData.user_doller_live.GetCashShowString();
-        gold_tipText.text = (CashoutNeedGold - Save.data.mainData.user_gold_live).GetTokenShowString() + " more gold to redeem";
+        pt_numText.text = (int)Save.data.allData.fission_info.user_doller + "<size=40>  PT</size>";
+        pt_cashout_numText.text = "≈$" + ((int)((float)Save.data.allData.fission_info.user_doller / PtCashoutRate)).GetCashShowString();
+        cash_numText.text = "$ " + Save.data.allData.user_panel.user_doller_live.GetCashShowString();
+        gold_tipText.text = (CashoutNeedGold - Save.data.allData.user_panel.user_gold_live).GetTokenShowString() + " more gold to redeem";
     }
     bool isPause = false;
     public override void Pause()

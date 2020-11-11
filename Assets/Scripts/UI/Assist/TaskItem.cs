@@ -14,6 +14,7 @@ public class TaskItem : MonoBehaviour
     public GameObject adGo;
     public Text button_contentText;
     public GameObject doneGo;
+    public GameObject red_pointGo;
 
     private Reward RewardType;
     private int RewardNum;
@@ -63,6 +64,8 @@ public class TaskItem : MonoBehaviour
         {
             doneGo.SetActive(false);
             if (!hasFinish)
+            {
+                red_pointGo.SetActive(false);
                 switch (taskTargetId)
                 {
                     case PlayerTaskTarget.BuyTicketByGoldOnce:
@@ -73,7 +76,7 @@ public class TaskItem : MonoBehaviour
                         break;
                     case PlayerTaskTarget.BuyTicketByRvOnce:
                         adGo.SetActive(true);
-                        button_contentText.text = "    CLAIM";
+                        button_contentText.text = "    GET";
                         getButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Task, "button");
                         getButton.gameObject.SetActive(true);
                         break;
@@ -98,11 +101,14 @@ public class TaskItem : MonoBehaviour
                         getButton.gameObject.SetActive(true);
                         break;
                 }
+            }
             else
             {
                 adGo.SetActive(false);
                 getButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Task, "button");
                 button_contentText.text = "CLAIM";
+                getButton.gameObject.SetActive(true);
+                red_pointGo.SetActive(true);
             }
         }
     }
@@ -119,9 +125,9 @@ public class TaskItem : MonoBehaviour
                     UI.ShowBasePanel(BasePanel.Friend);
                     break;
                 case PlayerTaskTarget.BuyTicketByGoldOnce:
-                    if (Save.data.mainData.user_gold_live >= 800)
+                    if (Save.data.allData.user_panel.user_gold_live >= 800)
                     {
-                        Server.Instance.OperationData_BuyTickets(OnFinishTaskCallback, null, false);
+                        Server.Instance.OperationData_BuyTickets(OnFinishTaskCallback, OnErrorCallback, false);
                     }
                     else
                         Master.Instance.ShowTip("Sorry, you have not enough coins");
@@ -137,7 +143,7 @@ public class TaskItem : MonoBehaviour
         {
             if (TaskTarget != PlayerTaskTarget.BuyTicketByRvOnce && TaskTarget != PlayerTaskTarget.BuyTicketByGoldOnce)
             {
-                Server.Instance.OperationData_FinishTask(OnFinishTaskCallback, null, Task_ID, false, RewardType);
+                Server.Instance.OperationData_FinishTask(OnFinishTaskCallback, OnErrorCallback, Task_ID, false, RewardType);
             }
             else
                 Debug.LogError("购买票任务状态错误");
@@ -151,9 +157,28 @@ public class TaskItem : MonoBehaviour
         UI.MenuPanel.Resume();
         UI.CurrentBasePanel.Pause();
         UI.CurrentBasePanel.Resume();
+        OnErrorCallback();
+    }
+    private void OnErrorCallback()
+    {
+        Server.Instance.RequestData(Server.Server_RequestType.TaskData, () =>
+        {
+            Tasks tasks = UI.GetUI(BasePanel.Task) as Tasks;
+            tasks.RefreshTaskInfo();
+            bool hasFinish = false;
+            foreach (var task in Save.data.allData.lucky_schedule.user_task)
+            {
+                if (task.task_cur >= task.task_tar && !task.task_receive)
+                {
+                    HasFinish = true;
+                    break;
+                }
+            }
+            UI.OnHasTaskFinished(hasFinish);
+        }, null);
     }
     private void OnAdBuyTicketCallback()
     {
-        Server.Instance.OperationData_BuyTickets(OnFinishTaskCallback, null, true);
+        Server.Instance.OperationData_BuyTickets(OnFinishTaskCallback, OnErrorCallback, true);
     }
 }

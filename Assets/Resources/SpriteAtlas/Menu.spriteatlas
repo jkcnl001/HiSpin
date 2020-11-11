@@ -31,7 +31,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: cbb863edee6e50648ae434482ab09119, type: 3}
-    totalSpriteSurfaceArea: 328177
+    totalSpriteSurfaceArea: 329473
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -53,6 +53,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 33f4a82baceaa1f40847ef24ece1f784, type: 3}
   - {fileID: 21300000, guid: 0048cb6bcee274246a4ed2760f8db2ea, type: 3}
   - {fileID: 21300000, guid: e0ebff7bf6c083f4b90b9f134c1028d7, type: 3}
+  - {fileID: 21300000, guid: 1184811c48c02f745abffc31ac3eecc2, type: 3}
   - {fileID: 21300000, guid: 492915fc021e3bb4180358826f833f98, type: 3}
   - {fileID: 21300000, guid: a3fb459f41e82aa4f995deb186b876b0, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -74,6 +75,7 @@ SpriteAtlas:
   - add
   - Gift_Off
   - Cash
+  - red_point
   - PT
   - Friend_Off
   m_Tag: Menu

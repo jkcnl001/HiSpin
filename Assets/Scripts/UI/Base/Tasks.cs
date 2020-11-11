@@ -28,26 +28,26 @@ public class Tasks : BaseUI
         if (Master.IsBigScreen)
         {
             RectTransform all_anchorRect = all_root.transform.parent as RectTransform;
-            all_anchorRect.localPosition -= new Vector3(0, 100, 0);
-            all_anchorRect.sizeDelta += new Vector2(0, Screen.height - 1920 - 200);
+            all_anchorRect.localPosition -= new Vector3(0, Master.TopMoveDownOffset, 0);
+            all_anchorRect.sizeDelta += new Vector2(0, 1920 * (Master.ExpandCoe - 1) - Master.TopMoveDownOffset);
             all_anchorRect.GetComponentInChildren<ScrollRect>().normalizedPosition = Vector2.one;
         }
     }
     protected override void BeforeShowAnimation(params int[] args)
     {
-        Server.Instance.RequestData(Server.Server_RequestType.TaskData, OnRequestDataCallback, null);
+        RefreshTaskInfo();
     }
-    private void OnRequestDataCallback()
+    public void RefreshTaskInfo()
     {
-        foreach(var task in get_tickets_items)
+        foreach (var task in get_tickets_items)
         {
             task.gameObject.SetActive(false);
         }
-        foreach(var task in daily_task_items)
+        foreach (var task in daily_task_items)
         {
             task.gameObject.SetActive(false);
         }
-        foreach(var task in achievement_task_items)
+        foreach (var task in achievement_task_items)
         {
             task.gameObject.SetActive(false);
         }
@@ -55,11 +55,11 @@ public class Tasks : BaseUI
         int getticketsTaskIndex = 0;
         int dailyTaskIndex = 0;
         int achievementIndex = 0;
-        List<PlayerTaskData> taskList = Save.data.task_list.user_task;
+        List<AllData_Task> taskList = Save.data.allData.lucky_schedule.user_task;
         int allTaskCount = taskList.Count;
-        for(int i = 0; i < allTaskCount; i++)
+        for (int i = 0; i < allTaskCount; i++)
         {
-            PlayerTaskData taskData = taskList[i];
+            AllData_Task taskData = taskList[i];
             switch (taskData.task_type)
             {
                 //gettickets
@@ -70,18 +70,18 @@ public class Tasks : BaseUI
                         get_tickets_items.Add(newTaskItem);
                     }
                     get_tickets_items[getticketsTaskIndex].gameObject.SetActive(true);
-                    get_tickets_items[getticketsTaskIndex].Init(taskData.task_id, taskData.task_title, taskData.task_describe, taskData.taskTargetId, taskData.reward_type, taskData.task_reward, taskData.task_receive, taskData.task_complete,0);
+                    get_tickets_items[getticketsTaskIndex].Init(taskData.task_id, taskData.task_title, taskData.task_describe, taskData.taskTargetId, taskData.reward_type, taskData.task_reward, taskData.task_receive, taskData.task_complete, 0);
                     getticketsTaskIndex++;
                     break;
                 //daily task
                 case 2:
-                    if (dailyTaskIndex > daily_task_items.Count -1)
+                    if (dailyTaskIndex > daily_task_items.Count - 1)
                     {
                         TaskItem newTaskItem = Instantiate(single_daily_task.gameObject, single_daily_task.transform.parent).GetComponent<TaskItem>();
                         daily_task_items.Add(newTaskItem);
                     }
                     daily_task_items[dailyTaskIndex].gameObject.SetActive(true);
-                    daily_task_items[dailyTaskIndex].Init(taskData.task_id, taskData.task_title, taskData.task_describe, taskData.taskTargetId, taskData.reward_type, taskData.task_reward, taskData.task_receive, taskData.task_complete,1);
+                    daily_task_items[dailyTaskIndex].Init(taskData.task_id, taskData.task_title, taskData.task_describe, taskData.taskTargetId, taskData.reward_type, taskData.task_reward, taskData.task_receive, taskData.task_complete, 1);
                     dailyTaskIndex++;
                     break;
                 //achievement
@@ -92,7 +92,7 @@ public class Tasks : BaseUI
                         achievement_task_items.Add(newTaskItem);
                     }
                     achievement_task_items[achievementIndex].gameObject.SetActive(true);
-                    achievement_task_items[achievementIndex].Init(taskData.task_id, taskData.task_title, taskData.task_describe, taskData.taskTargetId, taskData.reward_type, taskData.task_reward, taskData.task_receive, taskData.task_complete,2);
+                    achievement_task_items[achievementIndex].Init(taskData.task_id, taskData.task_title, taskData.task_describe, taskData.taskTargetId, taskData.reward_type, taskData.task_reward, taskData.task_receive, taskData.task_complete, 2);
                     achievementIndex++;
                     break;
             }
@@ -113,16 +113,5 @@ public class Tasks : BaseUI
         all_root.enabled = false;
         yield return new WaitForEndOfFrame();
         all_root.enabled = true;
-    }
-    bool isPause = false;
-    public override void Pause()
-    {
-        isPause = true;
-    }
-    public override void Resume()
-    {
-        if (!isPause) return;
-        isPause = false;
-        Server.Instance.RequestData(Server.Server_RequestType.TaskData, OnRequestDataCallback, null);
     }
 }

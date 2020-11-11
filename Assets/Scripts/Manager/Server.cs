@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 
 public class Server : MonoBehaviour
 {
-    const string Bi_name = Ads.AppName;
+    public const string Bi_name = Ads.AppName;
     public static Server Instance;
     public CanvasGroup canvasGroup;
     public Image state_iconImage;
@@ -31,13 +31,7 @@ public class Server : MonoBehaviour
         canvasGroup.blocksRaycasts = false;
         switch (requestType)
         {
-            case Server_RequestType.MainData:
-            case Server_RequestType.SlotsStateData:
-            case Server_RequestType.TaskData:
-            case Server_RequestType.BettingData:
-            case Server_RequestType.RankData:
-            case Server_RequestType.CashoutRecordData:
-            case Server_RequestType.FriendData:
+            case Server_RequestType.AllData:
                 StartCoroutine(ConnectToGetData(requestType, requestOkCallback, requestNoCallback, needShowConnecting));
                 break;
             case Server_RequestType.ClickSlotsCard:
@@ -64,8 +58,8 @@ public class Server : MonoBehaviour
             case Server_RequestType.GetLocalCountry:
                 StartCoroutine(ConnectToGetlocalcountry(getlocalcountryOkCallback, requestNoCallback));
                 break;
-            case Server_RequestType.GetBettingLeftTime:
-                StartCoroutine(ConnectToGetBettingLeftTime(requestOkCallback, requestNoCallback));
+            case Server_RequestType.OpenBettingPrize:
+                StartCoroutine(ConnectToOpenBettingPrize(requestOkCallback, requestNoCallback));
                 break;
             default:
                 break;
@@ -109,12 +103,8 @@ public class Server : MonoBehaviour
     }
     public enum Server_RequestType
     {
-        MainData,
-        SlotsStateData,
+        AllData,
         TaskData,
-        RankData,
-        CashoutRecordData,
-        FriendData,
 
         ClickSlotsCard,
         GetSlotsReward,
@@ -125,16 +115,12 @@ public class Server : MonoBehaviour
         BindPaypal,
         Cashout,
         GetLocalCountry,
-        GetBettingLeftTime,
+        OpenBettingPrize,
     }
     static readonly Dictionary<Server_RequestType, string> getdata_uri_dic = new Dictionary<Server_RequestType, string>()
     {
-        {Server_RequestType.MainData,"http://admin.crsdk.com:8000/lucky_panel/" },
-        {Server_RequestType.SlotsStateData,"http://admin.crsdk.com:8000/lucky_status/" },
+        {Server_RequestType.AllData,"http://admin.crsdk.com:8000/lucky_all_data/" },
         {Server_RequestType.TaskData,"http://admin.crsdk.com:8000/lucky_schedule/" },
-        {Server_RequestType.RankData,"http://admin.crsdk.com:8000/lucky_ranking/" },
-        {Server_RequestType.CashoutRecordData,"http://admin.crsdk.com:8000/lucky_record/" },
-        {Server_RequestType.FriendData,"http://admin.crsdk.com:8000/fission_info/" },
 
         {Server_RequestType.ClickSlotsCard,"http://admin.crsdk.com:8000/lucky_free/" },
         {Server_RequestType.GetSlotsReward,"http://admin.crsdk.com:8000/lucky_reward/" },
@@ -145,7 +131,7 @@ public class Server : MonoBehaviour
         {Server_RequestType.BindPaypal,"http://admin.crsdk.com:8000/lucky_paypal/" },
         {Server_RequestType.Cashout,"http://admin.crsdk.com:8000/lucky_apply/" },
         {Server_RequestType.GetLocalCountry,"https://a.mafiagameglobal.com/event/country/" },
-        {Server_RequestType.GetBettingLeftTime,"http://admin.crsdk.com:8000/get_time/" },
+        {Server_RequestType.OpenBettingPrize,"http://admin.crsdk.com:8000/lucky_flag/" },
     };
     #region request server function
     Server_RequestType requestType;
@@ -243,11 +229,11 @@ public class Server : MonoBehaviour
         requestNoCallback = failCallback;
         StartCoroutine(ConnectToGetlocalcountry(successCallback, failCallback));
     }
-    public void RequestData_GetBettingLeftTime(Action successCallback, Action failCallback)
+    public void OperationData_OpenBettingPrize(Action successCallback, Action failCallback)
     {
         requestOkCallback = successCallback;
         requestNoCallback = failCallback;
-        StartCoroutine(ConnectToGetBettingLeftTime(successCallback, failCallback));
+        StartCoroutine(ConnectToOpenBettingPrize(successCallback, failCallback));
     }
     #endregion
     #region IEnumerator connecting server
@@ -257,16 +243,7 @@ public class Server : MonoBehaviour
         yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
         iparams.Add(new MultipartFormDataSection("device_id", deviceID));
-        switch (_RequestType)
-        {
-            case Server_RequestType.MainData:
-            case Server_RequestType.FriendData:
-            case Server_RequestType.TaskData:
-                iparams.Add(new MultipartFormDataSection("app_name", Bi_name));
-                break;
-            default:
-                break;
-        }
+        iparams.Add(new MultipartFormDataSection("app_name", Bi_name));
         if (needShowConnecting)
             OnConnectingServer();
         UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[_RequestType], iparams);
@@ -282,62 +259,33 @@ public class Server : MonoBehaviour
             string downText = www.downloadHandler.text;
             if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5")
             {
-                if(_RequestType==Server_RequestType.BettingData&& downText == "-1")
-                {
-                    successCallback?.Invoke();
-                    OnConnectServerSuccess();
-                }
+                failCallback?.Invoke();
+                if (downText == "-1")
+                    OnConnectServerFail();
                 else
-                {
-                    failCallback?.Invoke();
-                    if (downText == "-1")
-                        OnConnectServerFail();
-                    else
-                        ShowConnectErrorTip(downText);
-                }
+                    ShowConnectErrorTip(downText);
             }
             else
             {
                 switch (_RequestType)
                 {
-                    case Server_RequestType.MainData:
-                        PlayerMainData mainData = JsonMapper.ToObject<PlayerMainData>(www.downloadHandler.text);
-                        Save.data.mainData = mainData;
-                        break;
-                    case Server_RequestType.SlotsStateData:
-                        PlayerSlotsStateData slotsStateData = JsonMapper.ToObject<PlayerSlotsStateData>(www.downloadHandler.text);
-                        Save.data.slots_state = slotsStateData;
+                    case Server_RequestType.AllData:
+                        try
+                        {
+                            AllData allData = JsonMapper.ToObject<AllData>(downText);
+                            Save.data.allData = allData;
+                        }
+                        catch(Exception e)
+                        {
+                            failCallback?.Invoke();
+                            OnConnectServerFail();
+                            ShowConnectErrorTip(e.Message);
+                            yield break;
+                        }
                         break;
                     case Server_RequestType.TaskData:
-                        PlayerTaskList taskList = JsonMapper.ToObject<PlayerTaskList>(www.downloadHandler.text);
-                        Save.data.task_list = taskList;
-                        break;
-                    case Server_RequestType.RankData:
-                        PlayerRankData rankData = JsonMapper.ToObject<PlayerRankData>(www.downloadHandler.text);
-                        Save.data.rank_data = rankData;
-                        break;
-                    case Server_RequestType.CashoutRecordData:
-                        CashoutRecordData cashoutRecordData = JsonMapper.ToObject<CashoutRecordData>(www.downloadHandler.text);
-                        Save.data.cashout_record_data = cashoutRecordData;
-                        break;
-                    case Server_RequestType.FriendData:
-                        FriendReceiveData friendReceiveData = JsonMapper.ToObject<FriendReceiveData>(www.downloadHandler.text);
-                        if (friendReceiveData.user_invite_people > Save.data.task_list.invite_receive)
-                        {
-                            int oldInviteNum = Save.data.task_list.invite_receive;
-                            int offset = friendReceiveData.user_invite_people - oldInviteNum;
-                            for(int i = 0; i < offset; i++)
-                            {
-                                bool isCash = oldInviteNum + i <= 7;
-                                UI.ShowPopPanel(PopPanel.InviteOk, isCash ? (int)Reward.Cash : (int)Reward.Ticket, isCash ? 100 : 50);
-                            }
-                        }
-                        Save.data.friend_data = friendReceiveData;
-                        break;
-                    case Server_RequestType.BettingData:
-                        BettingData bettingData = JsonMapper.ToObject<BettingData>(www.downloadHandler.text);
-                        Save.data.betting_data = bettingData;
-                        UI.ShowPopPanel(PopPanel.StartBetting);
+                        AllData_TaskData taskData = JsonMapper.ToObject<AllData_TaskData>(downText);
+                        Save.data.allData.lucky_schedule = taskData;
                         break;
                     default:
                         break;
@@ -377,8 +325,8 @@ public class Server : MonoBehaviour
             }
             else
             {
-                PlayerSlotsStateData slotsStateData = JsonMapper.ToObject<PlayerSlotsStateData>(www.downloadHandler.text);
-                Save.data.slots_state = slotsStateData;
+                AllData_SlotsState slotsStateData = JsonMapper.ToObject<AllData_SlotsState>(www.downloadHandler.text);
+                Save.data.allData.lucky_status = slotsStateData;
                 successCallback?.Invoke();
                 OnConnectServerSuccess();
             }
@@ -418,11 +366,11 @@ public class Server : MonoBehaviour
                 PlayerGetSlotsRewardReceiveData receiveData = JsonMapper.ToObject<PlayerGetSlotsRewardReceiveData>(www.downloadHandler.text);
                 if (reward_type == 0)
                 {
-                    Save.data.mainData.user_gold = receiveData.user_gold;
-                    Save.data.mainData.user_gold_live = receiveData.user_gold_live;
+                    Save.data.allData.user_panel.user_gold = receiveData.user_gold;
+                    Save.data.allData.user_panel.user_gold_live = receiveData.user_gold_live;
                 }
                 else
-                    Save.data.mainData.user_tickets = receiveData.user_tickets;
+                    Save.data.allData.user_panel.user_tickets = receiveData.user_tickets;
                 successCallback?.Invoke();
                 OnConnectServerSuccess();
             }
@@ -466,15 +414,15 @@ public class Server : MonoBehaviour
                     switch (opTypes[i])
                     {
                         case Reward.Gold:
-                            Save.data.mainData.user_gold = receiveData.user_gold;
-                            Save.data.mainData.user_gold_live = receiveData.user_gold_live;
+                            Save.data.allData.user_panel.user_gold = receiveData.user_gold;
+                            Save.data.allData.user_panel.user_gold_live = receiveData.user_gold_live;
                             break;
                         case Reward.Cash:
-                            Save.data.mainData.user_doller = receiveData.user_doller;
-                            Save.data.mainData.user_doller_live = receiveData.user_doller_live;
+                            Save.data.allData.user_panel.user_doller = receiveData.user_doller;
+                            Save.data.allData.user_panel.user_doller_live = receiveData.user_doller_live;
                             break;
                         case Reward.Ticket:
-                            Save.data.mainData.user_tickets = receiveData.user_tickets;
+                            Save.data.allData.user_panel.user_tickets = receiveData.user_tickets;
                             break;
                         default:
                             Debug.LogError("错误的任务完成变动类型");
@@ -520,13 +468,13 @@ public class Server : MonoBehaviour
 
                 if (isRv)
                 {
-                    Save.data.mainData.user_tickets = receiveData.user_tickets;
+                    Save.data.allData.user_panel.user_tickets = receiveData.user_tickets;
                 }
                 else
                 {
-                    Save.data.mainData.user_gold = receiveData.user_gold;
-                    Save.data.mainData.user_gold_live = receiveData.user_gold_live;
-                    Save.data.mainData.user_tickets = receiveData.user_tickets;
+                    Save.data.allData.user_panel.user_gold = receiveData.user_gold;
+                    Save.data.allData.user_panel.user_gold_live = receiveData.user_gold_live;
+                    Save.data.allData.user_panel.user_tickets = receiveData.user_tickets;
                 }
 
                 successCallback?.Invoke();
@@ -598,7 +546,7 @@ public class Server : MonoBehaviour
             else
             {
                 PlayerBindPaypalReceiveData paypalData = JsonMapper.ToObject<PlayerBindPaypalReceiveData>(www.downloadHandler.text);
-                Save.data.mainData.user_paypal = paypalData.user_paypal;
+                Save.data.allData.user_panel.user_paypal = paypalData.user_paypal;
                 successCallback?.Invoke();
                 OnConnectServerSuccess();
             }
@@ -644,10 +592,10 @@ public class Server : MonoBehaviour
                     case CashoutType.PT:
                         break;
                     case CashoutType.Cash:
-                        Save.data.mainData.user_doller_live = receiveData.user_doller_live;
+                        Save.data.allData.user_panel.user_doller_live = receiveData.user_doller_live;
                         break;
                     case CashoutType.Gold:
-                        Save.data.mainData.user_gold_live = receiveData.user_gold_live;
+                        Save.data.allData.user_panel.user_gold_live = receiveData.user_gold_live;
                         break;
                 }
                 successCallback?.Invoke();
@@ -677,14 +625,6 @@ public class Server : MonoBehaviour
         else
         {
             string downText = www.downloadHandler.text;
-            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
-            {
-                failCallback?.Invoke();
-                if (downText == "-1")
-                    OnConnectServerFail();
-                else
-                    ShowConnectErrorTip(downText);
-            }
             LocalCountryData countryData = JsonMapper.ToObject<LocalCountryData>(downText);
             localCountry = countryData.country.ToLower();
             successCallback?.Invoke(localCountry);
@@ -692,11 +632,13 @@ public class Server : MonoBehaviour
         }
         www.Dispose();
     }
-    IEnumerator ConnectToGetBettingLeftTime(Action successCallback, Action failCallback)
+    IEnumerator ConnectToOpenBettingPrize(Action successCallback, Action failCallback)
     {
         isConnecting = true;
         OnConnectingServer();
-        UnityWebRequest www = UnityWebRequest.Get(getdata_uri_dic[Server_RequestType.GetBettingLeftTime]);
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
+        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.OpenBettingPrize], iparams);
         yield return www.SendWebRequest();
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
@@ -707,18 +649,17 @@ public class Server : MonoBehaviour
         else
         {
             string downText = www.downloadHandler.text;
-            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
+            if (downText!="ok")
             {
                 failCallback?.Invoke();
-                if (downText == "-1")
-                    OnConnectServerFail();
-                else
-                    ShowConnectErrorTip(downText);
+                ShowConnectErrorTip(downText);
             }
-            BettingLeftTime bettinglefttimeData = JsonMapper.ToObject<BettingLeftTime>(downText);
-            Save.data.betting_lefttime = bettinglefttimeData;
-            successCallback?.Invoke();
-            OnConnectServerSuccess();
+            else
+            {
+                Save.data.allData.day_flag = true;
+                successCallback?.Invoke();
+                OnConnectServerSuccess();
+            }
         }
         www.Dispose();
     }
@@ -741,7 +682,7 @@ public class Server : MonoBehaviour
                 errorString = "Error code :" + errorCode;
                 break;
         }
-        Master.Instance.ShowTip(errorString);
+        Master.Instance.ShowTip(errorString,3);
     }
     #region connecting state
     const string errorTitle = "ERROR";
@@ -772,56 +713,17 @@ public class Server : MonoBehaviour
     }
     #endregion
 }
-public class PlayerMainData
-{
-    public string user_id;
-    public int user_gold;
-    public int user_gold_live;
-    public int user_doller;
-    public int user_doller_live;
-    public string user_paypal;
-    public int user_tickets;
-    public int user_title;
-    public int cur_betting;
-}
-public class PlayerSlotsStateData
-{
-    public List<int> white_lucky;
-}
-public class PlayerTaskList
-{
-    public int invite_receive;
-    public List<PlayerTaskData> user_task;
-}
-public class PlayerTaskData
-{
-    public string task_title;
-    public int task_id;
-    public PlayerTaskTarget taskTargetId;
-    public string task_describe;
-    public Reward reward_type;
-    public int task_type;
-    public int task_reward;
-    public bool task_receive;
-    public bool task_complete;
-}
-public enum PlayerTaskType
-{
-    gold,
-    doller,
-    tickets
-}
 public enum PlayerTaskTarget
 {
-    PlaySlotsOnce,
+    PlaySlotsOnce,//
     PlayBettingOnce,
-    WatchRvOnce,
+    WatchRvOnce,//
     CashoutOnce,
-    WritePaypalEmail,
-    OwnSomeGold,
-    WinnerOnce,
+    WritePaypalEmail,//
+    OwnSomeGold,//
+    WinnerOnce,//
     InviteAFriend,
-    GetTicketFromSlotsOnce,
+    GetTicketFromSlotsOnce,//
     BuyTicketByGoldOnce,
     BuyTicketByRvOnce,
 }
@@ -845,30 +747,6 @@ public class PlayerBuyTicketReceiveData
     public int user_gold;
     public int user_gold_live;
 }
-public class PlayerRankData
-{
-    public List<RankInfo> gold_rank;
-    public RankInfo self_gold_info;
-    public List<RankInfo> tickets_rank;
-}
-public class RankInfo
-{
-    public int user_title;
-    public string user_id;
-    public int user_token;
-    public int user_num;
-}
-public class BettingData
-{
-    public List<BettingWinnerInfo> ranking;
-    public int ysterday_tickets;
-}
-public class BettingWinnerInfo
-{
-    public int user_title;
-    public string user_id;
-    public int user_num;
-}
 public class PlayerBindPaypalReceiveData
 {
     public string user_paypal;
@@ -884,19 +762,65 @@ public class LocalCountryData
     public string ip;
     public string country;
 }
-public class CashoutRecordData
+#region newAllData
+public class AllData
 {
-    public List<CashoutRecordInfo> record;
+    public AllData_MainData user_panel;
+    public AllData_SlotsState lucky_status;
+    public AllData_BettingWinnerData award_ranking;
+    public AllData_RefreshLeftTimeData get_time;
+    public AllData_YesterdayRankData lucky_ranking;
+    public AllData_FriendData fission_info;
+    public AllData_TaskData lucky_schedule;
+    public AllData_CashoutRecordData lucky_record;
+    public bool day_flag;//今天是否已经开奖
 }
-public class CashoutRecordInfo
+public class AllData_MainData
 {
-    public string apply_time;
-    public int apply_doller;
-    public CashoutType apply_type;
-    public int apply_num;
-    public int apply_status;
+    public string user_id;
+    public int user_gold;
+    public int user_gold_live;
+    public int user_doller;
+    public int user_doller_live;
+    public string user_paypal;
+    public int user_tickets;
+    public int user_title;
+    public int cur_betting;
 }
-public class FriendReceiveData
+public class AllData_SlotsState
+{
+    public List<int> white_lucky;
+}
+public class AllData_BettingWinnerData
+{
+    public List<AllData_BettingWinnerData_Winner> ranking;
+    public int ysterday_tickets;
+    public int ticktes_flag;
+}
+public class AllData_BettingWinnerData_Winner
+{
+    public int user_title;
+    public string user_id;
+    public int user_num;
+}
+public class AllData_RefreshLeftTimeData
+{
+    public int server_time;
+}
+public class AllData_YesterdayRankData
+{
+    public List<AllData_YesterdayRankData_Rank> gold_rank;
+    public AllData_YesterdayRankData_Rank self_gold_info;
+    public List<AllData_YesterdayRankData_Rank> tickets_rank;
+}
+public class AllData_YesterdayRankData_Rank
+{
+    public int user_title;
+    public string user_id;
+    public int user_token;
+    public int user_num;
+}
+public class AllData_FriendData
 {
     public double user_doller;
     public string user_id;
@@ -905,21 +829,49 @@ public class FriendReceiveData
     public double user_total;
     public string up_user_id;
     public double live_balance;
-    public FriendList up_user_info;
+    public AllData_FriendData_FriendList up_user_info;
 }
-public class FriendList
+public class AllData_FriendData_FriendList
 {
     public double yestday_team_all;
-    public List<FriendInfo> two_user_list;
+    public List<AllData_FriendData_Friend> two_user_list;
 }
-public class FriendInfo
+public class AllData_FriendData_Friend
 {
     public string user_name;
     public string user_id;
     public List<int> user_img;
     public double yestday_doller;
 }
-public class BettingLeftTime
+public class AllData_TaskData
 {
-    public int server_time;
+    public int invite_receive;
+    public List<AllData_Task> user_task;
 }
+public class AllData_Task
+{
+    public string task_title;
+    public int task_id;
+    public PlayerTaskTarget taskTargetId;
+    public string task_describe;
+    public Reward reward_type;
+    public int task_type;
+    public int task_reward;
+    public bool task_receive;
+    public bool task_complete;
+    public int task_cur;
+    public int task_tar;
+}
+public class AllData_CashoutRecordData
+{
+    public List<AllData_CashoutRecordData_Record> record;
+}
+public class AllData_CashoutRecordData_Record
+{
+    public string apply_time;
+    public int apply_doller;
+    public CashoutType apply_type;
+    public int apply_num;
+    public int apply_status;
+}
+#endregion

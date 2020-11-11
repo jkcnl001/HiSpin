@@ -50,6 +50,7 @@ public class CashoutPop : PopUI
     private void OnConfirmCallback()
     {
         Master.Instance.SendAdjustInputEmailEvent(paypal_accountInput.text);
+        TaskAgent.TriggerTaskEvent(PlayerTaskTarget.WritePaypalEmail, 1);
         UI.ClosePopPanel(this);
     }
     private void OnConfirmAccountClick()

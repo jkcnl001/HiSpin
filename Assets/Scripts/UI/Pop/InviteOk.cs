@@ -18,12 +18,12 @@ public class InviteOk : PopUI
     }
     private void OnDoubleClick()
     {
-        Server.Instance.RequestData(Server.Server_RequestType.TaskData, () => { OnGetTaskListCallback(true); }, null);
+        OnGetTaskListCallback(true);
     }
     private void OnGetTaskListCallback(bool doublReward)
     {
-        List<PlayerTaskData> taskDatas = Save.data.task_list.user_task;
-        PlayerTaskData inviteTaskData = null;
+        List<AllData_Task> taskDatas = Save.data.allData.lucky_schedule.user_task;
+        AllData_Task inviteTaskData = null;
         if (taskDatas != null && taskDatas.Count > 0)
         {
             foreach (var task in taskDatas)
@@ -46,7 +46,7 @@ public class InviteOk : PopUI
     }
     private void OnSingleClick()
     {
-        Server.Instance.RequestData(Server.Server_RequestType.TaskData, () => { OnGetTaskListCallback(false); }, null);
+        OnGetTaskListCallback(false);
     }
     Reward invite_ok_reward_type;
     int invite_ok_reward_num;

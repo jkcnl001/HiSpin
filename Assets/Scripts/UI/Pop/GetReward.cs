@@ -21,7 +21,7 @@ public class GetReward : PopUI
     private void OnDoublegetButtonClick()
     {
         clickAdTime++;
-        Ads._instance.ShowRewardVideo(OnAdCallback, clickAdTime, "双倍" + reward_type, OnNothanksButtonClick);
+        Ads._instance.ShowRewardVideo(OnAdCallback, clickAdTime, "多倍奖励" + reward_type, OnNothanksButtonClick);
     }
     private void OnAdCallback()
     {
@@ -30,7 +30,7 @@ public class GetReward : PopUI
     }
     private void OnNothanksButtonClick()
     {
-        Get();
+        Ads._instance.ShowInterstialAd(Get, "放弃多倍" + reward_type);
     }
     private void Get()
     {
@@ -47,6 +47,15 @@ public class GetReward : PopUI
     private void OnRequestCallback()
     {
         UI.FlyReward(reward_type, reward_num, double_getButton.transform.position);
+        TaskAgent.TriggerTaskEvent(PlayerTaskTarget.PlaySlotsOnce, 1);
+        if (reward_type == Reward.Gold)
+        {
+            TaskAgent.TriggerTaskEvent(PlayerTaskTarget.OwnSomeGold, reward_num);
+        }
+        else if (reward_type == Reward.Ticket)
+        {
+            TaskAgent.TriggerTaskEvent(PlayerTaskTarget.GetTicketFromSlotsOnce, 1);
+        }
         UI.ClosePopPanel(this);
     }
     const string GoldTip = "OH YEEAAAAH!\nTOKEN HAUL!";
@@ -56,6 +65,7 @@ public class GetReward : PopUI
     int reward_num = 0;
     protected override void BeforeShowAnimation(params int[] args)
     {
+        clickAdTime = 0;
         reward_type = (Reward)args[0];
         reward_num = args[1];
         reward_area = (GetRewardArea)args[2];

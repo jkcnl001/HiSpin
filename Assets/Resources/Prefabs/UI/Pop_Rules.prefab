@@ -421,7 +421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6193197124493602859
 RectTransform:
   m_ObjectHideFlags: 0
@@ -440,7 +440,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.00036621, y: 491}
-  m_SizeDelta: {x: 996.0896, y: 1155}
+  m_SizeDelta: {x: 996.0896, y: 1234.0435}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8117697205927741622
 CanvasRenderer:
@@ -482,19 +482,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '1. There is a prize of 1,000 USD in the Lucky
-
-    Draw every day.
-
-    2.
-    You must have 200 tickets to participate in the Lucky Draw. More tickets you
-    have, more chance to win.
-
-    3. Every day at UTC 08:00:00, all your tickets
-    will be automatically put into the prize pool, and  the Lucky Draw will be done.
-
-    4.
-    There will be many winners with different bonus.'
+  m_Text: "1.  There is a prize of 1,000 USD in the Lucky\n    Draw every day.\n2.
+    You must have 200 tickets to participate\n    in the Lucky Draw. More tickets
+    you have,\n    more chance to win.\n3. Every day at UTC 08:00:00, all your\n   
+    tickets will be automatically put into the\n    prize pool, and  the Lucky Draw
+    will be\n    done.\n4. There will be many winners with different\n    bonus."
 --- !u!1 &4925321548883505185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,7 +1145,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -833}
-  m_SizeDelta: {x: 0, y: 81.320984}
+  m_SizeDelta: {x: 466, y: 81.320984}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5735934255396803620
 CanvasRenderer:
@@ -1287,7 +1279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -813}
+  m_AnchoredPosition: {x: 0, y: -896}
   m_SizeDelta: {x: 856.5055, y: 342}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1827821222525752071
@@ -1355,7 +1347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9141602686691059516
 RectTransform:
   m_ObjectHideFlags: 0

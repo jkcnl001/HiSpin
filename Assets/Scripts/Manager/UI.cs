@@ -338,6 +338,26 @@ public sealed class UI
     {
         MenuPanel.FlyReward_GetTargetPosAndCallback_ThenFly(type, num, startWorldPos);
     }
+    private static IUIBase GetUI(int panelIndex)
+    {
+        allPanelDic.TryGetValue(panelIndex, out IUIBase ui);
+        return ui;
+    }
+    public static IUIBase GetUI(BasePanel basePanel)
+    {
+        return GetUI((int)basePanel);
+    }
+    public static IUIBase GetUI(PopPanel popPanel)
+    {
+        return GetUI((int)popPanel);
+    }
+    public static void OnHasTaskFinished(bool hasFinished)
+    {
+        MenuPanel.OnTaskFinishChange(hasFinished);
+        Setting setting = GetUI(PopPanel.Setting) as Setting;
+        if (setting != null)
+            setting.OnTaskFinishChange(hasFinished);
+    }
 }
 public enum BasePanel
 {

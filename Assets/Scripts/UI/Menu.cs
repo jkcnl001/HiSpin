@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour, IUIBase
 {
     CanvasGroup canvasGroup;
+    public GameObject setting_rpGo;
 
     public Button offerwallButton;
     public Button rankButton;
@@ -17,6 +18,7 @@ public class Menu : MonoBehaviour, IUIBase
     public Button settingButton;
     public Button add_ticketButton;
     public Button backButton;
+    public Button play_slots_helpButton;
 
     public RectTransform selectRect;
     [Space(15)]
@@ -41,6 +43,7 @@ public class Menu : MonoBehaviour, IUIBase
         settingButton.AddClickEvent(OnSettingButtonClick);
         add_ticketButton.AddClickEvent(OnAddTicketButtonClick);
         backButton.AddClickEvent(OnBackButtonClick);
+        play_slots_helpButton.AddClickEvent(OnPlayslotsHelpButtonClick);
         fly_target_dic.Add(Reward.Gold, gold_numText.transform.parent);
         fly_target_dic.Add(Reward.Cash, cash_numText.transform.parent);
         fly_target_dic.Add(Reward.Ticket, ticket_numText.transform.parent);
@@ -49,6 +52,23 @@ public class Menu : MonoBehaviour, IUIBase
             RectTransform topRect = all_topGo.transform as RectTransform;
             topRect.sizeDelta = new Vector2(topRect.sizeDelta.x, topRect.sizeDelta.y + 100);
         }
+        setting_rpGo.SetActive(false);
+        foreach (var task in Save.data.allData.lucky_schedule.user_task)
+        {
+            if (task.task_cur >= task.task_tar && !task.task_receive)
+            {
+                setting_rpGo.SetActive(true);
+                break;
+            }
+        }
+    }
+    private void Start()
+    {
+        OnSlotsButtonClick();
+    }
+    public void OnTaskFinishChange(bool hasFinish)
+    {
+        setting_rpGo.SetActive(hasFinish);
     }
     #region button event
     private void OnOfferwallButtonClick()
@@ -84,6 +104,10 @@ public class Menu : MonoBehaviour, IUIBase
     {
         UI.CloseCurrentBasePanel();
     }
+    private void OnPlayslotsHelpButtonClick()
+    {
+        UI.ShowPopPanel(PopPanel.Rules, (int)RuleArea.PlaySlots);
+    }
     #endregion
     private Button currentBottomButton = null;
     private void OnChangeBottomButton(Button clickButton)
@@ -97,53 +121,49 @@ public class Menu : MonoBehaviour, IUIBase
     #region update top token text
     public void UpdateGoldText()
     {
-        gold_numText.text = Save.data.mainData.user_gold_live.GetTokenShowString();
+        gold_numText.text = Save.data.allData.user_panel.user_gold_live.GetTokenShowString();
     }
     public void UpdateCashText()
     {
-        cash_numText.text = Save.data.mainData.user_doller_live.GetCashShowString();
+        cash_numText.text = Save.data.allData.user_panel.user_doller_live.GetCashShowString();
     }
     public void UpdateTicketText()
     {
-        ticket_numText.text = Save.data.mainData.user_tickets.GetTokenShowString();
+        ticket_numText.text = Save.data.allData.user_panel.user_tickets.GetTokenShowString();
     }
     #endregion
     #region stateChange
     public IEnumerator Show(params int[] args)
     {
+        RefreshTokenText();
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = true;
-        Server.Instance.RequestData(Server.Server_RequestType.BettingData, OnRequestDataCallback, null);
         yield return null;
     }
-    public void OnStartNewBetting()
-    {
-        Server.Instance.RequestData(Server.Server_RequestType.BettingData, OnRequestDataCallback, null);
-    }
-    private void OnRequestDataCallback()
+    public void RefreshTokenText()
     {
         UpdateGoldText();
         UpdateTicketText();
         bool hasSelf = false;
-        List<BettingWinnerInfo> bettingDatas = Save.data.betting_data.ranking;
-        if (bettingDatas != null)
+        List<AllData_BettingWinnerData_Winner> bettingDatas = Save.data.allData.award_ranking.ranking;
+        if (!Save.data.allData.day_flag && bettingDatas != null)
         {
             foreach (var winner in bettingDatas)
             {
-                if (winner.user_id == Save.data.mainData.user_id)
+                if (winner.user_id == Save.data.allData.user_panel.user_id)
                 {
                     hasSelf = true;
-                    cash_numText.text = (Save.data.mainData.user_doller_live - winner.user_num).GetCashShowString();
+                    cash_numText.text = (Save.data.allData.user_panel.user_doller_live - winner.user_num).GetCashShowString();
                     break;
                 }
             }
             if (!hasSelf)
                 UpdateCashText();
+            UI.ShowPopPanel(PopPanel.StartBetting);
         }
         else
             UpdateCashText();
-        OnSlotsButtonClick();
     }
     public IEnumerator Close()
     {
@@ -169,8 +189,6 @@ public class Menu : MonoBehaviour, IUIBase
     public void OnBasePanelShow(int panelIndex)
     {
         BasePanel basePanelType = (BasePanel)panelIndex;
-        //OnChangeBottomButton(giftButton);
-        //OnChangeBottomButton(firendButton);
         switch (basePanelType)
         {
             case BasePanel.Cashout:
@@ -182,6 +200,7 @@ public class Menu : MonoBehaviour, IUIBase
                 backButton.gameObject.SetActive(true);
                 settingButton.gameObject.SetActive(false);
                 add_ticketButton.gameObject.SetActive(true);
+                play_slots_helpButton.gameObject.SetActive(false);
                 break;
             case BasePanel.CashoutRecord:
                 all_topGo.SetActive(true);
@@ -192,6 +211,7 @@ public class Menu : MonoBehaviour, IUIBase
                 backButton.gameObject.SetActive(true);
                 settingButton.gameObject.SetActive(false);
                 add_ticketButton.gameObject.SetActive(true);
+                play_slots_helpButton.gameObject.SetActive(false);
                 break;
             case BasePanel.Task:
                 all_topGo.SetActive(true);
@@ -201,6 +221,7 @@ public class Menu : MonoBehaviour, IUIBase
                 backButton.gameObject.SetActive(true);
                 settingButton.gameObject.SetActive(false);
                 add_ticketButton.gameObject.SetActive(true);
+                play_slots_helpButton.gameObject.SetActive(false);
                 break;
             case BasePanel.PlaySlots:
                 all_topGo.SetActive(true);
@@ -210,6 +231,7 @@ public class Menu : MonoBehaviour, IUIBase
                 backButton.gameObject.SetActive(false);
                 settingButton.gameObject.SetActive(false);
                 add_ticketButton.gameObject.SetActive(false);
+                play_slots_helpButton.gameObject.SetActive(Save.data.isPackB);
                 break;
             case BasePanel.Friend:
                 all_bottomGo.SetActive(false);
@@ -225,6 +247,7 @@ public class Menu : MonoBehaviour, IUIBase
                 settingButton.gameObject.SetActive(true);
                 all_bottomGo.SetActive(true);
                 add_ticketButton.gameObject.SetActive(true);
+                play_slots_helpButton.gameObject.SetActive(false);
                 break;
             case BasePanel.Slots:
                 OnChangeBottomButton(slotsButton);
@@ -247,6 +270,7 @@ public class Menu : MonoBehaviour, IUIBase
         settingButton.gameObject.SetActive(true);
         all_bottomGo.SetActive(true);
         add_ticketButton.gameObject.SetActive(true);
+        play_slots_helpButton.gameObject.SetActive(false);
     }
     public void FlyReward_GetTargetPosAndCallback_ThenFly(Reward type, int num, Vector3 startWorldPos)
     {

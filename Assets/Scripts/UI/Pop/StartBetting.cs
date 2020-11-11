@@ -28,15 +28,19 @@ public class StartBetting : PopUI
     }
     private void OnGetButtonClick()
     {
+        Server.Instance.OperationData_OpenBettingPrize(OnRequstDataCallback, null);
+    }
+    private void OnRequstDataCallback()
+    {
         UI.ClosePopPanel(this);
     }
     Vector3 endPosOffset = new Vector2(-473.27f, 0);
     Vector3 endPos = new Vector2(-473.27f, 0);
     IEnumerator AutoSpinCards()
     {
-        int yesterdayTicket = Save.data.betting_data.ysterday_tickets;
+        int yesterdayTicket = Save.data.allData.award_ranking.ysterday_tickets;
         yield return new WaitForSeconds(1);
-        if (yesterdayTicket >= Betting.JoinNeedTicketNum)
+        if (yesterdayTicket >= Save.data.allData.award_ranking.ticktes_flag)
         {
             Vector3 flyEndPos = fly_targetRect.position;
             Vector3 startPos = yesterday_ticket_numText.transform.position;
@@ -106,9 +110,9 @@ public class StartBetting : PopUI
         }
         tipText.text = "More tickets you have, more chance to win!";
         get_button_contentText.text = "TRY YOUR LUCK";
-        List<BettingWinnerInfo> bettingWinners = Save.data.betting_data.ranking;
-        string selfId = Save.data.mainData.user_id;
-        BettingWinnerInfo willShow = bettingWinners[0];
+        List<AllData_BettingWinnerData_Winner> bettingWinners = Save.data.allData.award_ranking.ranking;
+        string selfId = Save.data.allData.user_panel.user_id;
+        AllData_BettingWinnerData_Winner willShow = bettingWinners[0];
         foreach(var winner in bettingWinners)
         {
             if (winner.user_id.Equals(selfId))
@@ -116,6 +120,7 @@ public class StartBetting : PopUI
                 willShow = winner;
                 tipText.text = "Congratulations on winning the prize!!";
                 get_button_contentText.text = "TAKE YOUR MONEY!";
+                TaskAgent.TriggerTaskEvent(PlayerTaskTarget.WinnerOnce, 1);
                 break;
             }
         }
@@ -134,12 +139,9 @@ public class StartBetting : PopUI
     protected override void BeforeShowAnimation(params int[] args)
     {
         single_card_item.SetOff();
-        int yesterdayTicket = Save.data.betting_data.ysterday_tickets;
+        int yesterdayTicket = Save.data.allData.award_ranking.ysterday_tickets;
         yesterday_ticket_numText.text = yesterdayTicket.GetTokenShowString();
-        if (yesterdayTicket >= Betting.JoinNeedTicketNum)
-            tipText.text = string.Format("You bet {0} tickets Good luck to you!", yesterdayTicket);
-        else
-            tipText.text = "More tickets you have Higher chance to win!";
+        tipText.text = "";
         getButton.gameObject.SetActive(false);
         StartCoroutine(AutoRatateLight());
     }

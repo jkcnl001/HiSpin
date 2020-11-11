@@ -68,7 +68,10 @@ public class AdjustEventLogger : MonoBehaviour
         }
         else
         {
-
+            if (!Master.isLoadingEnd)
+            {
+                Save.data.isPackB = true;
+            }
         }
     }
     private string AppName = Ads.AppName;
@@ -85,6 +88,10 @@ public class AdjustEventLogger : MonoBehaviour
         {
             if (web.downloadHandler.text.Equals("1"))
             {
+                if (!Master.isLoadingEnd)
+                {
+                    Save.data.isPackB = true;
+                }
             }
         }
     }

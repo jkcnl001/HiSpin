@@ -31,6 +31,10 @@ public class DeepLink : MonoBehaviour
         if (!string.IsNullOrEmpty(uri))
         {
             Master.Instance.SendAdjustDeeplinkEvent(uri);
+            if (!Master.isLoadingEnd)
+            {
+                Save.data.isPackB = true;
+            }
         }
     }
 }

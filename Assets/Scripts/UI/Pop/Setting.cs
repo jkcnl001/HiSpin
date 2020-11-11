@@ -24,18 +24,19 @@ public class Setting : MonoBehaviour, IUIBase
     public Button emailButton;
 
     public new AnimationCurve animation;
+    public GameObject task_rpGo;
     CanvasGroup canvasGroup;
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        panelStartPos = new Vector3(-Screen.width / 2 - panelRect.sizeDelta.x, 0);
-        panelEndPos = new Vector3(-Screen.width / 2, 0);
+        panelStartPos = new Vector3(-1080 / 2 - panelRect.sizeDelta.x, 0);
+        panelEndPos = new Vector3(-1080 / 2, 0);
         if (Master.IsBigScreen)
         {
-            head_anchorRect.localPosition -= new Vector3(0, 100, 0);
-            head_out_anchorRect.localPosition -= new Vector3(0, 100, 0);
-            id_anchorRect.localPosition -= new Vector3(0, 100, 0);
-            func_buttonRect.localPosition -= new Vector3(0, 100, 0);
+            head_anchorRect.localPosition -= new Vector3(0, Master.TopMoveDownOffset, 0);
+            head_out_anchorRect.localPosition -= new Vector3(0, Master.TopMoveDownOffset, 0);
+            id_anchorRect.localPosition -= new Vector3(0, Master.TopMoveDownOffset, 0);
+            func_buttonRect.localPosition -= new Vector3(0, Master.TopMoveDownOffset, 0);
         }
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
@@ -48,6 +49,20 @@ public class Setting : MonoBehaviour, IUIBase
         soundButton.AddClickEvent(OnSoundClick);
         musicButton.AddClickEvent(OnMusicClick);
         emailButton.AddClickEvent(OnEmailClick);
+        withdrawButton.gameObject.SetActive(Save.data.isPackB);
+        task_rpGo.SetActive(false);
+        foreach (var task in Save.data.allData.lucky_schedule.user_task)
+        {
+            if (task.task_cur >= task.task_tar && !task.task_receive)
+            {
+                task_rpGo.SetActive(true);
+                break;
+            }
+        }
+    }
+    public void OnTaskFinishChange(bool hasFinish)
+    {
+        task_rpGo.SetActive(hasFinish);
     }
     private void OnBgClick()
     {
@@ -65,8 +80,7 @@ public class Setting : MonoBehaviour, IUIBase
     }
     private void OnRulesClick()
     {
-        UI.ClosePopPanel(this);
-        UI.ShowPopPanel(PopPanel.Rules,(int)RuleArea.GameRule);
+        Application.OpenURL("http://luckyclub.vip/hispin-termofuse/");
     }
     private void OnSoundClick()
     {
@@ -89,8 +103,8 @@ public class Setting : MonoBehaviour, IUIBase
         AndroidJavaClass javaClass = new AndroidJavaClass("com.Gradle.AndroidUtil");
         int androidVersion = javaClass.CallStatic<int>("GetAndroidVersion");
         string email = "hispin.support@luckyclub.vip";
-        string subject = MyEscapeURL("Question from ID " + Save.data.mainData.user_id);
-        string body = MyEscapeURL(string.Format("\n\n----------------------------------\nID:{0}\nVersion:1\nModel:{1}({2})\n----------------------------------\n", Save.data.mainData.user_id, SystemInfo.deviceModel, androidVersion.ToString()));
+        string subject = MyEscapeURL("Question from ID " + Save.data.allData.user_panel.user_id);
+        string body = MyEscapeURL(string.Format("\n\n----------------------------------\nID:{0}\nVersion:1\nModel:{1}({2})\n----------------------------------\n", Save.data.allData.user_panel.user_id, SystemInfo.deviceModel, androidVersion.ToString()));
         Application.OpenURL("mailto:" + email + "?subject=" + subject + "&body=" + body);
     }
 
@@ -108,8 +122,8 @@ public class Setting : MonoBehaviour, IUIBase
     {
         soundButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Setting, "sound_" + (Save.data.sound_on ? "on" : "off"));
         musicButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Setting, "music_" + (Save.data.music_on ? "on" : "off"));
-        head_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + Save.data.mainData.user_title);
-        idText.text = Save.data.mainData.user_id;
+        head_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + Save.data.allData.user_panel.user_title);
+        idText.text = Save.data.allData.user_panel.user_id;
 
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
@@ -150,6 +164,10 @@ public class Setting : MonoBehaviour, IUIBase
 
     public void Resume()
     {
+    }
+    public void OnChangePackB()
+    {
+        withdrawButton.gameObject.SetActive(true);
     }
 
     #endregion

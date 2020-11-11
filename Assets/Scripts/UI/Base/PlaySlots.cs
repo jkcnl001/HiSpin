@@ -7,7 +7,6 @@ public class PlaySlots : BaseUI
 {
     public Image titleImage;
     public Button spinButton;
-    public Button helpButton;
     public Text left_timeText;
     public Text cash_numText;
     public Image left_rewardImage;
@@ -40,7 +39,6 @@ public class PlaySlots : BaseUI
     {
         base.Awake();
         spinButton.AddClickEvent(OnSpinButtonClick);
-        helpButton.AddClickEvent(OnHelpButtonClick);
     }
     bool isSpining = false;
     private void OnSpinButtonClick()
@@ -58,10 +56,6 @@ public class PlaySlots : BaseUI
     private void OnIVCallback()
     {
         StartCoroutine(StartSpinSlots());
-    }
-    private void OnHelpButtonClick()
-    {
-        UI.ShowPopPanel(PopPanel.Rules, (int)RuleArea.PlaySlots);
     }
     private IEnumerator StartSpinSlots()
     {

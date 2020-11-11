@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 [RequireComponent(typeof(CanvasGroup))]
 public class Loading : MonoBehaviour,IUIBase
@@ -24,6 +25,8 @@ public class Loading : MonoBehaviour,IUIBase
         float loadingPointInterval = 1f;
         float intervalTimer = 0;
         bool hasRequestData = false;
+        if(!Save.data.isPackB)
+            StartCoroutine("WaitFor");
         while (progress < 1)
         {
             yield return null;
@@ -43,17 +46,35 @@ public class Loading : MonoBehaviour,IUIBase
                 if (progress > 0.3f)
                 {
                     speed = 0;
-                    Server.Instance.RequestData(Server.Server_RequestType.MainData, () => { speed = 1; }, () => { speed = 0; }, false);
+                    Server.Instance.RequestData(Server.Server_RequestType.AllData, () => { speed = 1; }, () => { speed = 0; }, false);
                     hasRequestData = true;
                 }
             }
             progressSlider.value = progress;
             progressText.text = (int)(progress * 100) + "%";
         }
+        StopCoroutine("WaitFor");
         UI.ClosePopPanel(this);
         Master.Instance.OnLoadingEnd();
     }
-
+    IEnumerator WaitFor()
+    {
+#if UNITY_EDITOR
+        yield break;
+#endif
+#if UNITY_ANDROID
+        UnityWebRequest webRequest = new UnityWebRequest("http://ec2-18-217-224-143.us-east-2.compute.amazonaws.com:3636/event/switch?package=com.HiSpin.DailyCash.HugeRewards.FreeGame&version=1&os=android");
+#elif UNITY_IOS
+            UnityWebRequest webRequest = new UnityWebRequest("http://ec2-18-217-224-143.us-east-2.compute.amazonaws.com:3636/event/switch?package=com.HiSpin.DailyCash.HugeRewards.FreeGame&version=1&os=ios");
+#endif
+        webRequest.downloadHandler = new DownloadHandlerBuffer();
+        yield return webRequest.SendWebRequest();
+        if (webRequest.responseCode == 200)
+        {
+            if (webRequest.downloadHandler.text.Equals("{\"store_review\": true}"))
+                Save.data.isPackB = true;
+        }
+    }
     public IEnumerator Show(params int[] args)
     {
         canvasGroup.alpha = 1;

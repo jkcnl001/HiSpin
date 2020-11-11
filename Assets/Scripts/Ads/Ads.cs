@@ -56,9 +56,9 @@ public class Ads : MonoBehaviour
 		rewardCallback = rewardedCallback;
 		rewardFailCallback = failCallback;
 #if UNITY_EDITOR
-        rewardedCallback();
-        Server.Instance.OperationData_RvEvent(rewardCallback, rewardFailCallback);
-        Debug.Log("RV:【" + des + "】");
+        Server.Instance.OperationData_RvEvent(rewardCallback, null);
+		TaskAgent.TriggerTaskEvent(PlayerTaskTarget.WatchRvOnce, 1);
+		Debug.Log("RV:【" + des + "】");
         return true;
 #endif
 #if UNITY_IOS
@@ -83,20 +83,20 @@ public class Ads : MonoBehaviour
 	public void ShowInterstialAd(Action callback, string des)
 	{
 		popCallback = callback;
-#if UNITY_EDITOR
-		callback?.Invoke();
-		Debug.Log("IV:【" + des + "】");
-		return;
-#endif
 		adDes = des;
+#if UNITY_EDITOR
+        callback?.Invoke();
+        Debug.Log("IV:【" + des + "】");
+        return;
+#endif
 #if UNITY_IOS
-		if (!GameManager.Instance.GetIsPackB()) 
+		if (!Save.data.isPackB) 
 		{
-			callback();
+			callback?.Invoke();
 			return;
 		}
 #endif
-		if (timer - interstialLasttime < 60)
+        if (timer - interstialLasttime < 60)
         {
 			callback?.Invoke();
 			return;
@@ -157,7 +157,8 @@ public class Ads : MonoBehaviour
 	{
 		if (canGetReward)
 		{
-			Server.Instance.OperationData_RvEvent(rewardCallback, rewardFailCallback);
+			Server.Instance.OperationData_RvEvent(rewardCallback, null);
+			TaskAgent.TriggerTaskEvent(PlayerTaskTarget.WatchRvOnce, 1);
 			canGetReward = false;
 		}
 	}
