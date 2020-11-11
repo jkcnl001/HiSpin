@@ -65,6 +65,7 @@ public class Friends : BaseUI
 #endif
         _AJ.CallStatic("ShareString", string.Format("http://admin.crsdk.com:8000/invita?user={0}&irsource_name={2}&app_name={1}", Save.data.allData.user_panel.user_id, "com.HiSpin.DailyCash.HugeRewards.FreeGame", Server.Bi_name));
     }
+    public const int invite_reward_cash_time = 5;
     protected override void BeforeShowAnimation(params int[] args)
     {
         RefreshFriendList();
@@ -73,8 +74,8 @@ public class Friends : BaseUI
         int not_received_invite_reward = invite_people_num - invite_people_receive;
         for (int i = 0; i < not_received_invite_reward; i++)
         {
-            bool isRewardCash = invite_people_receive + i <= 7;
-            UI.ShowPopPanel(PopPanel.InviteOk, (int)(isRewardCash ? Reward.Cash : Reward.Ticket), isRewardCash ? 100 : 50);
+            bool isRewardCash = invite_people_receive + i <= invite_reward_cash_time;
+            UI.ShowPopPanel(PopPanel.InviteOk, (int)(isRewardCash ? Reward.Cash : Reward.Ticket), isRewardCash ? 100 : 100);
         }
     }
     public void RefreshFriendList()
@@ -105,8 +106,8 @@ public class Friends : BaseUI
         bool noFriend = count == 0;
         lastdayGo.SetActive(!noFriend);
         nofriend_tipGo.SetActive(noFriend);
-        bool inviteRewardCash = invite_people_receive<= 7;
-        invite_reward_numText.text = string.Format("Invite friends to get <color=#FF9732>{0}</color>", inviteRewardCash ? "$1.00" : "50");
+        bool inviteRewardCash = invite_people_receive<= invite_reward_cash_time;
+        invite_reward_numText.text = string.Format("Invite friends to get <color=#FF9732>{0}</color>", inviteRewardCash ? "$1.00" : "100");
         invite_reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.Friend, inviteRewardCash ? "cash" : "ticket");
 
     }

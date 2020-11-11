@@ -104,11 +104,22 @@ public class TaskItem : MonoBehaviour
             }
             else
             {
-                adGo.SetActive(false);
-                getButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Task, "button");
-                button_contentText.text = "CLAIM";
-                getButton.gameObject.SetActive(true);
-                red_pointGo.SetActive(true);
+                if (taskTargetId == PlayerTaskTarget.InviteAFriend)
+                {
+                    adGo.SetActive(false);
+                    button_contentText.text = "GO TO";
+                    getButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Task, "button");
+                    getButton.gameObject.SetActive(true);
+                    red_pointGo.SetActive(false);
+                }
+                else
+                {
+                    adGo.SetActive(false);
+                    getButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Task, "button");
+                    button_contentText.text = "CLAIM";
+                    getButton.gameObject.SetActive(true);
+                    red_pointGo.SetActive(true);
+                }
             }
         }
     }
@@ -150,10 +161,8 @@ public class TaskItem : MonoBehaviour
                 case PlayerTaskTarget.OwnSomeGold:
                 case PlayerTaskTarget.WinnerOnce:
                 case PlayerTaskTarget.GetTicketFromSlotsOnce:
-                    Server.Instance.OperationData_FinishTask(OnFinishTaskCallback, OnErrorCallback, Task_ID, false, RewardType);
-                    break;
                 case PlayerTaskTarget.WritePaypalEmail:
-                    UI.ShowBasePanel(BasePanel.Cashout);
+                    Server.Instance.OperationData_FinishTask(OnFinishTaskCallback, OnErrorCallback, Task_ID, false, RewardType);
                     break;
                 case PlayerTaskTarget.InviteAFriend:
                     UI.ShowBasePanel(BasePanel.Friend);
@@ -186,6 +195,8 @@ public class TaskItem : MonoBehaviour
             bool hasFinish = false;
             foreach (var task in Save.data.allData.lucky_schedule.user_task)
             {
+                if (task.taskTargetId == PlayerTaskTarget.InviteAFriend)
+                    continue;
                 if (task.task_cur >= task.task_tar && !task.task_receive)
                 {
                     HasFinish = true;

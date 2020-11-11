@@ -14,6 +14,8 @@ public class TaskAgent
             AllData_Task task = allTask[i];
             if (task.taskTargetId == taskTarget)
             {
+                if (task.taskTargetId == PlayerTaskTarget.InviteAFriend)
+                    continue;
                 task.task_cur += change_num;
                 if (!string.IsNullOrEmpty(task.task_describe))
                     task.task_describe = task.task_cur + "/" + task.task_tar;

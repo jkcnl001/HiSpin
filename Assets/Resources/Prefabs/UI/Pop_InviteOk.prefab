@@ -141,12 +141,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db83492bb8efc81479c0fe95a5a816e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invite_okCg: {fileID: 0}
   reward_iconImage: {fileID: 6890480431624882223}
   reward_numText: {fileID: 6890480429662578992}
   double_buttonText: {fileID: 6890480430233880379}
   double_rewardButton: {fileID: 6890480430591747641}
   single_rewardButton: {fileID: 6890480430652561866}
+  adGo: {fileID: 6890480431013308123}
 --- !u!1 &6890480430233880377
 GameObject:
   m_ObjectHideFlags: 0

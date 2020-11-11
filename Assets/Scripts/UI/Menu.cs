@@ -55,6 +55,8 @@ public class Menu : MonoBehaviour, IUIBase
         setting_rpGo.SetActive(false);
         foreach (var task in Save.data.allData.lucky_schedule.user_task)
         {
+            if (task.taskTargetId == PlayerTaskTarget.InviteAFriend)
+                continue;
             if (task.task_cur >= task.task_tar && !task.task_receive)
             {
                 setting_rpGo.SetActive(true);
