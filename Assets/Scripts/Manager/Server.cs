@@ -34,6 +34,9 @@ public class Server : MonoBehaviour
             case Server_RequestType.AllData:
                 StartCoroutine(ConnectToGetData(requestType, requestOkCallback, requestNoCallback, needShowConnecting));
                 break;
+            case Server_RequestType.TaskData:
+                StartCoroutine(ConnectToGetData(Server_RequestType.TaskData, requestOkCallback, requestNoCallback, needShowConnecting));
+                break;
             case Server_RequestType.ClickSlotsCard:
                 StartCoroutine(ConnectToClickSlotsCard(requestOkCallback, requestNoCallback, clickSlotsIndex));
                 break;
@@ -111,7 +114,6 @@ public class Server : MonoBehaviour
         FinishTask,
         BuyTickets,
         WatchRvEvent,
-        BettingData,
         BindPaypal,
         Cashout,
         GetLocalCountry,
@@ -127,7 +129,6 @@ public class Server : MonoBehaviour
         {Server_RequestType.FinishTask,"http://admin.crsdk.com:8000/lucky_task/" },
         {Server_RequestType.BuyTickets,"http://admin.crsdk.com:8000/lucky_exchange/" },
         {Server_RequestType.WatchRvEvent,"http://admin.crsdk.com:8000/lucky_rv/" },
-        {Server_RequestType.BettingData,"http://admin.crsdk.com:8000/award_ranking/" },
         {Server_RequestType.BindPaypal,"http://admin.crsdk.com:8000/lucky_paypal/" },
         {Server_RequestType.Cashout,"http://admin.crsdk.com:8000/lucky_apply/" },
         {Server_RequestType.GetLocalCountry,"https://a.mafiagameglobal.com/event/country/" },
