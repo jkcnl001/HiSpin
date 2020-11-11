@@ -75,36 +75,115 @@ public class PlaySlots : BaseUI
             endOffset_R = type_offset_dic[Reward.Gold][Lindex+1];
             endOffset_M = type_offset_dic[Reward.Gold][Lindex-1];
         }
-        AudioSource tempAs = Audio.PlayLoop(AudioPlayArea.Spin);
-        float spinRotateTime = 1;
-        Vector2 leftOffset = left_rewardImage.material.GetTextureOffset(MaterialOffsetProperty);
-        Vector2 rightOffset = right_rewardImage.material.GetTextureOffset(MaterialOffsetProperty);
-        Vector2 midOffset = mid_rewardImage.material.GetTextureOffset(MaterialOffsetProperty);
-        while (spinRotateTime > 0)
+        #region newSpin
+        float spinTime_L = 2;
+        float spinTime_M = 3f;
+        float spinTime_R = 4;
+        float timer = 0;
+        float spinSpeed;
+        float backSpeed_L = 0.005f;
+        float backSpeed_M = 0.005f;
+        float backSpeed_R = 0.005f;
+        float backTimer_L = 0;
+        float backTimer_M = 0;
+        float backTimer_R = 0;
+        float startOffsetY_L = left_rewardImage.material.GetTextureOffset(MaterialOffsetProperty).y;
+        float startOffsetY_M = mid_rewardImage.material.GetTextureOffset(MaterialOffsetProperty).y;
+        float startOffsetY_R = right_rewardImage.material.GetTextureOffset(MaterialOffsetProperty).y;
+        bool stop_L = false;
+        bool back_L = false;
+        bool stop_M = false;
+        bool back_M = false;
+        bool stop_R = false;
+        bool back_R = false;
+        AudioSource as_Spin = Audio.PlayLoop(AudioPlayArea.Spin);
+        while (!stop_R || !stop_M || !stop_L)
         {
-            spinRotateTime -= Time.deltaTime;
-            Vector2 o = new Vector2(0, Time.deltaTime*4);
-            leftOffset += o;
-            rightOffset += o;
-            midOffset += o;
-            left_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, leftOffset);
-            right_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, rightOffset);
-            mid_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, midOffset);
             yield return null;
+            timer += Time.deltaTime * 2;
+            spinSpeed = Time.deltaTime * 2.6f;
+            startOffsetY_L += spinSpeed;
+            startOffsetY_M += spinSpeed;
+            startOffsetY_R += spinSpeed;
+            if (!stop_L)
+                if (timer < spinTime_L)
+                    left_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, startOffsetY_L));
+                else
+                {
+                    if (!back_L)
+                    {
+                        backSpeed_L -= 0.0005f;
+                        backTimer_L += backSpeed_L;
+                        left_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_L + backTimer_L));
+                        if (backSpeed_L <= 0)
+                            back_L = true;
+                    }
+                    else
+                    {
+                        backSpeed_L -= 0.002f;
+                        backTimer_L += backSpeed_L;
+                        left_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_L + backTimer_L));
+                        if (backTimer_L <= 0)
+                        {
+                            left_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_L));
+                            stop_L = true;
+                        }
+                    }
+                }
+            if (!stop_M)
+                if (timer < spinTime_M)
+                    mid_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, startOffsetY_M));
+                else
+                {
+                    if (!back_M)
+                    {
+                        backSpeed_M -= 0.0005f;
+                        backTimer_M += backSpeed_M;
+                        mid_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_M + backTimer_M));
+                        if (backSpeed_M <= 0)
+                            back_M = true;
+                    }
+                    else
+                    {
+                        backSpeed_M -= 0.002f;
+                        backTimer_M += backSpeed_M;
+                        mid_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_M + backTimer_M));
+                        if (backTimer_M <= 0)
+                        {
+                            mid_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_M));
+                            stop_M = true;
+                        }
+                    }
+                }
+            if (!stop_R)
+                if (timer < spinTime_R)
+                    right_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, startOffsetY_R));
+                else
+                {
+                    if (!back_R)
+                    {
+                        backSpeed_R -= 0.0005f;
+                        backTimer_R += backSpeed_R;
+                        right_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_R + backTimer_R));
+                        if (backSpeed_R <= 0)
+                            back_R = true;
+                    }
+                    else
+                    {
+                        backSpeed_R -= 0.002f;
+                        backTimer_R += backSpeed_R;
+                        right_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_R + backTimer_R));
+                        if (backTimer_R <= 0)
+                        {
+                            right_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_R));
+                            stop_R = true;
+                        }
+                    }
+                }
         }
-        tempAs.Stop();
-        tempAs = null;
-        left_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_L));
-        right_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_R));
-        mid_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_M));
-        yield return null;
-        left_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_L + 0.02f));
-        right_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_R + 0.02f));
-        mid_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_M + 0.02f));
-        yield return new WaitForSeconds(0.04f);
-        left_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_L));
-        right_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_R));
-        mid_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, endOffset_M));
+        as_Spin.Stop();
+        as_Spin = null;
+        #endregion
         yield return new WaitForSeconds(0.5f);
         switch (rewardType)
         {

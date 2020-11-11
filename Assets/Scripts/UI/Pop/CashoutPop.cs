@@ -42,6 +42,7 @@ public class CashoutPop : PopUI
            "");
         Application.OpenURL(url);
 #endif
+        UI.ClosePopPanel(this);
     }
     private void OnCloseButtonClick()
     {
@@ -80,6 +81,7 @@ public class CashoutPop : PopUI
         switch (asArea)
         {
             case AsCashoutArea.PaypalEmail:
+                closeButton.gameObject.SetActive(true);
                 Input_emailCg.alpha = 1;
                 Input_emailCg.blocksRaycasts = true;
                 Cash_outCg.alpha = 0;
@@ -92,6 +94,7 @@ public class CashoutPop : PopUI
                 baseImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.AsCashoutPop, "base_n");
                 break;
             case AsCashoutArea.Cashout:
+                closeButton.gameObject.SetActive(true);
                 Input_emailCg.alpha = 0;
                 Input_emailCg.blocksRaycasts = false;
                 Cash_outCg.alpha = 1;
@@ -108,6 +111,7 @@ public class CashoutPop : PopUI
                 baseImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.AsCashoutPop, "base_n");
                 break;
             case AsCashoutArea.FailHelp:
+                closeButton.gameObject.SetActive(true);
                 Input_emailCg.alpha = 0;
                 Input_emailCg.blocksRaycasts = false;
                 Cash_outCg.alpha = 0;
@@ -120,6 +124,7 @@ public class CashoutPop : PopUI
                 baseImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.AsCashoutPop, "base_f");
                 break;
             case AsCashoutArea.Rateus:
+                closeButton.gameObject.SetActive(false);
                 Input_emailCg.alpha = 0;
                 Input_emailCg.blocksRaycasts = false;
                 Cash_outCg.alpha = 0;

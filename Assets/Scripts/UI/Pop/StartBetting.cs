@@ -76,36 +76,52 @@ public class StartBetting : PopUI
                 yield return null;
             }
         }
-        float turn = 5;
-        float speed = 0;
-        float maxSpeed = 3000;
-        float minSpeed = 500;
+        float timer = 0;
+        float spinTime = 2;
+        bool hasBack = false;
+        float forwardSpeed = 0;
+        float backSpeed = 0.015f;
+        float backTimer = 0;
+
+        float maxSpeed = 6000;
+
         all_card_rootRect.localPosition = new Vector3(0, all_card_rootRect.localPosition.y);
-        while (turn > 0)
+        while (true)
         {
             yield return null;
-            if (turn > 1)
+            timer += Time.deltaTime;
+            if (timer < spinTime)
             {
-                speed += 50;
-                if (speed > maxSpeed)
-                    speed = maxSpeed;
-                all_card_rootRect.localPosition += new Vector3(-Time.deltaTime * speed, 0);
+                forwardSpeed += 50;
+                if (forwardSpeed > maxSpeed)
+                    forwardSpeed = maxSpeed;
+                all_card_rootRect.localPosition += new Vector3(-Time.deltaTime * forwardSpeed, 0);
+                if (all_card_rootRect.localPosition.x <= endPosOffset.x)
+                {
+                    all_card_rootRect.localPosition -= 2 * endPosOffset;
+                }
             }
             else
             {
-                speed -= 50;
-                if (speed < minSpeed)
-                    speed = minSpeed;
-                all_card_rootRect.localPosition += new Vector3(-Time.deltaTime * speed, 0);
-                if (Vector3.Distance(all_card_rootRect.localPosition, endPos) < 20)
+                if (!hasBack)
                 {
-                    break;
+                    backSpeed -= 0.0005f;
+                    backTimer += backSpeed;
+                    all_card_rootRect.localPosition = new Vector3(endPosOffset.x * (1 + backTimer), endPos.y);
+                    if (backSpeed <= 0)
+                        hasBack = true;
                 }
-            }
-            if (all_card_rootRect.localPosition.x <= endPosOffset.x)
-            {
-                turn--;
-                all_card_rootRect.localPosition -= 2 * endPosOffset;
+                else
+                {
+                    backSpeed -= 0.002f;
+                    backTimer += backSpeed;
+                    all_card_rootRect.localPosition = new Vector3(endPosOffset.x * (1 + backTimer), endPos.y);
+                    if (backTimer <= 0)
+                    {
+                        all_card_rootRect.localPosition = endPos;
+                        break;
+                    }
+                }
             }
         }
         tipText.text = "More tickets you have, more chance to win!";

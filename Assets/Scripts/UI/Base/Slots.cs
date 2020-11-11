@@ -49,6 +49,11 @@ public class Slots : BaseUI
     {
         UpdateTimedownText(Master.time);
         RefreshSlotsCardState();
+        if (Save.data.enter_slots_time >= 3 && !Save.data.hasRateus)
+        {
+            Save.data.hasRateus = true;
+            UI.ShowPopPanel(PopPanel.CashoutPop, (int)AsCashoutArea.Rateus);
+        }
     }
     public void UpdateTimedownText(string time)
     {

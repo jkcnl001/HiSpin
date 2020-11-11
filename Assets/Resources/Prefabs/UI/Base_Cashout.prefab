@@ -112,7 +112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -204.15, y: -102.28}
+  m_AnchoredPosition: {x: -243.85, y: -102.28}
   m_SizeDelta: {x: 73.93469, y: 71.4702}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1106573825607294293
@@ -1355,7 +1355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -337.3, y: -104.1}
+  m_AnchoredPosition: {x: -377, y: -104.1}
   m_SizeDelta: {x: 184.5697, y: 75.10791}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1106573826454070340
@@ -2757,8 +2757,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 146.99, y: -104.1}
-  m_SizeDelta: {x: 628.34265, y: 75.10791}
+  m_AnchoredPosition: {x: 139.38, y: -104.1}
+  m_SizeDelta: {x: 692.4564, y: 75.10791}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1106573827349471378
 CanvasRenderer:
@@ -2794,13 +2794,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 111
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 892,299 more gold to redeem
+  m_Text: 5,000,000 more gold to redeem
 --- !u!1 &1188656642707708861
 GameObject:
   m_ObjectHideFlags: 0
@@ -3375,5 +3375,5 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Tips: Paypal will charge for each transfer. The service charge of each
-    country is different, we can learn from the official website.'
+  m_Text: 'IMPORTANT: Paypal will charge for each transfer. The service charge of
+    each country is different, we can learn from the official website.'
