@@ -31,38 +31,40 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: f2cc93d1958febd4aa6b234cdabb5ac3, type: 3}
-    totalSpriteSurfaceArea: 2355711
+    totalSpriteSurfaceArea: 2018631
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 957d85f13c972d24dbe2348d0d5cd5ae, type: 3}
   - {fileID: 21300000, guid: 3675bf52895e40a4ba1148f1f1f8e3d0, type: 3}
+  - {fileID: 21300000, guid: 2aa5ef649b3a4d34fa5bc6ba763c3588, type: 3}
   - {fileID: 21300000, guid: 801af065d87c6c4469be457dd65c11c0, type: 3}
-  - {fileID: 21300000, guid: 5204d3d586a616947a89b9cbbd886f42, type: 3}
-  - {fileID: 21300000, guid: 126bb8e520a6bea44b71a67c209b2254, type: 3}
+  - {fileID: 21300000, guid: 4ef2d417276421742ac270b8ae15b28f, type: 3}
+  - {fileID: 21300000, guid: 78f3cc478bdf03a4fb21d86ed25b49b2, type: 3}
   - {fileID: 21300000, guid: 6029e97868a380545ad6d4bb049a7eca, type: 3}
+  - {fileID: 21300000, guid: f2e417a836e05f443b0f3ff32547480e, type: 3}
   - {fileID: 21300000, guid: 1eeff929c72ec51459da64a2f5c4f0a3, type: 3}
   - {fileID: 21300000, guid: b2e986895e2288a41ae9bf6b3318461b, type: 3}
   - {fileID: 21300000, guid: e260c09cec41a344db93536c69d021da, type: 3}
   - {fileID: 21300000, guid: 2906fc9cf1f858e4a98bc3a5a7809a1d, type: 3}
   - {fileID: 21300000, guid: ca9313fc6c36c3849baa06590c63a8ed, type: 3}
   - {fileID: 21300000, guid: 2e7ca03d9ea140d4d8dfa6558166e05d, type: 3}
-  - {fileID: 21300000, guid: fb6ec45e098870e48a01a2f378547136, type: 3}
   - {fileID: 21300000, guid: dfc0d27f31ab1a944ad162b0d1eb29f4, type: 3}
-  - {fileID: 21300000, guid: b3d2c59f3a7f04a4593a4e99b59c04a7, type: 3}
   m_PackedSpriteNamesToIndex:
+  - goto
   - sound_on
+  - topbase
   - rules
-  - head_out
-  - head_mask
+  - base
+  - red_point
   - music_on
+  - blue_dialog
   - withdraw
   - music_off
   - gamebg
   - email
   - tasks
   - paypal
-  - shang
   - sound_off
-  - base
   m_Tag: Setting
   m_IsVariant: 0

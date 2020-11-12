@@ -30,6 +30,9 @@ public class Menu : MonoBehaviour, IUIBase
     public GameObject all_topGo;
     public GameObject all_tokenGo;
     public Text top_titleText;
+    [Space(15)]
+    public Image head_iconImage;
+    public Text ticket_multipleText;
     [NonSerialized]
     public readonly Dictionary<Reward, Transform> fly_target_dic = new Dictionary<Reward, Transform>();
     private void Awake()
@@ -133,11 +136,17 @@ public class Menu : MonoBehaviour, IUIBase
     {
         ticket_numText.text = Save.data.allData.user_panel.user_tickets.GetTokenShowString();
     }
+    public void UpdateHeadIcon()
+    {
+        head_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + Save.data.allData.user_panel.user_title);
+        ticket_multipleText.text = "x 1";
+    }
     #endregion
     #region stateChange
     public IEnumerator Show(params int[] args)
     {
         RefreshTokenText();
+        UpdateHeadIcon();
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = true;
@@ -186,6 +195,7 @@ public class Menu : MonoBehaviour, IUIBase
         UpdateGoldText();
         UpdateCashText();
         UpdateTicketText();
+        UpdateHeadIcon();
     }
     #endregion
     public void OnBasePanelShow(int panelIndex)

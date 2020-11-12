@@ -5,17 +5,18 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CanvasGroup))]
 public class Setting : MonoBehaviour, IUIBase
 {
-    public RectTransform head_anchorRect;
-    public RectTransform head_out_anchorRect;
-    public RectTransform id_anchorRect;
-    public RectTransform func_buttonRect;
+    public RectTransform top_baseRect;
     [Space(15)]
     public Image bgImage;
     public RectTransform panelRect;
     public Image head_iconImage;
+    public GameObject head_redpointGo;
+    public Text ticket_multipleText;
+    public Text lvText;
     public Text idText;
     [Space(15)]
     public Button bgButton;
+    public Button meButton;
     public Button withdrawButton;
     public Button tasksButton;
     public Button rulesButton;
@@ -33,16 +34,14 @@ public class Setting : MonoBehaviour, IUIBase
         panelEndPos = new Vector3(-1080 / 2, 0);
         if (Master.IsBigScreen)
         {
-            head_anchorRect.localPosition -= new Vector3(0, Master.TopMoveDownOffset, 0);
-            head_out_anchorRect.localPosition -= new Vector3(0, Master.TopMoveDownOffset, 0);
-            id_anchorRect.localPosition -= new Vector3(0, Master.TopMoveDownOffset, 0);
-            func_buttonRect.localPosition -= new Vector3(0, Master.TopMoveDownOffset, 0);
+            top_baseRect.sizeDelta += new Vector2(0, Master.TopMoveDownOffset);
         }
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
         bgImage.color = bgStartColor;
         panelRect.localPosition = panelStartPos;
         bgButton.AddClickEvent(OnBgClick);
+        meButton.AddClickEvent(OnMeButtonClick);
         withdrawButton.AddClickEvent(OnWithdrawClick);
         tasksButton.AddClickEvent(OnTasksClick);
         rulesButton.AddClickEvent(OnRulesClick);
@@ -69,6 +68,10 @@ public class Setting : MonoBehaviour, IUIBase
     private void OnBgClick()
     {
         UI.ClosePopPanel(this);
+    }
+    private void OnMeButtonClick()
+    {
+
     }
     private void OnWithdrawClick()
     {
@@ -126,6 +129,9 @@ public class Setting : MonoBehaviour, IUIBase
         musicButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Setting, "music_" + (Save.data.music_on ? "on" : "off"));
         head_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + Save.data.allData.user_panel.user_title);
         idText.text = Save.data.allData.user_panel.user_id;
+        ticket_multipleText.text = "Ticker <color=#fff000>x 1</color>\nMultiplier ";
+        lvText.text = "Lv.1";
+        head_redpointGo.SetActive(false);
 
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
