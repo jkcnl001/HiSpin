@@ -31,15 +31,13 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 8bc643398d6f68343863c9a71ef59b61, type: 3}
-    totalSpriteSurfaceArea: 701704
+    totalSpriteSurfaceArea: 654179
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 97c5182009b12bb498b95a0f193b9414, type: 3}
   - {fileID: 21300000, guid: 5101cf14c9d69444bb6380e2226eed8f, type: 3}
-  - {fileID: 21300000, guid: b9630005492b0b34fb25591257c76c6c, type: 3}
   - {fileID: 21300000, guid: 7c4b9fb5dda786b47b68202dbad93e4d, type: 3}
-  - {fileID: 21300000, guid: 36b39c7885e747845aeca8366c599769, type: 3}
   - {fileID: 21300000, guid: 68c120c8e0b5f8f478742decc28d81d8, type: 3}
   - {fileID: 21300000, guid: ac95c43972682ea4a854d7e216b61ea3, type: 3}
   - {fileID: 21300000, guid: f4f36cfcb4faa8347b908ccb7fbb8f09, type: 3}
@@ -48,9 +46,7 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - rank_bg_b
   - head_out_a
-  - head_mask_a
   - gold
-  - head_mask_b
   - head_out_b
   - line
   - rank_bg_c

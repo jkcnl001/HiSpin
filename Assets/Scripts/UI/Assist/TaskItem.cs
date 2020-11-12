@@ -136,7 +136,7 @@ public class TaskItem : MonoBehaviour
                     UI.ShowBasePanel(BasePanel.Friend);
                     break;
                 case PlayerTaskTarget.BuyTicketByGoldOnce:
-                    if (Save.data.allData.user_panel.user_gold_live >= 800)
+                    if (Save.data.allData.user_panel.user_gold_live >= Save.data.allData.lucky_schedule.coin_ticket)
                     {
                         Server.Instance.OperationData_BuyTickets(OnFinishTaskCallback, OnErrorCallback, false);
                     }

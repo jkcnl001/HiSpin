@@ -71,7 +71,8 @@ public class Setting : MonoBehaviour, IUIBase
     }
     private void OnMeButtonClick()
     {
-
+        UI.ClosePopPanel(this);
+        UI.ShowBasePanel(BasePanel.Me);
     }
     private void OnWithdrawClick()
     {

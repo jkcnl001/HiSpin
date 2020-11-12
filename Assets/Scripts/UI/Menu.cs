@@ -269,6 +269,17 @@ public class Menu : MonoBehaviour, IUIBase
                 OnChangeBottomButton(lotteryButton);
                 OnBottomBasePanelShow();
                 break;
+            case BasePanel.Me:
+                all_topGo.SetActive(true);
+                all_tokenGo.SetActive(false);
+                top_titleText.gameObject.SetActive(true);
+                top_titleText.text = "ME";
+                all_bottomGo.SetActive(false);
+                backButton.gameObject.SetActive(true);
+                settingButton.gameObject.SetActive(false);
+                add_ticketButton.gameObject.SetActive(true);
+                play_slots_helpButton.gameObject.SetActive(false);
+                break;
             default:
                 break;
         }

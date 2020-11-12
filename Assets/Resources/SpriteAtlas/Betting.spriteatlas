@@ -31,7 +31,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 1879bcea67906af49ba4249b8f9497a7, type: 3}
-    totalSpriteSurfaceArea: 1113208
+    totalSpriteSurfaceArea: 1096308
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -42,7 +42,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 551380d1b37dad2448038d48ff1e4236, type: 3}
   - {fileID: 21300000, guid: cc4275437ac940d44b6838306186d22a, type: 3}
   - {fileID: 21300000, guid: 056d6663458513740a75eef186e484a9, type: 3}
-  - {fileID: 21300000, guid: f4babbc55a9b0334381c6d818ecf5a5f, type: 3}
   - {fileID: 21300000, guid: 97b77db702b528041b121b21d16228b7, type: 3}
   - {fileID: 21300000, guid: b811cb9b93c04df4b81ae5c35bab8b90, type: 3}
   - {fileID: 21300000, guid: be6167eb1a1a6cb48873f7a3dc439982, type: 3}
@@ -57,7 +56,6 @@ SpriteAtlas:
   - poolbase
   - playButton_Off
   - line
-  - head_mask
   - head_out
   - playButton_On
   - clock

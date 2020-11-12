@@ -55,7 +55,7 @@ public class InviteOk : PopUI
     {
         invite_ok_reward_type = (Reward)args[0];
         invite_ok_reward_num = args[1];
-        reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.InviteOk, invite_ok_reward_type.ToString());
+        reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.InviteOk, invite_ok_reward_type.ToString().ToLower());
         single_rewardButton.gameObject.SetActive(false);
         adGo.SetActive(false);
         double_buttonText.text = "GET";
@@ -65,7 +65,7 @@ public class InviteOk : PopUI
         }
         else
         {
-            reward_numText.text = "x " + invite_ok_reward_num;
+            reward_numText.text = "x " + invite_ok_reward_num.GetTokenShowString();
         }
     }
 }

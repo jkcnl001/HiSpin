@@ -803,8 +803,8 @@ public class AllData_SlotsState
 public class AllData_BettingWinnerData
 {
     public List<AllData_BettingWinnerData_Winner> ranking;
-    public int ysterday_tickets;
-    public int ticktes_flag;
+    public int ysterday_tickets;//昨日总票数
+    public int ticktes_flag;//参与抽奖所需票数
 }
 public class AllData_BettingWinnerData_Winner
 {
@@ -831,6 +831,7 @@ public class AllData_YesterdayRankData_Rank
 }
 public class AllData_FriendData
 {
+    public AllData_FriendData_InviteRewardConfig reward_conf;
     public double user_doller;
     public string user_id;
     public int user_invite_people;
@@ -839,6 +840,15 @@ public class AllData_FriendData
     public string up_user_id;
     public double live_balance;
     public AllData_FriendData_FriendList up_user_info;
+}
+public class AllData_FriendData_InviteRewardConfig
+{
+    public int invite_receive;//邀请奖励领取的次数
+    public int invite_flag;//邀请奖励分界人数, <=为小于部分，>为大于部分
+    public Reward lt_flag_type;//小于部分
+    public int lt_flag_num;
+    public Reward gt_flag_type;//大于部分
+    public int gt_flag_num;
 }
 public class AllData_FriendData_FriendList
 {
@@ -849,12 +859,12 @@ public class AllData_FriendData_Friend
 {
     public string user_name;
     public string user_id;
-    public List<int> user_img;
+    public int user_img;
     public double yestday_doller;
 }
 public class AllData_TaskData
 {
-    public int invite_receive;
+    public int coin_ticket;//购买票所需金币
     public List<AllData_Task> user_task;
 }
 public class AllData_Task
@@ -863,8 +873,8 @@ public class AllData_Task
     public int task_id;
     public PlayerTaskTarget taskTargetId;
     public string task_describe;
-    public Reward reward_type;
     public int task_type;
+    public Reward reward_type;
     public int task_reward;
     public bool task_receive;
     public bool task_complete;

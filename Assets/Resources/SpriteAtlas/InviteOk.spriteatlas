@@ -31,30 +31,32 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 1ed300484d999ba4babd01e913629dde, type: 3}
-    totalSpriteSurfaceArea: 1518788
+    totalSpriteSurfaceArea: 1516264
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 3fbecb509632b2d428d480c40df107d7, type: 3}
   - {fileID: 21300000, guid: 1988323196bf10c41b3a2652c246062a, type: 3}
   - {fileID: 21300000, guid: cbaf00a3e3c8845459805663e35267e0, type: 3}
+  - {fileID: 21300000, guid: 08350ba436d69f145884b26435c7a1ae, type: 3}
   - {fileID: 21300000, guid: d182b926f28c86642b59bb84b9227271, type: 3}
   - {fileID: 21300000, guid: c228ff562827eb740bb6d7ab2306c24c, type: 3}
   - {fileID: 21300000, guid: f06c6596fe4922b4bbcb1ef67ca77fe1, type: 3}
   - {fileID: 21300000, guid: 5b5fe54a1d6e1f7479e2983ca55d4a4f, type: 3}
   - {fileID: 21300000, guid: 16584d6a2e322694dba30d37fc08edf3, type: 3}
   - {fileID: 21300000, guid: 4d5cb8acabafe0b49a2351254c2e4431, type: 3}
-  - {fileID: 21300000, guid: 7b4a748dabe1c51488b407344f46b7d8, type: 3}
   - {fileID: 21300000, guid: 0493f67f94365f94d8675408ce2aa3c1, type: 3}
   m_PackedSpriteNamesToIndex:
+  - cash
   - underline
   - icon
-  - Ticket
+  - gold
+  - ticket
   - confirmBg
   - ok
   - close
   - ad
   - inputfiledBg
-  - Cash
   - base
   m_Tag: InviteOk
   m_IsVariant: 0

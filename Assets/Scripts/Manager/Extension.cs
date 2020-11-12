@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -52,5 +53,25 @@ public static class Extension
                 str = str.Insert(i, ",");
         }
         return str;
+    }
+    public static string CheckName(this string str)
+    {
+        if (str == null || str.Length == 0) { return ""; }
+
+        StringBuilder @string = new StringBuilder();
+        int charCount = 0;
+        int stringIndex = 0;
+        int stringLength = str.Length;
+        while (stringIndex < stringLength)
+        {
+            @string.Append(str[stringIndex]);
+            charCount++;
+            if (str[stringIndex] > 128)
+                charCount++;
+            if (charCount >= 16)
+                break;
+            stringIndex++;
+        }
+        return @string.ToString();
     }
 }

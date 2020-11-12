@@ -421,7 +421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6193197124493602859
 RectTransform:
   m_ObjectHideFlags: 0
@@ -519,7 +519,7 @@ RectTransform:
   m_Children:
   - {fileID: 2534060185365447803}
   m_Father: {fileID: 9141602687935579871}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1330,6 +1330,88 @@ MonoBehaviour:
     - 14th prize       $20
 
     15nd - 44th prize      $10'
+--- !u!1 &8491804207360645034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8103349995836374005}
+  - component: {fileID: 8791228366877008946}
+  - component: {fileID: 8981905304881417723}
+  m_Layer: 5
+  m_Name: MyInfoRules
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8103349995836374005
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8491804207360645034}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9141602687935579871}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 411.4572}
+  m_SizeDelta: {x: 915.2787, y: 803.30255}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &8791228366877008946
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8491804207360645034}
+  m_CullTransparentMesh: 0
+--- !u!114 &8981905304881417723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8491804207360645034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d3d624ce138797e4caf9c1563fbd203d, type: 3}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 100
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "1. Every time you spin, you will definitely\n    get 5 points of EXP,
+    and the experience\n    required to upgrade will increase with\n    the level;\n2.
+    Upgrade to unlock new avatars and get\n    tickets, also increase the multiplier
+    of\n    getting tickets;\n3. The multiplier of tickets obtained has\n    increased
+    to increase the number of\n    tickets obtained by slot machines."
 --- !u!1 &9141602686691059515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,6 +1572,7 @@ MonoBehaviour:
   betting_rulesRect: {fileID: 6193197124493602859}
   game_rulesRect: {fileID: 129281613709926890}
   invite_firend_rulesRect: {fileID: 8783918046541057544}
+  myinfoRect: {fileID: 8103349995836374005}
   closeButton: {fileID: 9141602688492873319}
   sureButton: {fileID: 2214987625784667186}
   termsButton: {fileID: 2592873360415251436}
@@ -1604,6 +1687,7 @@ RectTransform:
   - {fileID: 6193197124493602859}
   - {fileID: 129281613709926890}
   - {fileID: 8783918046541057544}
+  - {fileID: 8103349995836374005}
   - {fileID: 8094983467412653401}
   m_Father: {fileID: 9141602687539517650}
   m_RootOrder: 1

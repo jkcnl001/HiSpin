@@ -28,6 +28,7 @@ public sealed class UI
         { (int)BasePanel.Task,"Prefabs/UI/Base_Task&Achievement" },
         { (int)BasePanel.PlaySlots,"Prefabs/UI/Base_PlaySlots" },
         { (int)BasePanel.Friend,"Prefabs/UI/Base_Friend" },
+        { (int)BasePanel.Me,"Prefabs/UI/Base_Me" },
 
         { (int)PopPanel.Loading,"Prefabs/UI/Pop_Loading" },
         { (int)PopPanel.Setting,"Prefabs/UI/Pop_Setting" },
@@ -370,14 +371,15 @@ public enum BasePanel
     Task = 5,
     PlaySlots = 6,
     Friend = 7,
+    Me = 8,
 }
 public enum PopPanel
 {
-    Loading = 8,
-    Setting = 9,
-    GetReward = 10,
-    Rules = 11,
-    CashoutPop = 12,
-    InviteOk = 13,
-    StartBetting = 14,
+    Loading = 9,
+    Setting = 10,
+    GetReward = 11,
+    Rules = 12,
+    CashoutPop = 13,
+    InviteOk = 14,
+    StartBetting = 15,
 }

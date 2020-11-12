@@ -31,7 +31,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: c6b43086edd6c2442acc995fd02a39d7, type: 3}
-    totalSpriteSurfaceArea: 1250523
+    totalSpriteSurfaceArea: 1242996
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -42,7 +42,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ad1f18e2138e45b49950e6e25680d492, type: 3}
   - {fileID: 21300000, guid: ceaba6a3c37f41d4d9eb2fc64f2515c2, type: 3}
   - {fileID: 21300000, guid: b3ffaeb53449c3547b4190850981f540, type: 3}
-  - {fileID: 21300000, guid: bf235898f620d1f45b50323829f107fe, type: 3}
+  - {fileID: 21300000, guid: 9c6b6baca23693e4faf3302172fe8187, type: 3}
   - {fileID: 21300000, guid: 6c59554fea9c2614493de54462ed48af, type: 3}
   - {fileID: 21300000, guid: 314be25fb0cd11c4fa45d4c27285e334, type: 3}
   - {fileID: 21300000, guid: e73a195f0b925b544b2165f11de72f0a, type: 3}
@@ -54,7 +54,7 @@ SpriteAtlas:
   - main_top_base
   - main_lastday_recordbg
   - back
-  - mask
+  - gold
   - inviteButtonBG
   - ticket
   - cash

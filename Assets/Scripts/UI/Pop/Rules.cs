@@ -10,6 +10,7 @@ public class Rules : PopUI
     public RectTransform betting_rulesRect;
     public RectTransform game_rulesRect;
     public RectTransform invite_firend_rulesRect;
+    public RectTransform myinfoRect;
     public Button closeButton;
     public Button sureButton;
     public Button termsButton;
@@ -32,6 +33,7 @@ public class Rules : PopUI
     const string BettingTitle = "How it works?";
     const string PlaySlotsTitle= "How to win";
     const string InviteFriendTitle = "How it works";
+    const string MyInfoTitle = "How it works";
     static string BettingContentTop = "1.  There is a prize of 1,000 USD in the Lucky\n    Draw every day.\n2. You must have {0} tickets to participate\n" +
         "    in the Lucky Draw. More tickets you have,\n    more chance to win.\n3. Every day at UTC 08:00:00, all your\n    tickets will be automatically put into the\n" +
         "    prize pool, and  the Lucky Draw will be\n    done.\n4. There will be many winners with different\n    bonus.";
@@ -47,6 +49,7 @@ public class Rules : PopUI
                 betting_rulesRect.gameObject.SetActive(false);
                 play_slots_rulesRect.gameObject.SetActive(false);
                 invite_firend_rulesRect.gameObject.SetActive(false);
+                myinfoRect.gameObject.SetActive(false);
                 sureButton.transform.localPosition = new Vector3(0, game_rulesRect.localPosition.y - game_rulesRect.sizeDelta.y- 50);
                 break;
             case RuleArea.Betting:
@@ -55,6 +58,7 @@ public class Rules : PopUI
                 betting_rulesRect.gameObject.SetActive(true);
                 play_slots_rulesRect.gameObject.SetActive(false);
                 invite_firend_rulesRect.gameObject.SetActive(false);
+                myinfoRect.gameObject.SetActive(false);
                 sureButton.transform.localPosition = new Vector3(0, betting_rulesRect.localPosition.y - betting_rulesRect.sizeDelta.y - 50);
                 betting_rulesRect.GetComponent<Text>().text = string.Format(BettingContentTop, Save.data.allData.award_ranking.ticktes_flag);
                 break;
@@ -64,6 +68,7 @@ public class Rules : PopUI
                 betting_rulesRect.gameObject.SetActive(false);
                 play_slots_rulesRect.gameObject.SetActive(true);
                 invite_firend_rulesRect.gameObject.SetActive(false);
+                myinfoRect.gameObject.SetActive(false);
                 sureButton.transform.localPosition = new Vector3(0, play_slots_rulesRect.localPosition.y - play_slots_rulesRect.sizeDelta.y - 50);
                 break;
             case RuleArea.InviteFriend:
@@ -72,7 +77,17 @@ public class Rules : PopUI
                 betting_rulesRect.gameObject.SetActive(false);
                 play_slots_rulesRect.gameObject.SetActive(false);
                 invite_firend_rulesRect.gameObject.SetActive(true);
-                sureButton.transform.localPosition = new Vector3(0, invite_firend_rulesRect.localPosition.y - invite_firend_rulesRect.sizeDelta.y - 150);
+                myinfoRect.gameObject.SetActive(false);
+                sureButton.transform.localPosition = new Vector3(0, invite_firend_rulesRect.localPosition.y - invite_firend_rulesRect.sizeDelta.y - 50);
+                break;
+            case RuleArea.MyInfo:
+                titleText.text = MyInfoTitle;
+                game_rulesRect.gameObject.SetActive(false);
+                betting_rulesRect.gameObject.SetActive(false);
+                play_slots_rulesRect.gameObject.SetActive(false);
+                invite_firend_rulesRect.gameObject.SetActive(false);
+                myinfoRect.gameObject.SetActive(true);
+                sureButton.transform.localPosition = new Vector3(0, myinfoRect.localPosition.y - myinfoRect.sizeDelta.y - 50);
                 break;
         }
     }
@@ -83,4 +98,5 @@ public enum RuleArea
     Betting,
     PlaySlots,
     InviteFriend,
+    MyInfo,
 }

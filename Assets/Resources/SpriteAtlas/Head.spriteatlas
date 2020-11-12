@@ -60,29 +60,29 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f381a5ae4a788bd46a5593882dbe68fb, type: 3}
   - {fileID: 21300000, guid: 5c29c6cf25c670a428a5490e06ae312e, type: 3}
   m_PackedSpriteNamesToIndex:
-  - head_20
-  - head_0
-  - head_19
-  - head_13
-  - head_7
-  - head_16
-  - head_15
-  - head_2
-  - head_5
-  - head_23
-  - head_10
-  - head_17
-  - head_6
-  - head_18
-  - head_8
-  - head_1
-  - head_21
-  - head_9
-  - head_11
-  - head_12
-  - head_14
-  - head_22
-  - head_3
-  - head_4
+  - head_1020
+  - head_1024
+  - head_1019
+  - head_1013
+  - head_1007
+  - head_1016
+  - head_1015
+  - head_1002
+  - head_1005
+  - head_1023
+  - head_1010
+  - head_1017
+  - head_1006
+  - head_1018
+  - head_1008
+  - head_1001
+  - head_1021
+  - head_1009
+  - head_1011
+  - head_1012
+  - head_1014
+  - head_1022
+  - head_1003
+  - head_1004
   m_Tag: Head
   m_IsVariant: 0

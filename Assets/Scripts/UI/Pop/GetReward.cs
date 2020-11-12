@@ -82,6 +82,11 @@ public class GetReward : PopUI
                 tipText.text = TicketTip;
                 double_getText.text = "GET   x3";
                 break;
+            case Reward.Cash:
+                reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.GetReward, "ticket");
+                tipText.text = TicketTip;
+                double_getText.text = "GET   x3";
+                break;
             default:
                 Debug.LogError("奖励类型错误");
                 break;
