@@ -63,9 +63,9 @@ public class Loading : MonoBehaviour,IUIBase
         yield break;
 #endif
 #if UNITY_ANDROID
-        UnityWebRequest webRequest = new UnityWebRequest("http://ec2-18-217-224-143.us-east-2.compute.amazonaws.com:3636/event/switch?package=com.HiSpin.DailyCash.HugeRewards.FreeGame&version=1&os=android");
+        UnityWebRequest webRequest = new UnityWebRequest(string.Format("http://ec2-18-217-224-143.us-east-2.compute.amazonaws.com:3636/event/switch?package={0}&version={1}&os=android", Master.PackageName, Master.Version));
 #elif UNITY_IOS
-            UnityWebRequest webRequest = new UnityWebRequest("http://ec2-18-217-224-143.us-east-2.compute.amazonaws.com:3636/event/switch?package=com.HiSpin.DailyCash.HugeRewards.FreeGame&version=1&os=ios");
+            UnityWebRequest webRequest = new UnityWebRequest(string.Format("http://ec2-18-217-224-143.us-east-2.compute.amazonaws.com:3636/event/switch?package={0}&version={1}&os=ios", Master.PackageName, Master.Version));
 #endif
         webRequest.downloadHandler = new DownloadHandlerBuffer();
         yield return webRequest.SendWebRequest();

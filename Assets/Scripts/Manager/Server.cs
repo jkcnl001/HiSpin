@@ -161,6 +161,7 @@ public class Server : MonoBehaviour
     int getSlotsRewardNum;
     public void OperationData_GetSlotsReward(Action successCallback,Action failCallback,Reward type,int num)
     {
+        requestType = Server_RequestType.GetSlotsReward;
         int typeIndex = 0;
         if (type == Reward.Gold)
             typeIndex = 0;
@@ -182,6 +183,7 @@ public class Server : MonoBehaviour
     bool finishTaskDoubleReward;
     public void OperationData_FinishTask(Action successCallback, Action failCallback, int taskID, bool double_reward = false, params Reward[] opTypes)
     {
+        requestType = Server_RequestType.FinishTask;
         requestOkCallback = successCallback;
         requestNoCallback = failCallback;
         finishTaskId = taskID;
@@ -192,6 +194,7 @@ public class Server : MonoBehaviour
     bool isRv;
     public void OperationData_BuyTickets(Action successCallback,Action failCallback,bool isRv)
     {
+        requestType = Server_RequestType.BuyTickets;
         requestOkCallback = successCallback;
         requestNoCallback = failCallback;
         this.isRv = isRv;
@@ -199,6 +202,7 @@ public class Server : MonoBehaviour
     }
     public void OperationData_RvEvent(Action successCallback,Action failCallback)
     {
+        requestType = Server_RequestType.WatchRvEvent;
         requestOkCallback = successCallback;
         requestNoCallback = failCallback;
         StartCoroutine(ConnectToSendRVEvent(successCallback, failCallback));
@@ -206,6 +210,7 @@ public class Server : MonoBehaviour
     string paypal;
     public void OperationData_BindPaypal(Action successCallback, Action failCallback,string paypal)
     {
+        requestType = Server_RequestType.BindPaypal;
         requestOkCallback = successCallback;
         requestNoCallback = failCallback;
         this.paypal = paypal;
@@ -217,6 +222,7 @@ public class Server : MonoBehaviour
     Action<string> getlocalcountryOkCallback;
     public void OperationData_Cashout(Action successCallback, Action failCallback,CashoutType type,int typeNum,int cashNum)
     {
+        requestType = Server_RequestType.Cashout;
         requestOkCallback = successCallback;
         requestNoCallback = failCallback;
         cashoutType = type;
@@ -226,12 +232,14 @@ public class Server : MonoBehaviour
     }
     public void RequestData_GetLocalcountry(Action<string> successCallback, Action failCallback)
     {
+        requestType = Server_RequestType.GetLocalCountry;
         getlocalcountryOkCallback = successCallback;
         requestNoCallback = failCallback;
         StartCoroutine(ConnectToGetlocalcountry(successCallback, failCallback));
     }
     public void OperationData_OpenBettingPrize(Action successCallback, Action failCallback)
     {
+        requestType = Server_RequestType.OpenBettingPrize;
         requestOkCallback = successCallback;
         requestNoCallback = failCallback;
         StartCoroutine(ConnectToOpenBettingPrize(successCallback, failCallback));

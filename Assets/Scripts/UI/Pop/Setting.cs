@@ -109,7 +109,7 @@ public class Setting : MonoBehaviour, IUIBase
         int androidVersion = javaClass.CallStatic<int>("GetAndroidVersion");
         string email = "hispin.support@luckyclub.vip";
         string subject = MyEscapeURL("Question from ID " + Save.data.allData.user_panel.user_id);
-        string body = MyEscapeURL(string.Format("\n\n----------------------------------\nID:{0}\nVersion:1\nModel:{1}({2})\n----------------------------------\n", Save.data.allData.user_panel.user_id, SystemInfo.deviceModel, androidVersion.ToString()));
+        string body = MyEscapeURL(string.Format("\n\n----------------------------------\nID:{0}\nVersion:{3}\nModel:{1}({2})\n----------------------------------\n", Save.data.allData.user_panel.user_id, SystemInfo.deviceModel, androidVersion.ToString(), Master.Version));
         Application.OpenURL("mailto:" + email + "?subject=" + subject + "&body=" + body);
     }
 

@@ -10,6 +10,9 @@ public class Master : MonoBehaviour
     public static bool IsBigScreen = false;
     public static float ExpandCoe = 1;
     public const float TopMoveDownOffset = 100;
+    public const string PackageName = "com.HiSpin.DailyCash.HugeRewards.FreeGame";
+    public const int Version = 3;
+    public const string AppleId = "";
     public static bool isLoadingEnd = false;
     public static Master Instance;
     public Image bgImage;
