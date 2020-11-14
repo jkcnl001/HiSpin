@@ -31,7 +31,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: f2d267aeef865e04a9bb7ae29bd8a5a8, type: 3}
-    totalSpriteSurfaceArea: 707947
+    totalSpriteSurfaceArea: 711853
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -39,6 +39,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b946fd1197e45b244a7a19921b7807ba, type: 3}
   - {fileID: 21300000, guid: 987685f3ad95b5b4d9f07c50f88bd044, type: 3}
   - {fileID: 21300000, guid: eff442045f5e016418710f7d8a7fb23b, type: 3}
+  - {fileID: 21300000, guid: 2e9b004971a885049ba1cc5b32756b36, type: 3}
   - {fileID: 21300000, guid: f91963ab56f914f4a914146cd41dcf97, type: 3}
   - {fileID: 21300000, guid: 78a5cdfdfb245524796fb5cd3d662f0b, type: 3}
   - {fileID: 21300000, guid: 0330536ea1d011042927b2809482dfe0, type: 3}
@@ -47,6 +48,7 @@ SpriteAtlas:
   - gold
   - button
   - underline
+  - multiple
   - NOTHANKS
   - close
   - ticket

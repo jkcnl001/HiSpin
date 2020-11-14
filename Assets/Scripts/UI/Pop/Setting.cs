@@ -10,10 +10,11 @@ public class Setting : MonoBehaviour, IUIBase
     public Image bgImage;
     public RectTransform panelRect;
     public Image head_iconImage;
+    public Image lv_progressImage;
     public GameObject head_redpointGo;
     public Text ticket_multipleText;
     public Text lvText;
-    public Text idText;
+    public Text nameText;
     [Space(15)]
     public Button bgButton;
     public Button meButton;
@@ -49,17 +50,6 @@ public class Setting : MonoBehaviour, IUIBase
         musicButton.AddClickEvent(OnMusicClick);
         emailButton.AddClickEvent(OnEmailClick);
         withdrawButton.gameObject.SetActive(Save.data.isPackB);
-        task_rpGo.SetActive(false);
-        foreach (var task in Save.data.allData.lucky_schedule.user_task)
-        {
-            if (task.taskTargetId == PlayerTaskTarget.InviteAFriend)
-                continue;
-            if (task.task_cur >= task.task_tar && !task.task_receive)
-            {
-                task_rpGo.SetActive(true);
-                break;
-            }
-        }
     }
     public void OnTaskFinishChange(bool hasFinish)
     {
@@ -129,10 +119,34 @@ public class Setting : MonoBehaviour, IUIBase
         soundButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Setting, "sound_" + (Save.data.sound_on ? "on" : "off"));
         musicButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Setting, "music_" + (Save.data.music_on ? "on" : "off"));
         head_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + Save.data.allData.user_panel.user_title);
-        idText.text = Save.data.allData.user_panel.user_id;
-        ticket_multipleText.text = "Ticker <color=#fff000>x 1</color>\nMultiplier ";
-        lvText.text = "Lv.1";
-        head_redpointGo.SetActive(false);
+        nameText.text = Save.data.allData.user_panel.user_name;
+        ticket_multipleText.text = string.Format("Ticker <color=#fff000>x {0}</color>\nMultiplier ", Save.data.allData.user_panel.user_double.GetTicketMultipleString());
+        lvText.text = "Lv." + Save.data.allData.user_panel.user_level;
+        lv_progressImage.fillAmount = (float)Save.data.allData.user_panel.user_exp / Save.data.allData.user_panel.level_exp;
+        head_redpointGo.SetActive(false);//检测是否有新头像
+        int lv = Save.data.allData.user_panel.user_level;
+        List<int> avatar_level_list = Save.data.allData.user_panel.title_level;
+        List<bool> avatar_check = Save.data.head_icon_hasCheck;
+        int count = avatar_level_list.Count;
+        for (int i = 0; i < count; i++)
+        {
+            if (lv >= avatar_level_list[i] && !avatar_check[i])
+            {
+                head_redpointGo.SetActive(true);
+                break;
+            }
+        }
+        task_rpGo.SetActive(false);
+        foreach (var task in Save.data.allData.lucky_schedule.user_task)
+        {
+            if (task.taskTargetId == PlayerTaskTarget.InviteAFriend)
+                continue;
+            if (task.task_cur >= task.task_tar && !task.task_receive)
+            {
+                task_rpGo.SetActive(true);
+                break;
+            }
+        }
 
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;

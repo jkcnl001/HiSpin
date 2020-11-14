@@ -54,6 +54,14 @@ public static class Extension
         }
         return str;
     }
+    public static string GetTicketMultipleString(this int multiple)
+    {
+        string mulStr = multiple.ToString();
+        if (mulStr.Length == 1)
+            return "0." + mulStr;
+        else
+            return mulStr.Insert(mulStr.Length - 1, ".");
+    }
     public static string CheckName(this string str)
     {
         if (str == null || str.Length == 0) { return ""; }

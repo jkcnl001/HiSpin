@@ -14,13 +14,13 @@ public class Save
             data = new PlayerLocalData()
             {
                 allData = null,
-                hasOpenBettingPrize = false,
                 sound_on = true,
                 music_on = true,
                 enter_slots_time = 0,
                 input_eamil_time = 0,
                 hasRateus = false,
-                isPackB = false
+                isPackB = false,
+                head_icon_hasCheck=new List<bool>(),
             };
             PlayerPrefs.SetString("local_Data", JsonMapper.ToJson(data));
             PlayerPrefs.Save();
@@ -37,11 +37,11 @@ public class Save
 public class PlayerLocalData
 {
     public AllData allData;
-    public bool hasOpenBettingPrize;
     public bool sound_on;
     public bool music_on;
     public int enter_slots_time;
     public int input_eamil_time;
     public bool hasRateus;
     public bool isPackB;
+    public List<bool> head_icon_hasCheck;
 }

@@ -12,6 +12,10 @@ public class PlaySlots : BaseUI
     public Image left_rewardImage;
     public Image mid_rewardImage;
     public Image right_rewardImage;
+    [Space(15)]
+    public GameObject exp_addGo;
+    public Text expText;
+
     static readonly Dictionary<Reward, List<float>> type_offset_dic = new Dictionary<Reward, List<float>>()
     {
         {Reward.Gold,new List<float>(){ 0.31f, 0.43f, 0.55f, 0.69f, 0.82f} },
@@ -21,18 +25,23 @@ public class PlaySlots : BaseUI
 
     static readonly SlotsRandomData[] emptyData = new SlotsRandomData[2]
     {
-        new SlotsRandomData(){type=Reward.Null,weight=90,mustGetRange=null,numRnage=null},
-        new SlotsRandomData(){type=Reward.Null,weight=0,  mustGetRange=null,numRnage=null}
+        new SlotsRandomData(){type=Reward.Null,weight=90,mustGetRange=null,numRnage=null,blackbox=null},
+        new SlotsRandomData(){type=Reward.Null,weight=0,  mustGetRange=null,numRnage=null,blackbox=null}
     };
     static readonly SlotsRandomData[] goldData = new SlotsRandomData[2]
     {
-        new SlotsRandomData(){type=Reward.Gold,weight=90,mustGetRange=new Range(1,2),numRnage=new Range(200,320)},
-        new SlotsRandomData(){type=Reward.Gold,weight=90,mustGetRange=null,                   numRnage=new Range(100,300)}
+        new SlotsRandomData(){type=Reward.Gold,weight=90,mustGetRange=new Range(1,2),numRnage=new Range(200,320),blackbox=null},
+        new SlotsRandomData(){type=Reward.Gold,weight=90,mustGetRange=null,                   numRnage=new Range(100,300),blackbox=null}
     };
     static readonly SlotsRandomData[] ticketData = new SlotsRandomData[2]
     {
-        new SlotsRandomData(){type=Reward.Ticket,weight=20,mustGetRange=new Range(0,1),numRnage=new Range(10,10)},
+        new SlotsRandomData(){type=Reward.Ticket,weight=20,mustGetRange=new Range(0,1),numRnage=new Range(10,10),blackbox=new List<int>(){1,2,3,4,5 } },
         new SlotsRandomData(){type=Reward.Ticket,weight=10,mustGetRange=new Range(1,2),numRnage=new Range(10,10)}
+    };
+    static readonly SlotsRandomData[] cashData = new SlotsRandomData[2]
+    {
+        new SlotsRandomData(){type=Reward.Cash,weight=10,mustGetRange=new Range(0,1),numRnage=new Range(10,20),blackbox=new List<int>(){1,3,4,6,10 } },
+        new SlotsRandomData(){type=Reward.Cash,weight=0,mustGetRange=null,numRnage=null}
     };
 
     protected override void Awake()
@@ -45,6 +54,8 @@ public class PlaySlots : BaseUI
     {
         if (isSpining) return;
         isSpining = true;
+        exp_addGo.SetActive(true);
+        Master.Instance.AddLocalExp(exp_once);
         rewardType = RandomSlotsReward(out rewardNum);
         if (spinTime == 3)
         {
@@ -198,6 +209,7 @@ public class PlaySlots : BaseUI
                 break;
         }
         isSpining = false;
+        exp_addGo.SetActive(false);
     }
     bool isPause = false;
     public override void Resume()
@@ -221,8 +233,10 @@ public class PlaySlots : BaseUI
     static int spinTime = 0;
     static int goldMustGetTime = -1;
     static int ticketMustGetTime = -1;
+    static int cashMustGetTime = -1;
     static Reward rewardType = Reward.Null;
     static int rewardNum = 0;
+    static int exp_once = 0;
     protected override void BeforeShowAnimation(params int[] args)
     {
         left_timeText.text = MaxSpinTime + "/" + MaxSpinTime;
@@ -230,41 +244,67 @@ public class PlaySlots : BaseUI
         Master.Instance.ChangeBg(args[0]);
         isAd = args[1];
         cash_numText.text = "3 x     =     " + args[2].ToString();
+        int totalExp = args[3];
+        exp_once = totalExp / 5;
+        expText.text = "+ Exp " + exp_once;
+
         spinTime = 0;
-        goldMustGetTime = goldData[isAd].mustGetRange == null ? -1 : goldData[isAd].mustGetRange.RandomIncludeMax();
-        ticketMustGetTime = ticketData[isAd].mustGetRange == null ? -1 : ticketData[isAd].mustGetRange.RandomIncludeMax();
+        int enterSlotsTotalTimes = Save.data.allData.user_panel.lucky_count + 1;
+
+        List<int> goldBlackbox = goldData[isAd].blackbox;
+        bool hasSetGoldBlackbox = false;
+        if(goldBlackbox!=null)
+            foreach (var time in goldBlackbox)
+                if (time == enterSlotsTotalTimes)
+                {
+                    goldMustGetTime = goldData[isAd].mustGetRange.Max;
+                    hasSetGoldBlackbox = true;
+                    break;
+                }
+        if (!hasSetGoldBlackbox)
+            goldMustGetTime = goldData[isAd].mustGetRange == null ? -1 : goldData[isAd].mustGetRange.RandomIncludeMax();
+
+        List<int> ticketBlackbox = ticketData[isAd].blackbox;
+        bool hasSetTicketBlackbox = false;
+        if(ticketBlackbox!=null)
+            foreach(var time in ticketBlackbox)
+            {
+                ticketMustGetTime = ticketData[isAd].mustGetRange.Max;
+                hasSetTicketBlackbox = true;
+                break;
+            }
+        if (!hasSetTicketBlackbox)
+            ticketMustGetTime = ticketData[isAd].mustGetRange == null ? -1 : ticketData[isAd].mustGetRange.RandomIncludeMax();
+
+        List<int> cashBlackbox = cashData[isAd].blackbox;
+        bool hasSetCashblackbox = false;
+        if(cashBlackbox!=null)
+            foreach(var time in cashBlackbox)
+            {
+                cashMustGetTime = cashData[isAd].mustGetRange.Max;
+                hasSetCashblackbox = true;
+                break;
+            }
+        if (!hasSetCashblackbox)
+            cashMustGetTime = cashData[isAd].mustGetRange == null ? -1 : cashData[isAd].mustGetRange.RandomIncludeMax();
         left_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, type_offset_dic[Reward.Cash][0]));
         right_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, type_offset_dic[Reward.Cash][0]));
         mid_rewardImage.material.SetTextureOffset(MaterialOffsetProperty, new Vector2(0, type_offset_dic[Reward.Cash][0]));
     }
+    struct RandomData
+    {
+        public bool hasThis;
+        public Reward type;
+        public int startWeight;
+        public int endWeight;
+    }
+    private static List<RandomData> randomDatas = new List<RandomData>();
     private Reward RandomSlotsReward(out int rewardNum)
     {
         SlotsRandomData empty = emptyData[isAd];
         SlotsRandomData gold = goldData[isAd];
         SlotsRandomData ticket = ticketData[isAd];
-
-        bool hasEmpty = true;
-        bool hasGold = true;
-        bool hasTicket = true;
-
-        if (goldMustGetTime != -1 && ticketMustGetTime != -1)
-        {
-            hasEmpty = MaxSpinTime - spinTime > goldMustGetTime + ticketMustGetTime;
-            hasGold = goldMustGetTime > 0;
-            hasTicket = ticketMustGetTime > 0;
-        }
-        else if (goldMustGetTime == -1 && ticketMustGetTime != -1)
-        {
-            hasEmpty = MaxSpinTime - spinTime > ticketMustGetTime;
-            hasGold = hasEmpty;
-            hasTicket = ticketMustGetTime > 0;
-        }
-        else if (goldMustGetTime != -1 && ticketMustGetTime == -1)
-        {
-            hasEmpty = MaxSpinTime - spinTime > goldMustGetTime;
-            hasTicket = hasEmpty;
-            hasGold = goldMustGetTime > 0;
-        }
+        SlotsRandomData cash = cashData[isAd];
 
         Reward RewardTicket(out int num)
         {
@@ -289,47 +329,88 @@ public class PlaySlots : BaseUI
             left_timeText.text = (MaxSpinTime - spinTime) + "/" + MaxSpinTime;
             return Reward.Null;
         }
-
-        if (hasTicket && !hasGold && !hasEmpty)
+        Reward RewardCash(out int num)
         {
-            return RewardTicket(out rewardNum);
-        }
-        else if (hasGold && !hasTicket && !hasEmpty)
-        {
-            return RewardGold(out rewardNum);
-        }
-        else if (hasEmpty && !hasGold && !hasTicket)
-        {
-            return RewardNull(out rewardNum);
+            num = cash.numRnage.RandomIncludeMax();
+            cashMustGetTime--;
+            spinTime++;
+            left_timeText.text = (MaxSpinTime - spinTime) + "/" + MaxSpinTime;
+            return Reward.Cash;
         }
 
-        if (hasTicket && hasGold && !hasEmpty)
+        randomDatas.Clear();
+        int total = 0;
+        RandomData cashRandomData = new RandomData() { hasThis = false, type = Reward.Cash };
+        if (cashMustGetTime > 0)
+            cashRandomData.hasThis = true;
+        else if (cashMustGetTime <= -1)
+            cashRandomData.hasThis = MaxSpinTime - spinTime > (goldMustGetTime <= -1 ? 0 : goldMustGetTime) + (ticketMustGetTime <= -1 ? 0 : ticketMustGetTime);
+        if (cashRandomData.hasThis)
         {
-            return Random.Range(0, ticket.weight + gold.weight) < ticket.weight ? RewardTicket(out rewardNum) : RewardGold(out rewardNum);
-        }
-        else if (hasTicket && hasEmpty && !hasGold)
-        {
-            return Random.Range(0, ticket.weight + empty.weight) < ticket.weight ? RewardTicket(out rewardNum) : RewardNull(out rewardNum);
-        }
-        else if (hasGold && hasEmpty && !hasTicket)
-        {
-            return Random.Range(0, gold.weight + empty.weight) < gold.weight ? RewardGold(out rewardNum) : RewardNull(out rewardNum);
+            cashRandomData.startWeight = total;
+            total += cash.weight;
+            cashRandomData.endWeight = total;
         }
 
-        int total = empty.weight + gold.weight + ticket.weight;
+        RandomData ticketRandomData = new RandomData() { hasThis = false, type = Reward.Ticket };
+        if (ticketMustGetTime > 0)
+            ticketRandomData.hasThis = true;
+        else if(ticketMustGetTime<=-1)
+            ticketRandomData.hasThis=MaxSpinTime-spinTime> (goldMustGetTime <= -1 ? 0 : goldMustGetTime) + (cashMustGetTime <= -1 ? 0 : cashMustGetTime);
+        if (ticketRandomData.hasThis)
+        {
+            ticketRandomData.startWeight = total;
+            total += ticket.weight;
+            ticketRandomData.endWeight = total;
+        }
+
+        RandomData goldRandomData = new RandomData() { hasThis = false, type = Reward.Gold };
+        if (goldMustGetTime > 0)
+            goldRandomData.hasThis = true;
+        else if (goldMustGetTime <= -1)
+            goldRandomData.hasThis = MaxSpinTime - spinTime > (ticketMustGetTime <= -1 ? 0 : ticketMustGetTime) + (cashMustGetTime <= -1 ? 0 : cashMustGetTime);
+        if (goldRandomData.hasThis)
+        {
+            goldRandomData.startWeight = total;
+            total += gold.weight;
+            goldRandomData.endWeight = total;
+        }
+
+        RandomData emptyRandomData = new RandomData() { hasThis = false, type = Reward.Gold };
+        emptyRandomData.hasThis = MaxSpinTime - spinTime > (ticketMustGetTime <= -1 ? 0 : ticketMustGetTime) + (cashMustGetTime <= -1 ? 0 : cashMustGetTime) + (goldMustGetTime <= -1 ? 0 : goldMustGetTime);
+        if (emptyRandomData.hasThis)
+        {
+            emptyRandomData.startWeight = total;
+            total += empty.weight;
+            emptyRandomData.endWeight = total;
+        }
+
+        randomDatas.Add(cashRandomData);
+        randomDatas.Add(ticketRandomData);
+        randomDatas.Add(goldRandomData);
+        randomDatas.Add(emptyRandomData);
+
         int result = Random.Range(0, total);
-        if (result < empty.weight)
+        foreach(var data in randomDatas)
         {
-            return RewardNull(out rewardNum);
+            if (result >= data.startWeight && result < data.endWeight)
+            {
+                switch (data.type)
+                {
+                    case Reward.Null:
+                        return RewardNull(out rewardNum);
+                    case Reward.Gold:
+                        return RewardGold(out rewardNum);
+                    case Reward.Cash:
+                        return RewardCash(out rewardNum);
+                    case Reward.Ticket:
+                        return RewardTicket(out rewardNum);
+                    default:
+                        return RewardNull(out rewardNum);
+                }
+            }
         }
-        else if (result < empty.weight + gold.weight)
-        {
-            return RewardGold(out rewardNum);
-        }
-        else
-        {
-            return RewardTicket(out rewardNum);
-        }
+        return RewardNull(out rewardNum);
     }
     private struct SlotsRandomData
     {
@@ -337,5 +418,6 @@ public class PlaySlots : BaseUI
         public int weight;
         public Range mustGetRange;
         public Range numRnage;
+        public List<int> blackbox;
     }
 }

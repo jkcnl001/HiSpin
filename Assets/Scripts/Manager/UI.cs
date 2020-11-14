@@ -29,6 +29,7 @@ public sealed class UI
         { (int)BasePanel.PlaySlots,"Prefabs/UI/Base_PlaySlots" },
         { (int)BasePanel.Friend,"Prefabs/UI/Base_Friend" },
         { (int)BasePanel.Me,"Prefabs/UI/Base_Me" },
+        { (int)BasePanel.FriendList,"Prefabs/UI/Base_FriendList" },
 
         { (int)PopPanel.Loading,"Prefabs/UI/Pop_Loading" },
         { (int)PopPanel.Setting,"Prefabs/UI/Pop_Setting" },
@@ -37,6 +38,8 @@ public sealed class UI
         { (int)PopPanel.CashoutPop,"Prefabs/UI/Pop_AsCashout" },
         { (int)PopPanel.InviteOk,"Prefabs/UI/Pop_InviteOk" },
         { (int)PopPanel.StartBetting,"Prefabs/UI/Pop_StartBetting" },
+        { (int)PopPanel.GetCash,"Prefabs/UI/Pop_GetCash" },
+        { (int)PopPanel.Guide,"Prefabs/UI/Pop_Guide" },
     };
     //除菜单外所有面板已经加载的资源
     static readonly Dictionary<int, GameObject> loadedpanelPrefabDic = new Dictionary<int, GameObject>();
@@ -54,6 +57,8 @@ public sealed class UI
         new PopTask() { panelType = PopPanel.CashoutPop, taskQueue = new Queue<int[]>() },
         new PopTask() { panelType = PopPanel.InviteOk, taskQueue = new Queue<int[]>() },
         new PopTask() { panelType = PopPanel.StartBetting, taskQueue = new Queue<int[]>() },
+        new PopTask() { panelType = PopPanel.GetCash, taskQueue = new Queue<int[]>() },
+        new PopTask() { panelType = PopPanel.Guide, taskQueue = new Queue<int[]>() },
     };
     class PopTask
     {
@@ -372,14 +377,17 @@ public enum BasePanel
     PlaySlots = 6,
     Friend = 7,
     Me = 8,
+    FriendList = 9,
 }
 public enum PopPanel
 {
-    Loading = 9,
-    Setting = 10,
-    GetReward = 11,
-    Rules = 12,
-    CashoutPop = 13,
-    InviteOk = 14,
-    StartBetting = 15,
+    Loading = 10,
+    Setting = 11,
+    GetReward = 12,
+    Rules = 13,
+    CashoutPop = 14,
+    InviteOk = 15,
+    StartBetting = 16,
+    GetCash = 17,
+    Guide = 18,
 }

@@ -51,13 +51,32 @@ public class Master : MonoBehaviour
     public void OnLoadingEnd()
     {
         isLoadingEnd = true;
+        CheckLocalSavaData();
         StartTimeDown();
+        if (!Save.data.isPackB)
+            Save.data.isPackB = Save.data.allData.fission_info.up_user;
         UI.ShowMenuPanel();
     }
     public void StartTimeDown()
     {
         StopCoroutine("AutoTimedown");
         StartCoroutine("AutoTimedown", Save.data.allData.get_time.server_time + 5);
+    }
+    private void CheckLocalSavaData()
+    {
+        List<bool> head_new = Save.data.head_icon_hasCheck;
+        if (head_new == null || head_new.Count != Save.data.allData.user_panel.title_list.Count)
+        {
+            int count = Save.data.allData.user_panel.title_list.Count;
+            head_new = new List<bool>();
+            for(int i = 0; i < count; i++)
+            {
+                head_new.Add(false);
+            }
+            if (head_new.Count > 1)
+                head_new[0] = true;
+        }
+        Save.data.head_icon_hasCheck = head_new;
     }
     public void OnChangePackb()
     {
@@ -106,30 +125,53 @@ public class Master : MonoBehaviour
     }
     private void OnRequestAllDataCallback()
     {
-        Slots slots = UI.GetUI(BasePanel.Slots) as Slots;
-        if (slots != null)
-            slots.RefreshSlotsCardState();
-        Tasks tasks = UI.GetUI(BasePanel.Task) as Tasks;
-        if (tasks != null)
-            tasks.RefreshTaskInfo();
         StartTimeDown();
         UI.MenuPanel.RefreshTokenText();
-        Betting betting = UI.GetUI(BasePanel.Betting) as Betting;
-        if (betting != null)
+        if (UI.CurrentBasePanel == UI.GetUI(BasePanel.Slots))
+        {
+            Slots slots = UI.GetUI(BasePanel.Slots) as Slots;
+            slots.RefreshSlotsCardState();
+        }
+        if (UI.CurrentBasePanel == UI.GetUI(BasePanel.Task))
+        {
+            Tasks tasks = UI.GetUI(BasePanel.Task) as Tasks;
+            tasks.RefreshTaskInfo();
+        }
+        if (UI.CurrentBasePanel == UI.GetUI(BasePanel.Betting))
+        {
+            Betting betting = UI.GetUI(BasePanel.Betting) as Betting;
             betting.RefreshBettingWinner();
-        Rank rank = UI.GetUI(BasePanel.Rank) as Rank;
-        if (rank != null)
+        }
+        if (UI.CurrentBasePanel == UI.GetUI(BasePanel.Rank))
+        {
+            Rank rank = UI.GetUI(BasePanel.Rank) as Rank;
             rank.RefreshRankList();
-        Friends friends = UI.GetUI(BasePanel.Friend) as Friends;
-        if (friends != null)
+        }
+        if (UI.CurrentBasePanel == UI.GetUI(BasePanel.Friend))
+        {
+            Friends friends = UI.GetUI(BasePanel.Friend) as Friends;
             friends.RefreshFriendList();
-        CashoutRecord cashoutRecord = UI.GetUI(BasePanel.CashoutRecord) as CashoutRecord;
-        if (cashoutRecord != null)
+        }
+        if (UI.CurrentBasePanel == UI.GetUI(BasePanel.CashoutRecord))
+        {
+            CashoutRecord cashoutRecord = UI.GetUI(BasePanel.CashoutRecord) as CashoutRecord;
             cashoutRecord.InitRecord();
+        }
     }
     public void SetBgDefault()
     {
         bgImage.sprite = Sprites.GetBGSprite("bg");
+    }
+    public void AddLocalExp(int value)
+    {
+        Save.data.allData.user_panel.user_exp += value;
+        UI.MenuPanel.UpdateHeadIcon();
+        if (Save.data.allData.user_panel.user_exp >= Save.data.allData.user_panel.level_exp)
+        {
+            Save.data.allData.user_panel.user_level++;
+            Save.data.allData.user_panel.user_exp -= Save.data.allData.user_panel.level_exp;
+            UI.ShowPopPanel(PopPanel.GetReward, (int)Save.data.allData.user_panel.level_type, Save.data.allData.user_panel.next_level, (int)GetRewardArea.LevelUp, Save.data.allData.user_panel.user_level);
+        }
     }
     private void OnApplicationFocus(bool focus)
     {
@@ -185,14 +227,13 @@ public class Master : MonoBehaviour
     }
     public void SendAdjustEnterSlotsEvent(bool isAd)
     {
-        Save.data.enter_slots_time++;
 #if UNITY_EDITOR
         return;
 #endif
         AdjustEventLogger.Instance.AdjustEvent(AdjustEventLogger.TOKEN_stage_end,
             ("player_id", Save.data.allData.user_panel.user_id),
             //第几个老虎机
-            ("id", Save.data.enter_slots_time.ToString()),
+            ("id", Save.data.allData.user_panel.lucky_count.ToString()),
             //老虎机类型
             ("type", isAd ? "1" : "0"),
             //累计美元

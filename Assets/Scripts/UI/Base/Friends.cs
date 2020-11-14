@@ -12,15 +12,24 @@ public class Friends : BaseUI
     public Text pt_numText;
     public Button cashoutButton;
     public Text myfriends_numText;
+    [Space(15)]
+    public Button myfriendsButton;
+    public Image friend_headImage1;
+    public Image friend_headImage2;
+    public Image friend_headImage3;
+    [Space(15)]
     public Button inviteButton;
     public Text invite_reward_numText;
     public Image invite_reward_iconImage;
+    [Space(15)]
     public Text yesterday_pt_numText;
     public Text total_pt_numText;
     public GameObject lastdayGo;
     public GameObject nofriend_tipGo;
     public FriendInviteRecordItem single_invite_record_item;
     private List<FriendInviteRecordItem> all_invite_friend_items = new List<FriendInviteRecordItem>();
+    [Space(15)]
+    public RectTransform viewport;
     protected override void Awake()
     {
         base.Awake();
@@ -28,10 +37,12 @@ public class Friends : BaseUI
         helpButton.AddClickEvent(OnHelpButtonClick);
         cashoutButton.AddClickEvent(OnCashoutButtonClick);
         inviteButton.AddClickEvent(OnInviteButtonClick);
+        myfriendsButton.AddClickEvent(OnMyfriendsButtonClick);
         all_invite_friend_items.Add(single_invite_record_item);
         if (Master.IsBigScreen)
         {
-            topRect.sizeDelta = new Vector2(topRect.sizeDelta.x, topRect.sizeDelta.y + 100);
+            topRect.sizeDelta = new Vector2(topRect.sizeDelta.x, topRect.sizeDelta.y + Master.TopMoveDownOffset);
+            viewport.sizeDelta += new Vector2(0, 1920 * (Master.ExpandCoe - 1) - Master.TopMoveDownOffset);
         }
         cashoutButton.gameObject.SetActive(Save.data.isPackB);
     }
@@ -65,20 +76,13 @@ public class Friends : BaseUI
 #endif
         _AJ.CallStatic("ShareString", string.Format("http://admin.crsdk.com:8000/invita?user={0}&irsource_name={2}&app_name={1}", Save.data.allData.user_panel.user_id, "com.HiSpin.DailyCash.HugeRewards.FreeGame", Server.Bi_name));
     }
+    private void OnMyfriendsButtonClick()
+    {
+        UI.ShowBasePanel(BasePanel.FriendList);
+    }
     protected override void BeforeShowAnimation(params int[] args)
     {
         RefreshFriendList();
-        int invite_people_num = Save.data.allData.fission_info.user_invite_people;
-        int invite_people_receive = Save.data.allData.fission_info.reward_conf.invite_receive;
-        int not_received_invite_reward = invite_people_num - invite_people_receive;
-        for (int i = 0; i < not_received_invite_reward; i++)
-        {
-            int receiveTime = invite_people_receive + i + 1;
-            if (receiveTime <= Save.data.allData.fission_info.reward_conf.invite_flag)
-                UI.ShowPopPanel(PopPanel.InviteOk, (int)Save.data.allData.fission_info.reward_conf.lt_flag_type, Save.data.allData.fission_info.reward_conf.lt_flag_num);
-            else
-                UI.ShowPopPanel(PopPanel.InviteOk, (int)Save.data.allData.fission_info.reward_conf.gt_flag_type, Save.data.allData.fission_info.reward_conf.gt_flag_num);
-        }
     }
     public void RefreshFriendList()
     {
@@ -94,20 +98,50 @@ public class Friends : BaseUI
 
         List<AllData_FriendData_Friend> friend_Infos = Save.data.allData.fission_info.up_user_info.two_user_list;
         int count = friend_Infos.Count;
+        List<AllData_FriendData_Friend> friend_Infos_order = new List<AllData_FriendData_Friend>();
         for(int i = 0; i < count; i++)
         {
+            AllData_FriendData_Friend unorder_friend_info = friend_Infos[i];
+            int orderCount = friend_Infos_order.Count;
+            bool hasAdd = false;
+            for(int j = 0; j < orderCount; j++)
+            {
+                if (unorder_friend_info.yestday_doller < friend_Infos_order[j].yestday_doller)
+                    continue;
+                else
+                {
+                    friend_Infos_order.Insert(j, unorder_friend_info);
+                    hasAdd = true;
+                    break;
+                }
+            }
+            if (!hasAdd)
+                friend_Infos_order.Add(unorder_friend_info);
+        }
+
+        for(int i = 0; i < count; i++)
+        {
+            AllData_FriendData_Friend friendInfo = friend_Infos_order[i];
+            if ((int)friendInfo.yestday_doller == 0)
+                continue;
             if (i > all_invite_friend_items.Count - 1)
             {
                 FriendInviteRecordItem newRecordItem = Instantiate(single_invite_record_item, single_invite_record_item.transform.parent).GetComponent<FriendInviteRecordItem>();
                 all_invite_friend_items.Add(newRecordItem);
             }
-            AllData_FriendData_Friend friendInfo = friend_Infos[i];
             all_invite_friend_items[i].gameObject.SetActive(true);
-            all_invite_friend_items[i].Init(friendInfo.user_img, friendInfo.user_name, friendInfo.user_id, (int)friendInfo.yestday_doller);
+            all_invite_friend_items[i].Init(friendInfo.user_img, friendInfo.user_name, (int)friendInfo.yestday_doller, friendInfo.distance);
         }
         bool noFriend = count == 0;
         lastdayGo.SetActive(!noFriend);
         nofriend_tipGo.SetActive(noFriend);
+        myfriendsButton.gameObject.SetActive(!noFriend);
+        if (count > 0)
+            friend_headImage1.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + friend_Infos[0].user_img);
+        if (count > 1)
+            friend_headImage2.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + friend_Infos[1].user_img);
+        if (count > 2)
+            friend_headImage3.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + friend_Infos[2].user_img);
 
         int receiveTime = invite_people_receive + 1;
         if (receiveTime <= Save.data.allData.fission_info.reward_conf.invite_flag)
@@ -123,6 +157,15 @@ public class Friends : BaseUI
             invite_reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.Friend, Save.data.allData.fission_info.reward_conf.gt_flag_type.ToString().ToLower());
         }
 
+        int not_received_invite_reward = invite_people_num - invite_people_receive;
+        for (int i = 0; i < not_received_invite_reward; i++)
+        {
+            int receiveTimes = invite_people_receive + i + 1;
+            if (receiveTimes <= Save.data.allData.fission_info.reward_conf.invite_flag)
+                UI.ShowPopPanel(PopPanel.InviteOk, (int)Save.data.allData.fission_info.reward_conf.lt_flag_type, Save.data.allData.fission_info.reward_conf.lt_flag_num);
+            else
+                UI.ShowPopPanel(PopPanel.InviteOk, (int)Save.data.allData.fission_info.reward_conf.gt_flag_type, Save.data.allData.fission_info.reward_conf.gt_flag_num);
+        }
     }
     public void OnChangePackB()
     {

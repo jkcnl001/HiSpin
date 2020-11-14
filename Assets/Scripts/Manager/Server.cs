@@ -64,6 +64,15 @@ public class Server : MonoBehaviour
             case Server_RequestType.OpenBettingPrize:
                 StartCoroutine(ConnectToOpenBettingPrize(requestOkCallback, requestNoCallback));
                 break;
+            case Server_RequestType.ChangeHead_Name:
+                StartCoroutine(ConnectToChangeHeadOrName(requestOkCallback, requestNoCallback, New_head_id, New_name));
+                break;
+            case Server_RequestType.GetLevelUpReward:
+                StartCoroutine(ConnectToGetLevelupReward(requestOkCallback, requestNoCallback, LevelupRewardMultiple));
+                break;
+            case Server_RequestType.GetNewPlayerReward:
+                StartCoroutine(ConnectToGetNewPlayerReward(requestOkCallback, requestNoCallback, NewPlayerRewardMultiple));
+                break;
             default:
                 break;
         }
@@ -118,6 +127,9 @@ public class Server : MonoBehaviour
         Cashout,
         GetLocalCountry,
         OpenBettingPrize,
+        ChangeHead_Name,
+        GetLevelUpReward,
+        GetNewPlayerReward,
     }
     static readonly Dictionary<Server_RequestType, string> getdata_uri_dic = new Dictionary<Server_RequestType, string>()
     {
@@ -133,6 +145,9 @@ public class Server : MonoBehaviour
         {Server_RequestType.Cashout,"http://admin.crsdk.com:8000/lucky_apply/" },
         {Server_RequestType.GetLocalCountry,"https://a.mafiagameglobal.com/event/country/" },
         {Server_RequestType.OpenBettingPrize,"http://admin.crsdk.com:8000/lucky_flag/" },
+        {Server_RequestType.ChangeHead_Name,"http://admin.crsdk.com:8000/update_user/" },
+        {Server_RequestType.GetLevelUpReward,"http://admin.crsdk.com:8000/level_reward/" },
+        {Server_RequestType.GetNewPlayerReward,"http://admin.crsdk.com:8000/new_data/" },
     };
     #region request server function
     Server_RequestType requestType;
@@ -244,6 +259,35 @@ public class Server : MonoBehaviour
         requestNoCallback = failCallback;
         StartCoroutine(ConnectToOpenBettingPrize(successCallback, failCallback));
     }
+    int New_head_id;
+    string New_name;
+    public void OperationData_ChangeHead_Name(Action successCallback, Action failCallback,int new_head_id,string new_name)
+    {
+        requestType = Server_RequestType.ChangeHead_Name;
+        requestOkCallback = successCallback;
+        requestNoCallback = failCallback;
+        New_head_id = new_head_id;
+        New_name = new_name;
+        StartCoroutine(ConnectToChangeHeadOrName(successCallback, failCallback, new_head_id, new_name));
+    }
+    int LevelupRewardMultiple = 1;
+    public void OperationData_GetLevelupReward(Action successCallback, Action failCallback,int multiple)
+    {
+        requestType = Server_RequestType.GetLevelUpReward;
+        requestOkCallback = successCallback;
+        requestNoCallback = failCallback;
+        LevelupRewardMultiple = multiple;
+        StartCoroutine(ConnectToGetLevelupReward(successCallback, failCallback, multiple));
+    }
+    int NewPlayerRewardMultiple = 1;
+    public void OperationData_GetNewPlayerReawrd(Action successCallback, Action failCallback)
+    {
+        requestType = Server_RequestType.GetNewPlayerReward;
+        requestOkCallback = successCallback;
+        requestNoCallback = failCallback;
+        NewPlayerRewardMultiple = 1;
+        StartCoroutine(ConnectToGetNewPlayerReward(successCallback, failCallback, NewPlayerRewardMultiple));
+    }
     #endregion
     #region IEnumerator connecting server
     IEnumerator ConnectToGetData(Server_RequestType _RequestType, Action successCallback, Action failCallback, bool needShowConnecting)
@@ -260,19 +304,17 @@ public class Server : MonoBehaviour
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
         {
-            failCallback?.Invoke();
             OnConnectServerFail();
+            failCallback?.Invoke();
         }
         else
         {
+            OnConnectServerSuccess();
             string downText = www.downloadHandler.text;
             if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5")
             {
+                ShowConnectErrorTip(downText);
                 failCallback?.Invoke();
-                if (downText == "-1")
-                    OnConnectServerFail();
-                else
-                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -287,7 +329,6 @@ public class Server : MonoBehaviour
                         catch(Exception e)
                         {
                             failCallback?.Invoke();
-                            OnConnectServerFail();
                             ShowConnectErrorTip(e.Message);
                             yield break;
                         }
@@ -300,7 +341,6 @@ public class Server : MonoBehaviour
                         break;
                 }
                 successCallback?.Invoke();
-                OnConnectServerSuccess();
             }
         }
         www.Dispose();
@@ -318,26 +358,23 @@ public class Server : MonoBehaviour
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
         {
-            failCallback?.Invoke();
             OnConnectServerFail();
+            failCallback?.Invoke();
         }
         else
         {
+            OnConnectServerSuccess();
             string downText = www.downloadHandler.text;
             if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
+                ShowConnectErrorTip(downText);
                 failCallback?.Invoke();
-                if (downText == "-1")
-                    OnConnectServerFail();
-                else
-                    ShowConnectErrorTip(downText);
             }
             else
             {
                 AllData_SlotsState slotsStateData = JsonMapper.ToObject<AllData_SlotsState>(www.downloadHandler.text);
                 Save.data.allData.lucky_status = slotsStateData;
                 successCallback?.Invoke();
-                OnConnectServerSuccess();
             }
         }
         www.Dispose();
@@ -356,19 +393,17 @@ public class Server : MonoBehaviour
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
         {
-            failCallback?.Invoke();
             OnConnectServerFail();
+            failCallback?.Invoke();
         }
         else
         {
+            OnConnectServerSuccess();
             string downText = www.downloadHandler.text;
             if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
+                ShowConnectErrorTip(downText);
                 failCallback?.Invoke();
-                if (downText == "-1")
-                    OnConnectServerFail();
-                else
-                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -381,7 +416,6 @@ public class Server : MonoBehaviour
                 else
                     Save.data.allData.user_panel.user_tickets = receiveData.user_tickets;
                 successCallback?.Invoke();
-                OnConnectServerSuccess();
             }
         }
         www.Dispose();
@@ -400,19 +434,17 @@ public class Server : MonoBehaviour
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
         {
-            failCallback?.Invoke();
             OnConnectServerFail();
+            failCallback?.Invoke();
         }
         else
         {
+            OnConnectServerSuccess();
             string downText = www.downloadHandler.text;
             if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
+                ShowConnectErrorTip(downText);
                 failCallback?.Invoke();
-                if (downText == "-1")
-                    OnConnectServerFail();
-                else
-                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -439,7 +471,6 @@ public class Server : MonoBehaviour
                     }
                 }
                 successCallback?.Invoke();
-                OnConnectServerSuccess();
             }
         }
         www.Dispose();
@@ -457,19 +488,17 @@ public class Server : MonoBehaviour
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
         {
-            failCallback?.Invoke();
             OnConnectServerFail();
+            failCallback?.Invoke();
         }
         else
         {
+            OnConnectServerSuccess();
             string downText = www.downloadHandler.text;
             if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
+                ShowConnectErrorTip(downText);
                 failCallback?.Invoke();
-                if (downText == "-1")
-                    OnConnectServerFail();
-                else
-                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -485,9 +514,7 @@ public class Server : MonoBehaviour
                     Save.data.allData.user_panel.user_gold_live = receiveData.user_gold_live;
                     Save.data.allData.user_panel.user_tickets = receiveData.user_tickets;
                 }
-
                 successCallback?.Invoke();
-                OnConnectServerSuccess();
             }
         }
         www.Dispose();
@@ -504,23 +531,21 @@ public class Server : MonoBehaviour
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
         {
-            failCallback?.Invoke();
             OnConnectServerFail();
+            failCallback?.Invoke();
         }
         else
         {
+            OnConnectServerSuccess();
             string downText = www.downloadHandler.text;
             if (downText != "ok")
             {
+                ShowConnectErrorTip(downText);
                 failCallback?.Invoke();
-                OnConnectServerFail();
-                if (downText != "-1")
-                    ShowConnectErrorTip(downText);
             }
             else
             {
                 successCallback?.Invoke();
-                OnConnectServerSuccess();
             }
         }
         www.Dispose();
@@ -538,26 +563,23 @@ public class Server : MonoBehaviour
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
         {
-            failCallback?.Invoke();
             OnConnectServerFail();
+            failCallback?.Invoke();
         }
         else
         {
+            OnConnectServerSuccess();
             string downText = www.downloadHandler.text;
             if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
+                ShowConnectErrorTip(downText);
                 failCallback?.Invoke();
-                if (downText == "-1")
-                    OnConnectServerFail();
-                else
-                    ShowConnectErrorTip(downText);
             }
             else
             {
                 PlayerBindPaypalReceiveData paypalData = JsonMapper.ToObject<PlayerBindPaypalReceiveData>(www.downloadHandler.text);
                 Save.data.allData.user_panel.user_paypal = paypalData.user_paypal;
                 successCallback?.Invoke();
-                OnConnectServerSuccess();
             }
         }
         www.Dispose();
@@ -583,14 +605,12 @@ public class Server : MonoBehaviour
         }
         else
         {
+            OnConnectServerSuccess();
             string downText = www.downloadHandler.text;
             if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
             {
+                ShowConnectErrorTip(downText);
                 failCallback?.Invoke();
-                if (downText == "-1")
-                    OnConnectServerFail();
-                else
-                    ShowConnectErrorTip(downText);
             }
             else
             {
@@ -608,7 +628,6 @@ public class Server : MonoBehaviour
                         break;
                 }
                 successCallback?.Invoke();
-                OnConnectServerSuccess();
             }
         }
         www.Dispose();
@@ -628,16 +647,16 @@ public class Server : MonoBehaviour
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
         {
-            failCallback?.Invoke();
             OnConnectServerFail();
+            failCallback?.Invoke();
         }
         else
         {
             string downText = www.downloadHandler.text;
             LocalCountryData countryData = JsonMapper.ToObject<LocalCountryData>(downText);
             localCountry = countryData.country.ToLower();
-            successCallback?.Invoke(localCountry);
             OnConnectServerSuccess();
+            successCallback?.Invoke(localCountry);
         }
         www.Dispose();
     }
@@ -652,22 +671,133 @@ public class Server : MonoBehaviour
         isConnecting = false;
         if (www.isNetworkError || www.isHttpError)
         {
-            failCallback?.Invoke();
             OnConnectServerFail();
+            failCallback?.Invoke();
         }
         else
         {
+            OnConnectServerSuccess();
             string downText = www.downloadHandler.text;
             if (downText!="ok")
             {
-                failCallback?.Invoke();
                 ShowConnectErrorTip(downText);
+                failCallback?.Invoke();
             }
             else
             {
                 Save.data.allData.day_flag = true;
                 successCallback?.Invoke();
-                OnConnectServerSuccess();
+            }
+        }
+        www.Dispose();
+    }
+    IEnumerator ConnectToChangeHeadOrName(Action successCallback, Action failCallback, int head_id, string name)
+    {
+        isConnecting = true;
+        OnConnectingServer();
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
+        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (head_id > 0)
+            iparams.Add(new MultipartFormDataSection("title_id", head_id.ToString()));
+        if(!string.IsNullOrEmpty(name))
+            iparams.Add(new MultipartFormDataSection("user_name", name));
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.ChangeHead_Name], iparams);
+        yield return www.SendWebRequest();
+        isConnecting = false;
+        if (www.isNetworkError || www.isHttpError)
+        {
+            OnConnectServerFail();
+            failCallback?.Invoke();
+        }
+        else
+        {
+            OnConnectServerSuccess();
+            string downText = www.downloadHandler.text;
+            if (downText != "ok")
+            {
+                Master.Instance.ShowTip("Sorry, the name was used.", 2);
+                failCallback?.Invoke();
+            }
+            else
+            {
+                if (head_id > 0)
+                    Save.data.allData.user_panel.user_title = head_id;
+                if (!string.IsNullOrEmpty(name))
+                    Save.data.allData.user_panel.user_name = name;
+                successCallback?.Invoke();
+            }
+        }
+        www.Dispose();
+    }
+    IEnumerator ConnectToGetLevelupReward(Action successCallback, Action failCallback,int multiple)
+    {
+        isConnecting = true;
+        OnConnectingServer();
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
+        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("double", multiple.ToString()));
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.GetLevelUpReward], iparams);
+        yield return www.SendWebRequest();
+        isConnecting = false;
+        if (www.isNetworkError || www.isHttpError)
+        {
+            OnConnectServerFail();
+            failCallback?.Invoke();
+        }
+        else
+        {
+            OnConnectServerSuccess();
+            string downText = www.downloadHandler.text;
+            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
+            {
+                ShowConnectErrorTip(downText);
+                failCallback?.Invoke();
+            }
+            else
+            {
+                GetLevelupRewardReceiveData receiveData = JsonMapper.ToObject<GetLevelupRewardReceiveData>(downText);
+                Save.data.allData.user_panel.user_tickets = receiveData.user_tickets;
+                Save.data.allData.user_panel.user_level = receiveData.user_level;
+                Save.data.allData.user_panel.user_double = receiveData.user_double;
+                Save.data.allData.user_panel.next_double = receiveData.next_double;
+                Save.data.allData.user_panel.level_exp = receiveData.level_exp;
+                Save.data.allData.user_panel.user_exp = receiveData.user_exp;
+                Save.data.allData.user_panel.title_list = receiveData.title_list;
+                Save.data.allData.user_panel.next_level = receiveData.next_level;
+                successCallback?.Invoke();
+            }
+        }
+        www.Dispose();
+    }
+    IEnumerator ConnectToGetNewPlayerReward(Action successCallback, Action failCallback, int multiple)
+    {
+        isConnecting = true;
+        OnConnectingServer();
+        List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
+        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("double", multiple.ToString()));
+        UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.GetNewPlayerReward], iparams);
+        yield return www.SendWebRequest();
+        isConnecting = false;
+        if (www.isNetworkError || www.isHttpError)
+        {
+            OnConnectServerFail();
+            failCallback?.Invoke();
+        }
+        else
+        {
+            OnConnectServerSuccess();
+            string downText = www.downloadHandler.text;
+            if (downText == "-1" || downText == "-2" || downText == "-3" || downText == "-4" || downText == "-5" || downText == "-6")
+            {
+                ShowConnectErrorTip(downText);
+                failCallback?.Invoke();
+            }
+            else
+            {
+                GetNewPlayerRewardReceiveData receiveData = JsonMapper.ToObject<GetNewPlayerRewardReceiveData>(downText);
+                Save.data.allData.user_panel.user_doller_live = receiveData.user_doller_live;
+                successCallback?.Invoke();
             }
         }
         www.Dispose();
@@ -724,7 +854,7 @@ public class Server : MonoBehaviour
 }
 public enum PlayerTaskTarget
 {
-    PlaySlotsOnce,//
+    EnterSlotsOnce,//
     PlayBettingOnce,
     WatchRvOnce,//
     CashoutOnce,
@@ -771,6 +901,21 @@ public class LocalCountryData
     public string ip;
     public string country;
 }
+public class GetLevelupRewardReceiveData
+{
+    public int user_tickets;
+    public int user_level;
+    public int user_double;
+    public int next_double;
+    public int level_exp;
+    public int user_exp;
+    public List<int> title_list;
+    public int next_level;
+}
+public class GetNewPlayerRewardReceiveData
+{
+    public int user_doller_live;
+}
 #region newAllData
 public class AllData
 {
@@ -795,10 +940,25 @@ public class AllData_MainData
     public int user_tickets;
     public int user_title;
     public int cur_betting;
+    public string user_name;
+    public int user_level;
+    public int user_double;//当前票倍数
+    public int next_double;//下一级票倍数
+    public int level_exp;
+    public int user_exp;
+    public List<int> title_list;
+    public int next_level;//升级奖励票数
+    public List<int> title_level;
+    public bool new_reward;//新手奖励
+    public Reward level_type;//升级奖励类型
+    public Reward new_data_type;//新手奖励类型
+    public int new_data_num;//新手奖励数量
+    public int lucky_count;//进入老虎机总次数
 }
 public class AllData_SlotsState
 {
     public List<int> white_lucky;
+    public int lucky_exp;
 }
 public class AllData_BettingWinnerData
 {
@@ -857,10 +1017,12 @@ public class AllData_FriendData_FriendList
 }
 public class AllData_FriendData_Friend
 {
-    public string user_name;
-    public string user_id;
     public int user_img;
     public double yestday_doller;
+    public int distance;//1直接好友，0间接好友
+    public string user_name;
+    public int user_level;
+    public string user_time;
 }
 public class AllData_TaskData
 {

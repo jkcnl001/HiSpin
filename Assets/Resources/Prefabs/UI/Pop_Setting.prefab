@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3195744884770810503}
   - component: {fileID: 1202099864300580510}
   m_Layer: 5
-  m_Name: id
+  m_Name: name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -838,10 +838,11 @@ MonoBehaviour:
   bgImage: {fileID: 2955612459127879591}
   panelRect: {fileID: 2955612458958926098}
   head_iconImage: {fileID: 2955612460164148286}
+  lv_progressImage: {fileID: 4779235125775602180}
   head_redpointGo: {fileID: 6005226846434904417}
   ticket_multipleText: {fileID: 5854040353917748580}
   lvText: {fileID: 7827052703864903984}
-  idText: {fileID: 1202099864300580510}
+  nameText: {fileID: 1202099864300580510}
   bgButton: {fileID: 1847431073019306393}
   meButton: {fileID: 684120219913234309}
   withdrawButton: {fileID: 2955612460006450215}

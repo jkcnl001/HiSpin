@@ -10,6 +10,7 @@ public class Menu : MonoBehaviour, IUIBase
     CanvasGroup canvasGroup;
     public GameObject setting_rpGo;
 
+    public Button cashButton;
     public Button offerwallButton;
     public Button rankButton;
     public Button slotsButton;
@@ -32,12 +33,14 @@ public class Menu : MonoBehaviour, IUIBase
     public Text top_titleText;
     [Space(15)]
     public Image head_iconImage;
+    public Image exp_progressImage;
     public Text ticket_multipleText;
     [NonSerialized]
     public readonly Dictionary<Reward, Transform> fly_target_dic = new Dictionary<Reward, Transform>();
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+        cashButton.AddClickEvent(OnCashButtonClick);
         offerwallButton.AddClickEvent(OnOfferwallButtonClick);
         rankButton.AddClickEvent(OnRankButtonClick);
         slotsButton.AddClickEvent(OnSlotsButtonClick);
@@ -55,17 +58,6 @@ public class Menu : MonoBehaviour, IUIBase
             RectTransform topRect = all_topGo.transform as RectTransform;
             topRect.sizeDelta = new Vector2(topRect.sizeDelta.x, topRect.sizeDelta.y + 100);
         }
-        setting_rpGo.SetActive(false);
-        foreach (var task in Save.data.allData.lucky_schedule.user_task)
-        {
-            if (task.taskTargetId == PlayerTaskTarget.InviteAFriend)
-                continue;
-            if (task.task_cur >= task.task_tar && !task.task_receive)
-            {
-                setting_rpGo.SetActive(true);
-                break;
-            }
-        }
     }
     private void Start()
     {
@@ -76,6 +68,10 @@ public class Menu : MonoBehaviour, IUIBase
         setting_rpGo.SetActive(hasFinish);
     }
     #region button event
+    private void OnCashButtonClick()
+    {
+        UI.ShowPopPanel(PopPanel.Rules, (int)RuleArea.Cashout);
+    }
     private void OnOfferwallButtonClick()
     {
         if (!Ads._instance.ShowOfferwallAd())
@@ -99,6 +95,8 @@ public class Menu : MonoBehaviour, IUIBase
     }
     private void OnSettingButtonClick()
     {
+        if (UI.CurrentBasePanel == UI.GetUI(BasePanel.PlaySlots))
+            return;
         UI.ShowPopPanel(PopPanel.Setting);
     }
     private void OnAddTicketButtonClick()
@@ -139,7 +137,32 @@ public class Menu : MonoBehaviour, IUIBase
     public void UpdateHeadIcon()
     {
         head_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + Save.data.allData.user_panel.user_title);
-        ticket_multipleText.text = "x 1";
+        ticket_multipleText.text = "x " + Save.data.allData.user_panel.user_double.GetTicketMultipleString();
+        exp_progressImage.fillAmount= (float)Save.data.allData.user_panel.user_exp / Save.data.allData.user_panel.level_exp;
+
+        setting_rpGo.SetActive(false);
+        foreach (var task in Save.data.allData.lucky_schedule.user_task)
+        {
+            if (task.taskTargetId == PlayerTaskTarget.InviteAFriend)
+                continue;
+            if (task.task_cur >= task.task_tar && !task.task_receive)
+            {
+                setting_rpGo.SetActive(true);
+                break;
+            }
+        }
+        int lv = Save.data.allData.user_panel.user_level;
+        List<int> avatar_level_list = Save.data.allData.user_panel.title_level;
+        List<bool> avatar_check = Save.data.head_icon_hasCheck;
+        int count = avatar_level_list.Count;
+        for (int i = 0; i < count; i++)
+        {
+            if (lv >= avatar_level_list[i] && !avatar_check[i])
+            {
+                setting_rpGo.SetActive(true);
+                break;
+            }
+        }
     }
     #endregion
     #region stateChange
@@ -156,6 +179,8 @@ public class Menu : MonoBehaviour, IUIBase
     {
         UpdateGoldText();
         UpdateTicketText();
+        if (!Save.data.allData.user_panel.new_reward)
+            UI.ShowPopPanel(PopPanel.GetCash, (int)GetCashArea.NewPlayerReward, Save.data.allData.user_panel.new_data_num);
         bool hasSelf = false;
         List<AllData_BettingWinnerData_Winner> bettingDatas = Save.data.allData.award_ranking.ranking;
         if (!Save.data.allData.day_flag && bettingDatas != null)
@@ -201,6 +226,11 @@ public class Menu : MonoBehaviour, IUIBase
     public void OnBasePanelShow(int panelIndex)
     {
         BasePanel basePanelType = (BasePanel)panelIndex;
+
+        if (panelIndex <= (int)BasePanel.Betting)
+        {
+            UpdateHeadIcon();
+        }
         switch (basePanelType)
         {
             case BasePanel.Cashout:
@@ -241,7 +271,7 @@ public class Menu : MonoBehaviour, IUIBase
                 top_titleText.gameObject.SetActive(false);
                 all_bottomGo.SetActive(false);
                 backButton.gameObject.SetActive(false);
-                settingButton.gameObject.SetActive(false);
+                settingButton.gameObject.SetActive(true);
                 add_ticketButton.gameObject.SetActive(false);
                 play_slots_helpButton.gameObject.SetActive(Save.data.isPackB);
                 break;
@@ -356,6 +386,28 @@ public class Menu : MonoBehaviour, IUIBase
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             UI.CloseCurrentBasePanel();
+        }
+    }
+    [Space(15)]
+    public RectTransform guide_1Rect;
+    public RectTransform guide_2Rect;
+    public RectTransform guide_3Rect;
+    public Vector3 GetGudieMaskPosAndSize(int guideStep, out Vector2 size)
+    {
+        switch (guideStep)
+        {
+            case 1:
+                size = guide_1Rect.sizeDelta;
+                return guide_1Rect.position;
+            case 2:
+                size = guide_2Rect.sizeDelta;
+                return guide_2Rect.position;
+            case 3:
+                size = guide_3Rect.sizeDelta;
+                return guide_3Rect.position;
+            default:
+                size = Vector2.zero;
+                return Vector3.zero;
         }
     }
 }

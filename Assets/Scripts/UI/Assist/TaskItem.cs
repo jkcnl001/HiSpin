@@ -89,7 +89,7 @@ public class TaskItem : MonoBehaviour
                         break;
                     case PlayerTaskTarget.OwnSomeGold:
                     case PlayerTaskTarget.WatchRvOnce:
-                    case PlayerTaskTarget.PlaySlotsOnce:
+                    case PlayerTaskTarget.EnterSlotsOnce:
                     case PlayerTaskTarget.PlayBettingOnce:
                     case PlayerTaskTarget.CashoutOnce:
                     case PlayerTaskTarget.WinnerOnce:
@@ -154,7 +154,7 @@ public class TaskItem : MonoBehaviour
         {
             switch (TaskTarget)
             {
-                case PlayerTaskTarget.PlaySlotsOnce:
+                case PlayerTaskTarget.EnterSlotsOnce:
                 case PlayerTaskTarget.PlayBettingOnce:
                 case PlayerTaskTarget.WatchRvOnce:
                 case PlayerTaskTarget.CashoutOnce:

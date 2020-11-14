@@ -10,6 +10,8 @@ public class Range
 {
     private int min;
     private int max;
+    public int Min { get { return min; } }
+    public int Max { get { return max; } }
     public Range(int min,int max)
     {
         this.min = min;

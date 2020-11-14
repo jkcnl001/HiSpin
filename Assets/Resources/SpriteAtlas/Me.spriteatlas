@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Me
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 09e68bfd9238e2d4dbc3b7869b03cc73, type: 3}
+    totalSpriteSurfaceArea: 659252
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 66965d40b0a7a6246b61417c674de049, type: 3}
+  - {fileID: 21300000, guid: f5239590debb9b249a13aa941b1eba6e, type: 3}
+  - {fileID: 21300000, guid: fa5cec413d7dbb041a2b4bedd32919e9, type: 3}
+  - {fileID: 21300000, guid: 9de8bb819631a614d96d32f6533df750, type: 3}
+  - {fileID: 21300000, guid: 8fb906531e0da754f9158e0f007040e5, type: 3}
+  - {fileID: 21300000, guid: d59fe764f3500904d92083acca8cc42c, type: 3}
+  - {fileID: 21300000, guid: 26a2f985c50ca9d4f9ee8adfb03a592d, type: 3}
+  - {fileID: 21300000, guid: a39beae688889d446bb24aefee29b15d, type: 3}
+  - {fileID: 21300000, guid: 89aff2774a9e91043bd9e7b0c21b6d0b, type: 3}
+  - {fileID: 21300000, guid: 47870c976921e784e8a00b1e0dfdaee4, type: 3}
+  - {fileID: 21300000, guid: 368366b752060dc448f60e7747ed7b8b, type: 3}
+  - {fileID: 21300000, guid: f96835ed53111a2439de5dadf43493ad, type: 3}
+  - {fileID: 21300000, guid: 22993d4e025a45a458f5d1b69430cde7, type: 3}
+  - {fileID: 21300000, guid: f52d9eee5dd970545be31b9e99d50d36, type: 3}
+  - {fileID: 21300000, guid: 8f58fadfdc5892d4aa51a64f1c8e04fe, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - exp_fill
+  - new
+  - head_out_bg
+  - select
+  - exp_bg
+  - name_bg
+  - head_out_fill
+  - star
+  - input_icon
+  - mid_base
+  - avatar_lock
+  - mid_Reward_bg
+  - avatar_out
+  - cursor
+  - avatar_base
+  m_Tag: Me
+  m_IsVariant: 0
