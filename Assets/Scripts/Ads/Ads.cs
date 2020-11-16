@@ -7,11 +7,11 @@ using UnityEngine.UI;
 
 public class Ads : MonoBehaviour
 {
-    //ios FBID 229348018437156  Golden Luck
+	//ios FBID 728969364687204  Hi Spin
 #if UNITY_ANDROID
-    private const string APP_KEY = "de040b19";
+	private const string APP_KEY = "de040b19";
 #elif UNITY_IOS
-	private const string APP_KEY = "";
+	private const string APP_KEY = "debe9209";
 #endif
 	public static Ads _instance;
 	[NonSerialized]

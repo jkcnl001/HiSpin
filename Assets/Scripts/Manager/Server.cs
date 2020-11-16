@@ -182,6 +182,8 @@ public class Server : MonoBehaviour
             typeIndex = 0;
         else if (type == Reward.Ticket)
             typeIndex = 1;
+        else if (type == Reward.Cash)
+            typeIndex = 2;
         else
         {
             Debug.LogError("老虎机奖励类型错误");
@@ -412,6 +414,11 @@ public class Server : MonoBehaviour
                 {
                     Save.data.allData.user_panel.user_gold = receiveData.user_gold;
                     Save.data.allData.user_panel.user_gold_live = receiveData.user_gold_live;
+                }
+                else if (reward_type == 2)
+                {
+                    Save.data.allData.user_panel.user_doller = receiveData.user_doller;
+                    Save.data.allData.user_panel.user_doller_live = receiveData.user_doller_live;
                 }
                 else
                     Save.data.allData.user_panel.user_tickets = receiveData.user_tickets;
@@ -871,6 +878,8 @@ public class PlayerGetSlotsRewardReceiveData
     public int user_gold;
     public int user_gold_live;
     public int user_tickets;
+    public int user_doller;
+    public int user_doller_live;
 }
 public class PlayerFinishTaskReceiveData
 {
@@ -954,6 +963,7 @@ public class AllData_MainData
     public Reward new_data_type;//新手奖励类型
     public int new_data_num;//新手奖励数量
     public int lucky_count;//进入老虎机总次数
+    public int lucky_total_cash;//老虎机获得的总共现金，不大于200
 }
 public class AllData_SlotsState
 {

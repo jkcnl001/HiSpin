@@ -17,6 +17,6 @@ public class FriendItem : MonoBehaviour
         nameText.text = name;
         dateText.text = date;
         levelText.text = "Lv." + level;
-        head_iconImage.SetNativeSize();
+        starImage.SetNativeSize();
     }
 }

@@ -26,12 +26,16 @@ public class GetCash : PopUI
     }
     private void OnGetSlotsRewardCallback()
     {
+        Save.data.allData.user_panel.lucky_total_cash += getcashNum;
+        UI.FlyReward(Reward.Cash, getcashNum, SaveInButton.transform.position);
         UI.ClosePopPanel(this);
     }
     private void OnGetNewplayerRewardCallback()
     {
+        UI.FlyReward(Reward.Cash, getcashNum, SaveInButton.transform.position);
         UI.ClosePopPanel(this);
-        UI.ShowPopPanel(PopPanel.Guide);
+        if (Save.data.isPackB)
+            UI.ShowPopPanel(PopPanel.Guide);
     }
     GetCashArea getCashArea;
     int getcashNum;
@@ -40,6 +44,10 @@ public class GetCash : PopUI
         getCashArea = (GetCashArea)args[0];
         getcashNum = args[1];
         cash_numText.text = "$" + getcashNum.GetCashShowString();
+    }
+    protected override void AfterShowAnimation(params int[] args)
+    {
+        Master.Instance.ShowEffect(Reward.Cash);
     }
 }
 public enum GetCashArea

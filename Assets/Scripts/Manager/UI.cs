@@ -107,9 +107,11 @@ public sealed class UI
         if (_baseAnimationCor is null)
             _baseAnimationCor = TaskEngine.StartCoroutine(ExcuteBasePanelShowTask());
     }
-    public static void CloseCurrentBasePanel()
+    public static void CloseCurrentBasePanel(bool isPhoneBack=false)
     {
         int panelIndex = BasePanelHistoryRecord.Peek();
+        if (isPhoneBack)
+            if (panelIndex == (int)BasePanel.PlaySlots) return;
         if (panelIndex > (int)BasePanel.Betting)
         {
             BasePanelHistoryRecord.Pop();

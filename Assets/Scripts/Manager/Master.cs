@@ -67,11 +67,13 @@ public class Master : MonoBehaviour
         List<bool> head_new = Save.data.head_icon_hasCheck;
         if (head_new == null || head_new.Count != Save.data.allData.user_panel.title_list.Count)
         {
-            int count = Save.data.allData.user_panel.title_list.Count;
+            List<int> headList = Save.data.allData.user_panel.title_list;
+            int count = headList.Count;
+            int userHeadId = Save.data.allData.user_panel.user_title;
             head_new = new List<bool>();
             for(int i = 0; i < count; i++)
             {
-                head_new.Add(false);
+                head_new.Add(headList[i] == userHeadId);
             }
             if (head_new.Count > 1)
                 head_new[0] = true;
@@ -303,6 +305,72 @@ public class Master : MonoBehaviour
                 ("link", uri),
                 ("order_id", uri)
             );
+    }
+
+    public ParticleSystem left_particle;
+    public ParticleSystem right_particle;
+    public void ShowEffect(Reward reward,float time = 0.5f)
+    {
+        Color color;
+        switch (reward)
+        {
+            case Reward.Gold:
+                color = new Color(0.99f, 1, 0.23f);
+                break;
+            case Reward.Cash:
+                color = Color.green;
+                break;
+            case Reward.Ticket:
+                color = new Color(1, 0.5f, 0);
+                break;
+            default:
+                color = Color.clear;
+                break;
+        }
+        left_particle.GetComponent<Renderer>().sharedMaterial.SetColor("_Color", color);
+        left_particle.Play();
+        right_particle.Play();
+        StopCoroutine("DealyStopPartical");
+        StartCoroutine("DealyStopPartical", time);
+    }
+    IEnumerator DealyStopPartical(float time)
+    {
+        yield return new WaitForSeconds(time);
+        left_particle.Stop();
+        right_particle.Stop();
+    }
+    public RectTransform guidemaskRectRoot;
+    public GameObject guidemaskGo1;
+    public GameObject guidemaskGo2;
+    public GameObject guidemaskGo3;
+    public Camera guideCamera;
+    public GameObject guideGo;
+    public void SetGuideMask(int guideStep)
+    {
+        guideGo.SetActive(true);
+        switch (guideStep)
+        {
+            case 1:
+                guidemaskGo1.SetActive(true);
+                if (IsBigScreen)
+                    guidemaskGo1.transform.localPosition -= new Vector3(0, TopMoveDownOffset, 0);
+                guidemaskGo2.SetActive(false);
+                guidemaskGo3.SetActive(false);
+                break;
+            case 2:
+                guidemaskGo1.SetActive(false);
+                guidemaskGo2.SetActive(true);
+                guidemaskGo3.SetActive(false);
+                break;
+            case 3:
+                guidemaskGo1.SetActive(false);
+                guidemaskGo2.SetActive(false);
+                guidemaskGo3.SetActive(true);
+                break;
+            default:
+                guideGo.SetActive(false);
+                break;
+        }
     }
 }
 public enum Reward

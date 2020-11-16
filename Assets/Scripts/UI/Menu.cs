@@ -70,7 +70,8 @@ public class Menu : MonoBehaviour, IUIBase
     #region button event
     private void OnCashButtonClick()
     {
-        UI.ShowPopPanel(PopPanel.Rules, (int)RuleArea.Cashout);
+        if (Save.data.isPackB)
+            UI.ShowPopPanel(PopPanel.Rules, (int)RuleArea.Cashout);
     }
     private void OnOfferwallButtonClick()
     {
@@ -200,6 +201,9 @@ public class Menu : MonoBehaviour, IUIBase
         }
         else
             UpdateCashText();
+#if UNITY_EDITOR
+        UI.ShowPopPanel(PopPanel.Guide);
+#endif
     }
     public IEnumerator Close()
     {
@@ -284,7 +288,7 @@ public class Menu : MonoBehaviour, IUIBase
                 all_topGo.SetActive(true);
                 all_tokenGo.SetActive(false);
                 top_titleText.gameObject.SetActive(true);
-                top_titleText.text = "YESTERDAY RANKING";
+                top_titleText.text = "LAST DAY RANKING";
                 backButton.gameObject.SetActive(false);
                 settingButton.gameObject.SetActive(true);
                 all_bottomGo.SetActive(true);
@@ -385,7 +389,7 @@ public class Menu : MonoBehaviour, IUIBase
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            UI.CloseCurrentBasePanel();
+            UI.CloseCurrentBasePanel(true);
         }
     }
     [Space(15)]

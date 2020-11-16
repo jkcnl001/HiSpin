@@ -82,6 +82,7 @@ public class GetReward : PopUI
         reward_numText.text = reward_num.ToString();
         reward_mutiple = 1;
         ticket_multipleGo.SetActive(false);
+        nothanksButton.gameObject.SetActive(false);
         switch (reward_area)
         {
             case GetRewardArea.PlaySlots:
@@ -125,6 +126,8 @@ public class GetReward : PopUI
             raiseAniamtion = StartCoroutine(NumRaiseAnimation(reward_num, correntNum, ticket_multiple));
             reward_num = correntNum;
         }
+        Master.Instance.ShowEffect(reward_type);
+        StartCoroutine("DelayShowNothanks");
     }
     IEnumerator NumRaiseAnimation(int startNum, int endNum,int multiple)
     {
@@ -158,8 +161,14 @@ public class GetReward : PopUI
     }
     protected override void BeforeCloseAnimation()
     {
+        StopCoroutine("DelayShowNothanks");
         if (raiseAniamtion != null)
             StopCoroutine(raiseAniamtion);
+    }
+    IEnumerator DelayShowNothanks()
+    {
+        yield return new WaitForSeconds(1);
+        nothanksButton.gameObject.SetActive(true);
     }
 }
 public enum GetRewardArea

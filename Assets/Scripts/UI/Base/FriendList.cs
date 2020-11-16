@@ -28,6 +28,7 @@ public class FriendList : BaseUI
             bottomRect.sizeDelta += new Vector2(0, 1920 * (Master.ExpandCoe - 1) - Master.TopMoveDownOffset);
             viewport.sizeDelta += new Vector2(0, 1920 * (Master.ExpandCoe - 1) - Master.TopMoveDownOffset);
         }
+        all_friends.Add(single_friend_item);
     }
     private void OnBackButtonClick()
     {

@@ -623,7 +623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7406022945299938058
 RectTransform:
   m_ObjectHideFlags: 0
@@ -641,7 +641,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 411.4572}
-  m_SizeDelta: {x: 915.2787, y: 648.13007}
+  m_SizeDelta: {x: 915.2787, y: 845.43134}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3792815898760953085
 CanvasRenderer:
@@ -672,7 +672,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d3d624ce138797e4caf9c1563fbd203d, type: 3}
-    m_FontSize: 64
+    m_FontSize: 72
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -684,8 +684,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "1. Win\_the\_jackpot\_and\_other\_cash\n   prizes\_in\_the\_Lucky\_Draw.\n\n2.Compete\_every
-    day\_in\_the\_task \n   and\_win\_cash\_directly!\n\n3.Refer\_friends\_and\_get\_direct\_cash\n  
-    and\_lots\_of\_tickets!"
+    day\_in\_the\_task \n   and\_win\_cash\_directly!\n\n3.Refer\_friends\_and\_get\_direct\n  
+    cash and\_lots\_of\_tickets!"
 --- !u!1 &4925321548883505185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,14 +1599,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '1st                          $200
+  m_Text: '1st                         $200
 
-    2nd - 4th prize        $100
+    2nd - 3th prize        $100
 
-    5nd
-    - 14th prize       $20
+    4nd
+    - 16th prize        $20
 
-    15nd - 44th prize      $10'
+    17nd - 50th prize       $10'
 --- !u!1 &8491804207360645034
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,7 +1624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8103349995836374005
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1642,7 +1642,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 411.4572}
-  m_SizeDelta: {x: 915.2787, y: 803.30255}
+  m_SizeDelta: {x: 968.9999, y: 648.13007}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8791228366877008946
 CanvasRenderer:
@@ -1684,11 +1684,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "1. Every time you spin, you will definitely\n    get 5 points of EXP,
-    and the experience\n    required to upgrade will increase with\n    the level;\n2.
-    Upgrade to unlock new avatars and get\n    tickets, also increase the multiplier
-    of\n    getting tickets;\n3. The multiplier of tickets obtained has\n    increased
-    to increase the number of\n    tickets obtained by slot machines."
+  m_Text: "1.  Play slots to get experience for upgrade\n    level.\n2. Upgrade\_the
+    level will\_unlock\_new\n    avatars\_and\_get\_tickets,\_also\_increase\n   
+    the\_multiplier\_of\_getting\_tickets.\n3. The\_ticket\_multiplier\_is\_used\_to\n   
+    increase\_tickets\_obtained\_by\_slots."
 --- !u!1 &9141602686691059515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,7 +1889,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 4.7, y: 585.6}
-  m_SizeDelta: {x: 1070.6, y: 128.90314}
+  m_SizeDelta: {x: 959.60095, y: 128.90314}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9141602687780912149
 CanvasRenderer:
@@ -1932,7 +1931,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: HOW TO MAKE MONEY
+  m_Text: How it works
 --- !u!1 &9141602687935579870
 GameObject:
   m_ObjectHideFlags: 0

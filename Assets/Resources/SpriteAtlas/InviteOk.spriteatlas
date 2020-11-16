@@ -47,7 +47,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4d5cb8acabafe0b49a2351254c2e4431, type: 3}
   - {fileID: 21300000, guid: 0493f67f94365f94d8675408ce2aa3c1, type: 3}
   m_PackedSpriteNamesToIndex:
-  - Cash
+  - cash
   - underline
   - icon
   - gold

@@ -14,7 +14,14 @@ public class AdjustEventLogger : MonoBehaviour
     private static extern string Getidfa();
 #endif
 #if UNITY_IOS
-    public const string APP_TOKEN = "";
+    public const string APP_TOKEN = "mhp8r1lea3gg";
+    public const string TOKEN_open = "81vaze";
+    public const string TOKEN_ad = "266qxl";
+    public const string TOKEN_noads = "vtjdf6";
+    public const string TOKEN_stage_end = "xwh0ze";
+    public const string TOKEN_task = "7ys6oz";
+    public const string TOKEN_eamil = "nnmlyb";
+    public const string TOKEN_deeplink = "jb68sg";
 #elif UNITY_ANDROID
     public const string APP_TOKEN = "nwle7bsx7itc";
     public const string TOKEN_open = "3grjd1";

@@ -58,7 +58,7 @@ public class InviteOk : PopUI
         reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.InviteOk, invite_ok_reward_type.ToString().ToLower());
         single_rewardButton.gameObject.SetActive(false);
         adGo.SetActive(false);
-        double_buttonText.text = "GET";
+        double_buttonText.text = "Claim";
         if (invite_ok_reward_type == Reward.Cash)
         {
             reward_numText.text = "x " + invite_ok_reward_num.GetCashShowString();

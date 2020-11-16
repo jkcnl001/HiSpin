@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036d152725b84c749b3bf84341c49478, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allFlyticketGo: {fileID: 7517830876985570522}
   yesterday_ticket_numText: {fileID: 4516353831351602033}
   lightRect: {fileID: 3114091290023928458}
   tipText: {fileID: 2431416864339872191}

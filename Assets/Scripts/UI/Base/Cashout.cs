@@ -23,7 +23,7 @@ public class Cashout : BaseUI
     public Button cashout_rightButton;
     [Space(15)]
     public Text gold_numText;
-    public Text gold_tipText;
+    public Button gold_redeemButton;
     [Space(15)]
     public Button about_feeButton;
     //L,M,R
@@ -41,19 +41,21 @@ public class Cashout : BaseUI
             anchor_rect.GetComponentInChildren<ScrollRect>().normalizedPosition = Vector2.one;
         }
 
-        pt_cashout_leftButton.GetComponentInChildren<Text>().text = "$ " + Cashout_Nums[0];
-        pt_cashout_midButton.GetComponentInChildren<Text>().text = "$ " + Cashout_Nums[1];
-        pt_cashout_rightButton.GetComponentInChildren<Text>().text = "$ " + Cashout_Nums[2];
+        pt_cashout_leftButton.GetComponentInChildren<Text>().text = "$ " + 5;
+        pt_cashout_midButton.GetComponentInChildren<Text>().text = "$ " + 10;
+        pt_cashout_rightButton.GetComponentInChildren<Text>().text = "$ " + 50;
         cashout_leftButton.GetComponentInChildren<Text>().text = "$ " + Cashout_Nums[0];
         cashout_midButton.GetComponentInChildren<Text>().text = "$ " + Cashout_Nums[1];
         cashout_rightButton.GetComponentInChildren<Text>().text = "$ " + Cashout_Nums[2];
 
-        pt_cashout_leftButton.AddClickEvent(() => { OnPtCashoutButtonClick(Cashout_Nums[0]); });
-        pt_cashout_midButton.AddClickEvent(() => { OnPtCashoutButtonClick(Cashout_Nums[1]); });
-        pt_cashout_rightButton.AddClickEvent(() => { OnPtCashoutButtonClick(Cashout_Nums[2]); });
+        pt_cashout_leftButton.AddClickEvent(() => { OnPtCashoutButtonClick(5);});
+        pt_cashout_midButton.AddClickEvent(() => { OnPtCashoutButtonClick(10); });
+        pt_cashout_rightButton.AddClickEvent(() => { OnPtCashoutButtonClick(50); });
         cashout_leftButton.AddClickEvent(() => { OnCashoutButtonClick(Cashout_Nums[0]); });
         cashout_midButton.AddClickEvent(() => { OnCashoutButtonClick(Cashout_Nums[1]); });
         cashout_rightButton.AddClickEvent(() => { OnCashoutButtonClick(Cashout_Nums[2]); });
+
+        gold_redeemButton.AddClickEvent(OnGoldCashoutButtonClick);
     }
     private void OnRecordButtonClick()
     {
@@ -77,6 +79,10 @@ public class Cashout : BaseUI
         else
             Master.Instance.ShowTip("Sorry, your balance is not enough.");
     }
+    private void OnGoldCashoutButtonClick()
+    {
+        Master.Instance.ShowTip("Sorry, your balance is not enough.");
+    }
     private void OnAboutFeeClick()
     {
         Server.Instance.RequestData_GetLocalcountry(OnRequestLocalcountyCallback, null);
@@ -86,6 +92,7 @@ public class Cashout : BaseUI
         Application.OpenURL(string.Format("https://www.paypal.com/{0}/webapps/mpp/paypal-fees", country));
     }
     const int CashoutNeedGold = 5000000;
+    public const int GoldMaxNum = 4600000;
     const int PtCashoutRate = 1000;
     protected override void BeforeShowAnimation(params int[] args)
     {
@@ -97,7 +104,7 @@ public class Cashout : BaseUI
         pt_numText.text = (int)Save.data.allData.fission_info.user_doller + "<size=40>  PT</size>";
         pt_cashout_numText.text = "≈$" + ((int)((float)Save.data.allData.fission_info.user_doller / PtCashoutRate)).GetCashShowString();
         cash_numText.text = "$ " + Save.data.allData.user_panel.user_doller_live.GetCashShowString();
-        gold_tipText.text = (CashoutNeedGold - Save.data.allData.user_panel.user_gold_live).GetTokenShowString() + " more gold to redeem";
+        gold_numText.text = Save.data.allData.user_panel.user_gold_live.GetTokenShowString();
     }
     bool isPause = false;
     public override void Pause()

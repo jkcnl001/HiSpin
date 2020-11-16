@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StartBetting : PopUI
 {
+    public GameObject allFlyticketGo;
     public Text yesterday_ticket_numText;
     public RectTransform lightRect;
     public Text tipText;
@@ -158,6 +159,8 @@ public class StartBetting : PopUI
         int yesterdayTicket = Save.data.allData.award_ranking.ysterday_tickets;
         yesterday_ticket_numText.text = yesterdayTicket.GetTokenShowString();
         tipText.text = "";
+        allFlyticketGo.SetActive(yesterdayTicket >= Save.data.allData.award_ranking.ticktes_flag);
+        yesterday_ticket_numText.transform.parent.gameObject.SetActive(allFlyticketGo.activeSelf);
         getButton.gameObject.SetActive(false);
         StartCoroutine(AutoRatateLight());
     }
