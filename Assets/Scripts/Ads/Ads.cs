@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdGemUnity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -9,9 +10,11 @@ public class Ads : MonoBehaviour
 {
 	//ios FBID 728969364687204  Hi Spin
 #if UNITY_ANDROID
-	private const string APP_KEY = "de040b19";
+	private const string IS_APP_KEY = "de040b19";
+	private const int AdGem_APP_ID = 0;
 #elif UNITY_IOS
-	private const string APP_KEY = "debe9209";
+	private const string IS_APP_KEY = "debe9209";
+	private const int AdGem_APP_ID = 0;
 #endif
 	public static Ads _instance;
 	[NonSerialized]
@@ -33,21 +36,38 @@ public class Ads : MonoBehaviour
 		//IronSource.Agent.validateIntegration();
 
 		// SDK init
-		IronSource.Agent.init(APP_KEY);
+		IronSource.Agent.init(IS_APP_KEY);
 		IronSource.Agent.loadInterstitial();
+		AdGem.startSession(AdGem_APP_ID, false, false, true);
 
 	}
-	public bool ShowOfferwallAd()
+	public bool ShowOfferwallAd(Offerwall_Co _Co)
 	{
 #if UNITY_EDITOR
 		Debug.Log("Show OW.");
 		return true;
 #endif
-		if (IronSource.Agent.isOfferwallAvailable())
-		{
-			IronSource.Agent.showOfferwall();
-			return true;
-		}
+        switch (_Co)
+        {
+            case Offerwall_Co.IS:
+				if (IronSource.Agent.isOfferwallAvailable())
+				{
+					IronSource.Agent.showOfferwall();
+					return true;
+				}
+				break;
+            case Offerwall_Co.AdGem:
+                if (AdGem.offerWallReady)
+                {
+					AdGem.showOfferWall();
+					return true;
+				}
+                break;
+            case Offerwall_Co.Fyber:
+                break;
+            default:
+                break;
+        }
 		return false;
 	}
 	public bool ShowRewardVideo(Action rewardedCallback, int clickAdTime,string des,Action failCallback)
@@ -178,5 +198,11 @@ public class Ads : MonoBehaviour
     {
 		isOut = !focus;
     }
+}
+public enum Offerwall_Co
+{
+	IS,
+	AdGem,
+	Fyber
 }
        

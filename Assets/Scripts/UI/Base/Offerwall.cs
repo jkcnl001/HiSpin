@@ -54,7 +54,7 @@ public class Offerwall : BaseUI
     }
     private void OnISButtonClick()
     {
-        Ads._instance.ShowOfferwallAd();
+        Ads._instance.ShowOfferwallAd(Offerwall_Co.IS);
     }
     private void OnFyberButtonClick()
     {
