@@ -46,6 +46,21 @@ public class Friends : BaseUI
         }
         cashoutButton.gameObject.SetActive(Save.data.isPackB);
     }
+    #region ios share
+    public void Init()
+    {
+        GJCNativeShare.Instance.onShareSuccess = OnShareSuccess;
+        GJCNativeShare.Instance.onShareCancel = OnShareCancel;
+    }
+    void OnShareSuccess(string platform)
+    {
+        //...your code
+    }
+    void OnShareCancel(string platform)
+    {
+        //...your code
+    }
+    #endregion
     private void OnBackButtonClick()
     {
         UI.CloseCurrentBasePanel();
@@ -74,7 +89,12 @@ public class Friends : BaseUI
 #if UNITY_EDITOR
         return;
 #endif
-        _AJ.CallStatic("ShareString", string.Format("http://admin.crsdk.com:8000/invita?user={0}&irsource_name={2}&app_name={1}", Save.data.allData.user_panel.user_id, "com.HiSpin.DailyCash.HugeRewards.FreeGame", Server.Bi_name));
+#if UNITY_ANDROID
+        _AJ.CallStatic("ShareString", "Let's play to win cash prizes! Join me on HiSpin. http://luckyclub.vip:8000/HiSpin/" + Save.data.allData.user_panel.user_id);
+        return;
+#endif
+        GJCNativeShare.Instance.NativeShare("Let's play to win cash prizes! Join me on HiSpin. http://luckyclub.vip:8000/HiSpin/" + Save.data.allData.user_panel.user_id);
+
     }
     private void OnMyfriendsButtonClick()
     {
@@ -118,12 +138,13 @@ public class Friends : BaseUI
             if (!hasAdd)
                 friend_Infos_order.Add(unorder_friend_info);
         }
-
+        int hasPtFriendCount = 0;
         for(int i = 0; i < count; i++)
         {
             AllData_FriendData_Friend friendInfo = friend_Infos_order[i];
             if ((int)friendInfo.yestday_doller == 0)
                 continue;
+            hasPtFriendCount++;
             if (i > all_invite_friend_items.Count - 1)
             {
                 FriendInviteRecordItem newRecordItem = Instantiate(single_invite_record_item, single_invite_record_item.transform.parent).GetComponent<FriendInviteRecordItem>();
@@ -133,8 +154,9 @@ public class Friends : BaseUI
             all_invite_friend_items[i].Init(friendInfo.user_img, friendInfo.user_name, (int)friendInfo.yestday_doller, friendInfo.distance);
         }
         bool noFriend = count == 0;
-        lastdayGo.SetActive(!noFriend);
-        nofriend_tipGo.SetActive(noFriend);
+        bool noPtFriend = hasPtFriendCount == 0;
+        lastdayGo.SetActive(!noPtFriend);
+        nofriend_tipGo.SetActive(noPtFriend);
         myfriendsButton.gameObject.SetActive(!noFriend);
         if (count > 0)
             friend_headImage1.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + friend_Infos[0].user_img);

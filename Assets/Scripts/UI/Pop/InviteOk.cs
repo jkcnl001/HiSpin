@@ -43,6 +43,7 @@ public class InviteOk : PopUI
     }
     private void OnGetRewardCallback()
     {
+        Save.data.allData.fission_info.reward_conf.invite_receive++;
         UI.ClosePopPanel(this);
     }
     private void OnSingleClick()

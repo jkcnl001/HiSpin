@@ -31,58 +31,62 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: cbb863edee6e50648ae434482ab09119, type: 3}
-    totalSpriteSurfaceArea: 398901
+    totalSpriteSurfaceArea: 473152
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 2118205073547414c8ea24ce99eb16b2, type: 3}
   - {fileID: 21300000, guid: b69ace61d1170f644b439628d17d9970, type: 3}
-  - {fileID: 21300000, guid: 9b8ac2a18f999ca4c800f05afaa632d5, type: 3}
-  - {fileID: 21300000, guid: fec6c0e16b360f643ae8a055d6ac2ae7, type: 3}
-  - {fileID: 21300000, guid: 03e52862f16f1ec418a27a2c874688eb, type: 3}
+  - {fileID: 21300000, guid: 27b5ed81c36af994f8f1b70f3868353b, type: 3}
   - {fileID: 21300000, guid: fe9f60333c23f4e47949cf767f39222e, type: 3}
-  - {fileID: 21300000, guid: 655bfed36f14d7d47adbe36a37eb3cbb, type: 3}
-  - {fileID: 21300000, guid: 8b09de2430e054e42a8e164d6ca7aa5d, type: 3}
+  - {fileID: 21300000, guid: da86144360b79bb44a921cfae448a685, type: 3}
+  - {fileID: 21300000, guid: 971b0e43c34110e479d71f4f92cc72cc, type: 3}
   - {fileID: 21300000, guid: 2e25f0c4e959c1341af1a3b2e54ef183, type: 3}
   - {fileID: 21300000, guid: 53deb625c47230c4d8b796b6cc4f5982, type: 3}
-  - {fileID: 21300000, guid: 027ca8650d68c5f408ad835348c7038d, type: 3}
+  - {fileID: 21300000, guid: dcf18c5526fd08a4caaa627704b2dc97, type: 3}
+  - {fileID: 21300000, guid: 7b5a97659199faf418a3787d0f7f433b, type: 3}
   - {fileID: 21300000, guid: abc9cb955ef0a2446947cccad27a4acc, type: 3}
+  - {fileID: 21300000, guid: 26f0cac5a686bd9418e7857a44af2672, type: 3}
   - {fileID: 21300000, guid: 901312069c43c09478585d088fb78e30, type: 3}
   - {fileID: 21300000, guid: b2831266f166f734eb979be89bc0cf92, type: 3}
+  - {fileID: 21300000, guid: e2d8aca640d116445b1ef155c411ce3d, type: 3}
+  - {fileID: 21300000, guid: e7a98b48f9823fa46b5457ffbfa7e507, type: 3}
   - {fileID: 21300000, guid: 4f5b42688c83ceb4c85960381b75b65a, type: 3}
   - {fileID: 21300000, guid: d4ffbd798b6f29b4796e9e3c892a51e8, type: 3}
   - {fileID: 21300000, guid: 5961f5a96f02d7c45a6d265d34d21928, type: 3}
-  - {fileID: 21300000, guid: d21d9f8ab92355740861c0e19f39ac9f, type: 3}
-  - {fileID: 21300000, guid: 6e91379a547c4bf4b9e8f2559c93cc11, type: 3}
   - {fileID: 21300000, guid: 33f4a82baceaa1f40847ef24ece1f784, type: 3}
-  - {fileID: 21300000, guid: 0048cb6bcee274246a4ed2760f8db2ea, type: 3}
   - {fileID: 21300000, guid: e0ebff7bf6c083f4b90b9f134c1028d7, type: 3}
   - {fileID: 21300000, guid: 1184811c48c02f745abffc31ac3eecc2, type: 3}
   - {fileID: 21300000, guid: 492915fc021e3bb4180358826f833f98, type: 3}
-  - {fileID: 21300000, guid: a3fb459f41e82aa4f995deb186b876b0, type: 3}
+  - {fileID: 21300000, guid: c4b72fcdb924d8942a23d5d61833b000, type: 3}
+  - {fileID: 21300000, guid: 74e3c9fedf0ca6740afa6670d477ab39, type: 3}
+  - {fileID: 21300000, guid: 5ac892bfce576ff40af73a4a0ea8326d, type: 3}
   m_PackedSpriteNamesToIndex:
+  - Friend_On
   - Back
   - Rank_Off
-  - Lottery_On
-  - Friend_On
   - Setting
-  - Lottery_Off
-  - Gift_On
+  - Offerwall_Off
+  - Slots_Off
   - head_out_bg
   - head_out_fill
-  - Slots_Off
+  - num bg
+  - slots_bg
   - yellow_point
+  - Lottery_Off
   - Gold
   - Select
+  - Offerwall_On
+  - Friend_Off
   - TopBG
   - Ticket
   - BottomBG
-  - Rank_On
-  - Slots_On
   - add
-  - Gift_Off
   - Cash
   - red_point
   - PT
-  - Friend_Off
+  - Lottery_On
+  - Rank_On
+  - Slots_On
   m_Tag: Menu
   m_IsVariant: 0

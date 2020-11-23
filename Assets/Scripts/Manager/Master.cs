@@ -11,7 +11,7 @@ public class Master : MonoBehaviour
     public static float ExpandCoe = 1;
     public const float TopMoveDownOffset = 100;
     public const string PackageName = "com.HiSpin.DailyCash.HugeRewards.FreeGame";
-    public const int Version = 3;
+    public const int Version = 5;
     public const string AppleId = "";
     public static bool isLoadingEnd = false;
     public static Master Instance;
@@ -31,6 +31,7 @@ public class Master : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Application.targetFrameRate = 60;
         UI = new UI(this, BaseRoot, MenuRoot, PopRoot);
         Save = new Save();
         Audio = new Audio(AudioRoot);
@@ -54,7 +55,9 @@ public class Master : MonoBehaviour
         CheckLocalSavaData();
         StartTimeDown();
         if (!Save.data.isPackB)
+        {
             Save.data.isPackB = Save.data.allData.fission_info.up_user;
+        }
         UI.ShowMenuPanel();
     }
     public void StartTimeDown()
@@ -206,8 +209,8 @@ public class Master : MonoBehaviour
         return;
 #endif
         AdjustEventLogger.Instance.AdjustEvent(AdjustEventLogger.TOKEN_open,
-            ("player_id", Save.data.allData.user_panel.user_id),
-            ("install_version", "1")
+            ("player_id", string.IsNullOrEmpty(Save.data.allData.user_panel.user_id) ? "None" : Save.data.allData.user_panel.user_id),
+            ("install_version", Version.ToString())
             );
     }
     public void SendAdjustPlayAdEvent(bool hasAd, bool isRewardAd, string adByWay)

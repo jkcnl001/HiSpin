@@ -20,8 +20,7 @@ public class Menu : MonoBehaviour, IUIBase
     public Button add_ticketButton;
     public Button backButton;
     public Button play_slots_helpButton;
-
-    public RectTransform selectRect;
+    public Text slots_left_free_numText;
     [Space(15)]
     public Text gold_numText;
     public Text cash_numText;
@@ -75,8 +74,7 @@ public class Menu : MonoBehaviour, IUIBase
     }
     private void OnOfferwallButtonClick()
     {
-        if (!Ads._instance.ShowOfferwallAd())
-            Master.Instance.ShowTip("Sorry, loading failed. Try again later.", 2);
+        UI.ShowBasePanel(BasePanel.Offerwall);
     }
     private void OnRankButtonClick()
     {
@@ -119,7 +117,6 @@ public class Menu : MonoBehaviour, IUIBase
         if (currentBottomButton != null)
             currentBottomButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Menu, currentBottomButton.name + "_Off");
         currentBottomButton = clickButton;
-        selectRect.localPosition = new Vector3(currentBottomButton.transform.localPosition.x, selectRect.localPosition.y);
         currentBottomButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Menu, currentBottomButton.name + "_On");
     }
     #region update top token text
@@ -165,12 +162,22 @@ public class Menu : MonoBehaviour, IUIBase
             }
         }
     }
+    public void UpdateFreeSlotsLeftNumText()
+    {
+        int freeNum = 0;
+        foreach (var free in Save.data.allData.lucky_status.white_lucky)
+            if (free == 0)
+                freeNum++;
+        slots_left_free_numText.text = freeNum.ToString();
+        slots_left_free_numText.transform.parent.gameObject.SetActive(freeNum > 0);
+    }
     #endregion
     #region stateChange
     public IEnumerator Show(params int[] args)
     {
         RefreshTokenText();
         UpdateHeadIcon();
+        UpdateFreeSlotsLeftNumText();
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = true;
@@ -201,9 +208,6 @@ public class Menu : MonoBehaviour, IUIBase
         }
         else
             UpdateCashText();
-#if UNITY_EDITOR
-        UI.ShowPopPanel(PopPanel.Guide);
-#endif
     }
     public IEnumerator Close()
     {
@@ -280,7 +284,8 @@ public class Menu : MonoBehaviour, IUIBase
                 play_slots_helpButton.gameObject.SetActive(Save.data.isPackB);
                 break;
             case BasePanel.Friend:
-                all_bottomGo.SetActive(false);
+                OnChangeBottomButton(firendButton);
+                all_bottomGo.SetActive(true);
                 all_topGo.SetActive(false);
                 break;
             case BasePanel.Rank:
@@ -313,6 +318,11 @@ public class Menu : MonoBehaviour, IUIBase
                 settingButton.gameObject.SetActive(false);
                 add_ticketButton.gameObject.SetActive(true);
                 play_slots_helpButton.gameObject.SetActive(false);
+                break;
+            case BasePanel.Offerwall:
+                OnChangeBottomButton(offerwallButton);
+                all_topGo.SetActive(false);
+                all_bottomGo.SetActive(true);
                 break;
             default:
                 break;

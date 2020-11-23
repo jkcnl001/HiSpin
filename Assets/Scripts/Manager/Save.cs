@@ -16,7 +16,6 @@ public class Save
                 allData = null,
                 sound_on = true,
                 music_on = true,
-                enter_slots_time = 0,
                 input_eamil_time = 0,
                 hasRateus = false,
                 isPackB = false,
@@ -39,7 +38,6 @@ public class PlayerLocalData
     public AllData allData;
     public bool sound_on;
     public bool music_on;
-    public int enter_slots_time;
     public int input_eamil_time;
     public bool hasRateus;
     public bool isPackB;

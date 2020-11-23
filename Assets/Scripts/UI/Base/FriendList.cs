@@ -36,14 +36,10 @@ public class FriendList : BaseUI
     }
     private void OnDirectFriendButtonClick()
     {
-        direct_friend_underline.SetActive(true);
-        indirect_friend_underline.SetActive(false);
         SetFriendListShow(true);
     }
     private void OnIndirectFriendButtonClick()
     {
-        direct_friend_underline.SetActive(false);
-        indirect_friend_underline.SetActive(true);
         SetFriendListShow(false);
     }
     static readonly List<AllData_FriendData_Friend> direct_friend_list = new List<AllData_FriendData_Friend>();
@@ -67,6 +63,8 @@ public class FriendList : BaseUI
     const string indirect_title = "Friends invited by your friends";
     private void SetFriendListShow(bool isDirect)
     {
+        direct_friend_underline.SetActive(isDirect);
+        indirect_friend_underline.SetActive(!isDirect);
         List<AllData_FriendData_Friend> willBeShow = isDirect ? direct_friend_list : indirect_friend_list;
         list_titleText.text = isDirect ? direct_title : indirect_title;
         foreach (var friend in all_friends)

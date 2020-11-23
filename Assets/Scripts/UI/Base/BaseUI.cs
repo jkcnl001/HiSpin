@@ -37,9 +37,9 @@ public class BaseUI : MonoBehaviour, IUIBase
     public virtual IEnumerator Close()
     {
         BeforeCloseAnimation();
+        yield return null;
         canvasGroup.alpha = 0;
         canvasGroup.blocksRaycasts = false;
-        yield return null;
         AfterCloseAnimation();
     }
     public virtual void Pause()

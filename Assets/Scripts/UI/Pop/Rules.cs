@@ -12,6 +12,7 @@ public class Rules : PopUI
     public RectTransform invite_firend_rulesRect;
     public RectTransform myinfoRect;
     public RectTransform cashoutRect;
+    public RectTransform offerwallRect;
     public Button closeButton;
     public Button sureButton;
     public Button termsButton;
@@ -42,6 +43,7 @@ public class Rules : PopUI
     const string PlaySlotsTitle= "How to win";
     const string InviteFriendTitle = "How it works";
     const string MyInfoTitle = "How it works";
+    const string OfferwallTitle = "How it works";
     static string BettingContentTop = "1.  There is a prize of 1,000 USD in the Lucky\n    Draw every day.\n2. You must have {0} tickets to participate\n" +
         "    in the Lucky Draw. More tickets you have,\n    more chance to win.\n3. Every day at UTC 08:00:00, all your\n    tickets will be automatically put into the\n" +
         "    prize pool, and  the Lucky Draw will be\n    done.\n4. There will be many winners with different\n    bonus.";
@@ -60,6 +62,7 @@ public class Rules : PopUI
                 invite_firend_rulesRect.gameObject.SetActive(false);
                 myinfoRect.gameObject.SetActive(false);
                 cashoutRect.gameObject.SetActive(false);
+                offerwallRect.gameObject.SetActive(false);
                 cashoutButton.gameObject.SetActive(false);
                 sureButton.gameObject.SetActive(true);
                 sureButton.transform.localPosition = new Vector3(0, game_rulesRect.localPosition.y - game_rulesRect.sizeDelta.y- 50);
@@ -72,6 +75,7 @@ public class Rules : PopUI
                 invite_firend_rulesRect.gameObject.SetActive(false);
                 myinfoRect.gameObject.SetActive(false);
                 cashoutRect.gameObject.SetActive(false);
+                offerwallRect.gameObject.SetActive(false);
                 cashoutButton.gameObject.SetActive(false);
                 sureButton.gameObject.SetActive(true);
                 sureButton.transform.localPosition = new Vector3(0, betting_rulesRect.localPosition.y - betting_rulesRect.sizeDelta.y - 50);
@@ -85,6 +89,7 @@ public class Rules : PopUI
                 invite_firend_rulesRect.gameObject.SetActive(false);
                 myinfoRect.gameObject.SetActive(false);
                 cashoutRect.gameObject.SetActive(false);
+                offerwallRect.gameObject.SetActive(false);
                 cashoutButton.gameObject.SetActive(false);
                 sureButton.gameObject.SetActive(true);
                 sureButton.transform.localPosition = new Vector3(0, play_slots_rulesRect.localPosition.y - play_slots_rulesRect.sizeDelta.y - 50);
@@ -97,6 +102,7 @@ public class Rules : PopUI
                 invite_firend_rulesRect.gameObject.SetActive(true);
                 myinfoRect.gameObject.SetActive(false);
                 cashoutRect.gameObject.SetActive(false);
+                offerwallRect.gameObject.SetActive(false);
                 cashoutButton.gameObject.SetActive(false);
                 sureButton.gameObject.SetActive(true);
                 sureButton.transform.localPosition = new Vector3(0, invite_firend_rulesRect.localPosition.y - invite_firend_rulesRect.sizeDelta.y - 50);
@@ -109,6 +115,7 @@ public class Rules : PopUI
                 invite_firend_rulesRect.gameObject.SetActive(false);
                 myinfoRect.gameObject.SetActive(true);
                 cashoutRect.gameObject.SetActive(false);
+                offerwallRect.gameObject.SetActive(false);
                 cashoutButton.gameObject.SetActive(false);
                 sureButton.gameObject.SetActive(true);
                 sureButton.transform.localPosition = new Vector3(0, myinfoRect.localPosition.y - myinfoRect.sizeDelta.y - 50);
@@ -121,9 +128,23 @@ public class Rules : PopUI
                 invite_firend_rulesRect.gameObject.SetActive(false);
                 myinfoRect.gameObject.SetActive(false);
                 cashoutRect.gameObject.SetActive(true);
+                offerwallRect.gameObject.SetActive(false);
                 cashoutButton.gameObject.SetActive(true);
                 sureButton.gameObject.SetActive(false);
                 cashoutButton.transform.localPosition = new Vector3(0, cashoutRect.localPosition.y - cashoutRect.sizeDelta.y - 150);
+                break;
+            case RuleArea.Offerwall:
+                titleText.text = OfferwallTitle;
+                game_rulesRect.gameObject.SetActive(false);
+                betting_rulesRect.gameObject.SetActive(false);
+                play_slots_rulesRect.gameObject.SetActive(false);
+                invite_firend_rulesRect.gameObject.SetActive(false);
+                myinfoRect.gameObject.SetActive(false);
+                cashoutRect.gameObject.SetActive(false);
+                offerwallRect.gameObject.SetActive(true);
+                cashoutButton.gameObject.SetActive(false);
+                sureButton.gameObject.SetActive(true);
+                sureButton.transform.localPosition = new Vector3(0, offerwallRect.localPosition.y - offerwallRect.sizeDelta.y - 150);
                 break;
         }
     }
@@ -136,4 +157,5 @@ public enum RuleArea
     InviteFriend,
     MyInfo,
     Cashout,
+    Offerwall,
 }

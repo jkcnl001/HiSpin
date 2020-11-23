@@ -19,6 +19,7 @@ public sealed class UI
     const string menuPanelPath = "Prefabs/UI/Menu";
     static readonly Dictionary<int, string> panelPathDic = new Dictionary<int, string>()
     {
+        { (int)BasePanel.Offerwall,"Prefabs/UI/Base_Offerwall" },
         { (int)BasePanel.Rank,"Prefabs/UI/Base_Rank" },
         { (int)BasePanel.Slots,"Prefabs/UI/Base_Slots" },
         { (int)BasePanel.Betting,"Prefabs/UI/Base_Betting" },
@@ -369,27 +370,28 @@ public sealed class UI
 }
 public enum BasePanel
 {
-    Rank = 0,
-    Slots = 1,
-    Betting = 2,
+    Offerwall = 0,
+    Rank = 1,
+    Slots = 2,
+    Friend = 3,
+    Betting = 4,
 
-    Cashout = 3,
-    CashoutRecord = 4,
-    Task = 5,
-    PlaySlots = 6,
-    Friend = 7,
-    Me = 8,
-    FriendList = 9,
+    Cashout = 5,
+    CashoutRecord = 6,
+    Task = 7,
+    PlaySlots = 8,
+    Me = 9,
+    FriendList = 10,
 }
 public enum PopPanel
 {
-    Loading = 10,
-    Setting = 11,
-    GetReward = 12,
-    Rules = 13,
-    CashoutPop = 14,
-    InviteOk = 15,
-    StartBetting = 16,
-    GetCash = 17,
-    Guide = 18,
+    Loading = 11,
+    Setting = 12,
+    GetReward = 13,
+    Rules = 14,
+    CashoutPop = 15,
+    InviteOk = 16,
+    StartBetting = 17,
+    GetCash = 18,
+    Guide = 19,
 }

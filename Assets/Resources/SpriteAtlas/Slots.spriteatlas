@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 493b8016b3885f6488598b83b99aad59, type: 3}
-    totalSpriteSurfaceArea: 8478782
+    totalSpriteSurfaceArea: 8465802
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -59,13 +59,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 420a0dd31b48bcf4786ecf50b668f8da, type: 3}
   - {fileID: 21300000, guid: 9c0b6a04d83ab1d47a73d3729a51476e, type: 3}
   - {fileID: 21300000, guid: e8dc1dc428dd8504dba0bf2b7ba34650, type: 3}
+  - {fileID: 21300000, guid: cc0ba165337e07e4ebd594744265f7fe, type: 3}
   - {fileID: 21300000, guid: 132291c58a0c10b49997bef3132228ce, type: 3}
   - {fileID: 21300000, guid: 9f6314f650fb5c2428da86d1ee6f7e7d, type: 3}
   - {fileID: 21300000, guid: 884246870e6e28248a30b3be6842cac4, type: 3}
   - {fileID: 21300000, guid: 08fa8ed718df8a143b0548ea2c27b0b7, type: 3}
   - {fileID: 21300000, guid: 0b0d4b481d501dc4791323dc945bd3f8, type: 3}
   - {fileID: 21300000, guid: b6995be8694e16c428aa884f42bdd25e, type: 3}
-  - {fileID: 21300000, guid: 269773f899fc5784fb4377eb346aeeb6, type: 3}
   - {fileID: 21300000, guid: 9b18d97994166ef48b68b932961acca7, type: 3}
   - {fileID: 21300000, guid: 867d3be9eeb41cd4e8800d06e9bbf1d9, type: 3}
   - {fileID: 21300000, guid: dac5447ab8c2e0b4b83585148337bd3d, type: 3}
@@ -73,6 +73,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 864030ead170c5c4cb3fbd24dd64112b, type: 3}
   - {fileID: 21300000, guid: 22c35c8b1fdbe224eac5c70320da2ffc, type: 3}
   - {fileID: 21300000, guid: a3c69acb2b56863468ab970da6dc806b, type: 3}
+  - {fileID: 21300000, guid: 73a0cefb235ff824e85cc40a7db1f9e3, type: 3}
   - {fileID: 21300000, guid: 20befa1c220d2a6498e593fd52488d7b, type: 3}
   - {fileID: 21300000, guid: 8f4896ac0f4bb34408440691ca504bc3, type: 3}
   - {fileID: 21300000, guid: 3bab252d253a1ab4d828a1ac20594ae4, type: 3}
@@ -93,13 +94,13 @@ SpriteAtlas:
   - title_2
   - slots_out_s
   - slots_spin_up
+  - ad_s
   - title_0
   - slots_mask
   - slots_tipbg
   - star
   - slots_mask_s
   - tip
-  - ad
   - help
   - title_9
   - unlock
@@ -107,6 +108,7 @@ SpriteAtlas:
   - prizebg_violet
   - title_5
   - title_8
+  - ad_l
   - title_10
   - title_1
   - title_7

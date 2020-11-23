@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 28.124023, y: 457.84595}
+  m_AnchoredPosition: {x: 28.124023, y: 523}
   m_SizeDelta: {x: 912.7528, y: 969.492}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6015091651773582886
@@ -357,8 +357,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 411.4572}
-  m_SizeDelta: {x: 915.2787, y: 736.6528}
+  m_AnchoredPosition: {x: 0, y: 578}
+  m_SizeDelta: {x: 915.2787, y: 1100.4775}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2913025810545812385
 CanvasRenderer:
@@ -389,7 +389,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d3d624ce138797e4caf9c1563fbd203d, type: 3}
-    m_FontSize: 64
+    m_FontSize: 61
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -400,10 +400,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "1.  You can earn points by friends watch\n    ad and complete tasks, and
-    you can\n    also get  points from a friends of\n    friends.\n2. Every day UTC
-    10:00:00, you can\n    review yesterday\u2019s income from\n    friends.\n3.
-    Points can be exchanged for money,\n    100,000 points equals 1 USD."
+  m_Text: "1.  You can earn points by friends watch ad \n    and complete tasks,
+    and you can also get \n    points from a friends of friends.\n<color=#FFE200>   
+    We will give 70% of AD revenue to \n    players. So, You will earn 50% of your
+    \n    close friends\u2019 AD revenue and 25% of \n    your unfamiliar friends\u2019
+    AD revenue.</color>\n2. Every day UTC 10:00:00, you can review \n    yesterday\u2019s
+    income from friends.\n3. Points can be exchanged for money,\n    100,000 points
+    equals 1 USD.\n<color=#FFE200>4. You can earn HUGE Pts by completing \n    the
+    tasks in the offer.</color>"
 --- !u!1 &1244792784956927955
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5394778547632728686
 RectTransform:
   m_ObjectHideFlags: 0
@@ -436,7 +440,7 @@ RectTransform:
   m_Children:
   - {fileID: 2849349460904013225}
   m_Father: {fileID: 9141602687935579871}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -558,7 +562,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00036621, y: 491}
+  m_AnchoredPosition: {x: 0.00036621, y: 556.15405}
   m_SizeDelta: {x: 996.0896, y: 1234.0435}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8117697205927741622
@@ -640,7 +644,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 411.4572}
+  m_AnchoredPosition: {x: 0, y: 476.61127}
   m_SizeDelta: {x: 915.2787, y: 845.43134}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3792815898760953085
@@ -704,7 +708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8094983467412653401
 RectTransform:
   m_ObjectHideFlags: 0
@@ -718,11 +722,11 @@ RectTransform:
   m_Children:
   - {fileID: 2534060185365447803}
   m_Father: {fileID: 9141602687935579871}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -584}
+  m_AnchoredPosition: {x: 0, y: -835}
   m_SizeDelta: {x: 699, y: 199}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &218497887743126739
@@ -1122,6 +1126,88 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!1 &5343661458855003398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8912935551277702577}
+  - component: {fileID: 3928392033315653598}
+  - component: {fileID: 6331547246396114419}
+  m_Layer: 5
+  m_Name: OfferwallRules
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8912935551277702577
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5343661458855003398}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9141602687935579871}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 476.61127}
+  m_SizeDelta: {x: 974.32, y: 778.52704}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &3928392033315653598
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5343661458855003398}
+  m_CullTransparentMesh: 0
+--- !u!114 &6331547246396114419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5343661458855003398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d3d624ce138797e4caf9c1563fbd203d, type: 3}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 100
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "1.  Complete the sponsor's task and get a lot \n    of points.\n2. After
+    completing the task, the sponsor \n    will review the results and increase your
+    \n    points as soon as possible. It may take \n    1-3 days.\n3. If your close
+    friends complete the task, \n    you will earn extra 50% points, and \n    extra
+    25%  from unfamiliar friends."
 --- !u!1 &5736795335471587024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,7 +1710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8103349995836374005
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1641,7 +1727,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 411.4572}
+  m_AnchoredPosition: {x: 0, y: 476.61127}
   m_SizeDelta: {x: 968.9999, y: 648.13007}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8791228366877008946
@@ -1723,7 +1809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 411.4572}
+  m_AnchoredPosition: {x: 0, y: 476.61127}
   m_SizeDelta: {x: 856.5055, y: 933.0471}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &9141602686691059518
@@ -1850,6 +1936,7 @@ MonoBehaviour:
   invite_firend_rulesRect: {fileID: 8783918046541057544}
   myinfoRect: {fileID: 8103349995836374005}
   cashoutRect: {fileID: 7406022945299938058}
+  offerwallRect: {fileID: 8912935551277702577}
   closeButton: {fileID: 9141602688492873319}
   sureButton: {fileID: 2214987625784667186}
   termsButton: {fileID: 2592873360415251436}
@@ -1888,7 +1975,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.7, y: 585.6}
+  m_AnchoredPosition: {x: 4.7, y: 650.754}
   m_SizeDelta: {x: 959.60095, y: 128.90314}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9141602687780912149
@@ -1967,6 +2054,7 @@ RectTransform:
   - {fileID: 8783918046541057544}
   - {fileID: 8103349995836374005}
   - {fileID: 7406022945299938058}
+  - {fileID: 8912935551277702577}
   - {fileID: 5394778547632728686}
   - {fileID: 8094983467412653401}
   m_Father: {fileID: 9141602687539517650}
@@ -2086,7 +2174,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 434, y: 734.1}
+  m_AnchoredPosition: {x: 434, y: 799.254}
   m_SizeDelta: {x: 101, y: 101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9141602688492873321

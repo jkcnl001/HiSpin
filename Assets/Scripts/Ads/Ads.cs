@@ -62,9 +62,9 @@ public class Ads : MonoBehaviour
         return true;
 #endif
 #if UNITY_IOS
-		if (!GameManager.Instance.GetIsPackB())
+		if (!Save.data.isPackB)
 		{
-			rewardCallback();
+			rewardCallback?.Invoke();
 			return true;
 		}
 #endif

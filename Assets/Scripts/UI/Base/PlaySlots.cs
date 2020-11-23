@@ -35,12 +35,12 @@ public class PlaySlots : BaseUI
     };
     static readonly SlotsRandomData[] ticketData = new SlotsRandomData[2]
     {
-        new SlotsRandomData(){type=Reward.Ticket,weight=20,mustGetRange=new Range(0,1),numRnage=new Range(10,10),blackbox=new List<int>(){1,2,3,4,5 } },
+        new SlotsRandomData(){type=Reward.Ticket,weight=20,mustGetRange=new Range(0,1),numRnage=new Range(10,10),blackbox=new List<int>(){1,2,4,5 } },
         new SlotsRandomData(){type=Reward.Ticket,weight=10,mustGetRange=new Range(1,2),numRnage=new Range(10,10)}
     };
     static readonly SlotsRandomData[] cashData = new SlotsRandomData[2]
     {
-        new SlotsRandomData(){type=Reward.Cash,weight=10,mustGetRange=new Range(0,1),numRnage=new Range(10,20),blackbox=new List<int>(){1,3,4,6,10 } },
+        new SlotsRandomData(){type=Reward.Cash,weight=5,mustGetRange=new Range(0,1),numRnage=new Range(10,20),blackbox=new List<int>(){1,3,6,10 } },
         new SlotsRandomData(){type=Reward.Cash,weight=0,mustGetRange=null,numRnage=null}
     };
 

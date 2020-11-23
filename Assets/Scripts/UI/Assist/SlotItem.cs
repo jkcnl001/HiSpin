@@ -31,6 +31,7 @@ public class SlotItem : MonoBehaviour
         reward_numText.text = cashNum.ToString();
         isAd = !isFree;
         ad_maskGo.SetActive(isAd);
+        reward_numText.transform.parent.gameObject.SetActive(!isAd);
     }
     private void OnClick()
     {
@@ -45,8 +46,10 @@ public class SlotItem : MonoBehaviour
     }
     private void OnSuccessCallback()
     {
+        Save.data.allData.user_panel.lucky_count++;
         Master.Instance.SendAdjustEnterSlotsEvent(isAd);
         TaskAgent.TriggerTaskEvent(PlayerTaskTarget.EnterSlotsOnce, 1);
         UI.ShowBasePanel(BasePanel.PlaySlots, index, isAd ? 1 : 0, cashNum, Save.data.allData.lucky_status.lucky_exp);
+        UI.MenuPanel.UpdateFreeSlotsLeftNumText();
     }
 }
