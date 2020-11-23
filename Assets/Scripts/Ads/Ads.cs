@@ -1,4 +1,5 @@
 ﻿using AdGemUnity;
+using FyberPlugin;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ public class Ads : MonoBehaviour
 #if UNITY_ANDROID
 	private const string IS_APP_KEY = "de040b19";
 	private const int AdGem_APP_ID = 0;
+	private const string Fyber_APP_ID = "";
 #elif UNITY_IOS
 	private const string IS_APP_KEY = "debe9209";
 	private const int AdGem_APP_ID = 0;
+	private const string Fyber_APP_ID = "";
 #endif
 	public static Ads _instance;
 	[NonSerialized]
@@ -38,15 +41,33 @@ public class Ads : MonoBehaviour
 		// SDK init
 		IronSource.Agent.init(IS_APP_KEY);
 		IronSource.Agent.loadInterstitial();
+		return;
+		AdGem.loadOfferWallBeforeShowing = true;
 		AdGem.startSession(AdGem_APP_ID, false, false, true);
-
 	}
+	OfferWallRequester offerWallRequester;
+	public void InitFyber(string userid,string securityToken)
+	{
+		return;
+		Fyber.With(Fyber_APP_ID)
+		  .WithUserId(userid)
+		.WithSecurityToken(securityToken)
+		  .Start();
+		offerWallRequester = OfferWallRequester.Create();
+		offerWallRequester.Request();
+		offerWallRequester.CloseOnRedirect(false);
+	}
+	ShowOfferwallAds ofwScripts = null;
 	public bool ShowOfferwallAd(Offerwall_Co _Co)
 	{
 #if UNITY_EDITOR
-		Debug.Log("Show OW.");
-		return true;
+		Debug.Log("Show "+_Co+" Offerwall");
+		return CheckOfferwallAvailable(_Co);
 #endif
+        if (_Co != Offerwall_Co.IS)
+        {
+			return false;
+        }
         switch (_Co)
         {
             case Offerwall_Co.IS:
@@ -64,12 +85,39 @@ public class Ads : MonoBehaviour
 				}
                 break;
             case Offerwall_Co.Fyber:
+				if (ofwScripts == null)
+					ofwScripts = transform.GetComponent<ShowOfferwallAds>();
+                if (ofwScripts.ofwAd != null)
+				{
+					ofwScripts.ofwAd.Start();
+					ofwScripts.ofwAd = null;
+					return true;
+				}
                 break;
             default:
                 break;
         }
 		return false;
 	}
+	public bool CheckOfferwallAvailable(Offerwall_Co _Co)
+    {
+        switch (_Co)
+        {
+            case Offerwall_Co.IS:
+				return IronSource.Agent.isOfferwallAvailable();
+            case Offerwall_Co.AdGem:
+				return false;
+				return AdGem.offerWallReady;
+            case Offerwall_Co.Fyber:
+				return false;
+				if (ofwScripts == null)
+					ofwScripts = transform.GetComponent<ShowOfferwallAds>();
+				return ofwScripts.ofwAd != null;
+            default:
+				return false;
+				break;
+        }
+    }
 	public bool ShowRewardVideo(Action rewardedCallback, int clickAdTime,string des,Action failCallback)
 	{
 		adDes = des;

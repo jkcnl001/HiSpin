@@ -43,7 +43,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 493b8016b3885f6488598b83b99aad59, type: 3}
-    totalSpriteSurfaceArea: 8465802
+    totalSpriteSurfaceArea: 8456966
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -73,7 +73,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 864030ead170c5c4cb3fbd24dd64112b, type: 3}
   - {fileID: 21300000, guid: 22c35c8b1fdbe224eac5c70320da2ffc, type: 3}
   - {fileID: 21300000, guid: a3c69acb2b56863468ab970da6dc806b, type: 3}
-  - {fileID: 21300000, guid: 73a0cefb235ff824e85cc40a7db1f9e3, type: 3}
   - {fileID: 21300000, guid: 20befa1c220d2a6498e593fd52488d7b, type: 3}
   - {fileID: 21300000, guid: 8f4896ac0f4bb34408440691ca504bc3, type: 3}
   - {fileID: 21300000, guid: 3bab252d253a1ab4d828a1ac20594ae4, type: 3}
@@ -108,7 +107,6 @@ SpriteAtlas:
   - prizebg_violet
   - title_5
   - title_8
-  - ad_l
   - title_10
   - title_1
   - title_7

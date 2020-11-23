@@ -327,6 +327,7 @@ public class Server : MonoBehaviour
                         {
                             AllData allData = JsonMapper.ToObject<AllData>(downText);
                             Save.data.allData = allData;
+                            Ads._instance.InitFyber(allData.user_panel.user_id, "");
                         }
                         catch(Exception e)
                         {

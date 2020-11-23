@@ -39,6 +39,20 @@ public class Offerwall : BaseUI
             topRect.sizeDelta = new Vector2(topRect.sizeDelta.x, topRect.sizeDelta.y + Master.TopMoveDownOffset);
             viewportRect.sizeDelta += new Vector2(0, 1920 * (Master.ExpandCoe - 1) - Master.TopMoveDownOffset);
         }
+        adgem_button_contentText.text = Ads._instance.CheckOfferwallAvailable(Offerwall_Co.AdGem) ? ready : loading;
+        is_button_contentText.text = Ads._instance.CheckOfferwallAvailable(Offerwall_Co.IS) ? ready : loading;
+        fyber_button_contentText.text = Ads._instance.CheckOfferwallAvailable(Offerwall_Co.Fyber) ? ready : loading;
+        StartCoroutine("UpdateOfferwallState");
+    }
+    IEnumerator UpdateOfferwallState()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            adgem_button_contentText.text = Ads._instance.CheckOfferwallAvailable(Offerwall_Co.AdGem) ? ready : loading;
+            is_button_contentText.text = Ads._instance.CheckOfferwallAvailable(Offerwall_Co.IS) ? ready : loading;
+            fyber_button_contentText.text = Ads._instance.CheckOfferwallAvailable(Offerwall_Co.Fyber) ? ready : loading;
+        }
     }
     private void OnHelpButtonClick()
     {
@@ -50,15 +64,24 @@ public class Offerwall : BaseUI
     }
     private void OnAdgemButtonClick()
     {
-
+        if (!Ads._instance.ShowOfferwallAd(Offerwall_Co.AdGem))
+        {
+            Master.Instance.ShowTip("AdGem Offerwall is not available.");
+        }
     }
     private void OnISButtonClick()
     {
-        Ads._instance.ShowOfferwallAd(Offerwall_Co.IS);
+        if (!Ads._instance.ShowOfferwallAd(Offerwall_Co.IS))
+        {
+            Master.Instance.ShowTip("Ironsource Offerwall is not available.");
+        }
     }
     private void OnFyberButtonClick()
     {
-
+        if (!Ads._instance.ShowOfferwallAd(Offerwall_Co.Fyber))
+        {
+            Master.Instance.ShowTip("Fyber Offerwall is not available.");
+        }
     }
     protected override void BeforeShowAnimation(params int[] args)
     {
