@@ -17,10 +17,12 @@ public class GetCash : PopUI
         switch (getCashArea)
         {
             case GetCashArea.NewPlayerReward:
-                Server.Instance.OperationData_GetNewPlayerReawrd(OnGetNewplayerRewardCallback, null);
+                //Server.Instance.OperationData_GetNewPlayerReawrd(OnGetNewplayerRewardCallback, null);
+                Server_New.Instance.ConnectToServer_GetNewPlayerReward(OnGetNewplayerRewardCallback, null, null, true);
                 break;
             case GetCashArea.PlaySlots:
-                Server.Instance.OperationData_GetSlotsReward(OnGetSlotsRewardCallback, null, Reward.Cash, getcashNum);
+                //Server.Instance.OperationData_GetSlotsReward(OnGetSlotsRewardCallback, null, Reward.Cash, getcashNum);
+                Server_New.Instance.ConnectToServer_GetSlotsReward(OnGetSlotsRewardCallback, null, null, true, Reward.Cash, getcashNum);
                 break;
         }
     }

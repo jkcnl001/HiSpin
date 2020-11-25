@@ -60,11 +60,13 @@ public class CashoutPop : PopUI
         if (string.IsNullOrEmpty(email) || string.IsNullOrWhiteSpace(email))
             Master.Instance.ShowTip("Account is empty!");
         else
-            Server.Instance.OperationData_BindPaypal(OnConfirmCallback, null, paypal_accountInput.text);
+            //Server.Instance.OperationData_BindPaypal(OnConfirmCallback, null, paypal_accountInput.text);
+            Server_New.Instance.ConnectToServer_BindPaypal(OnConfirmCallback, null, null, true, email);
     }
     private void OnCashoutClick()
     {
-        Server.Instance.OperationData_Cashout(OnCashoutCallback, null, cashoutType, cashoutTypeNum, cashoutNum);
+        //Server.Instance.OperationData_Cashout(OnCashoutCallback, null, cashoutType, cashoutTypeNum, cashoutNum);
+        Server_New.Instance.ConnectToServer_Cashout(OnCashoutCallback, null, null, true, cashoutType, cashoutTypeNum, cashoutNum);
     }
     private void OnCashoutCallback()
     {

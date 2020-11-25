@@ -9,6 +9,7 @@ public class Menu : MonoBehaviour, IUIBase
 {
     CanvasGroup canvasGroup;
     public GameObject setting_rpGo;
+    public GameObject friend_rpGo;
 
     public Button cashButton;
     public Button offerwallButton;
@@ -74,7 +75,17 @@ public class Menu : MonoBehaviour, IUIBase
     }
     private void OnOfferwallButtonClick()
     {
-        UI.ShowBasePanel(BasePanel.Offerwall);
+#if UNITY_IOS
+        if (!Save.data.isPackB)
+        {
+            UI.ShowBasePanel(BasePanel.Task);
+            return;
+        }
+#endif
+        if (Save.data.allData.user_panel.user_level >= 4)
+            UI.ShowBasePanel(BasePanel.Offerwall);
+        else
+            Master.Instance.ShowTip("Unlock at level 4.", 2);
     }
     private void OnRankButtonClick()
     {
@@ -91,6 +102,12 @@ public class Menu : MonoBehaviour, IUIBase
     private void OnFriendButtonClick()
     {
         UI.ShowBasePanel(BasePanel.Friend);
+        if (friend_rpGo.activeSelf)
+        {
+            Master.Instance.SendAdjustEnterInvitePageEvent();
+            friend_rpGo.SetActive(false);
+        }
+        Save.data.lastClickFriendTime = DateTime.Now;
     }
     private void OnSettingButtonClick()
     {
@@ -110,16 +127,30 @@ public class Menu : MonoBehaviour, IUIBase
     {
         UI.ShowPopPanel(PopPanel.Rules, (int)RuleArea.PlaySlots);
     }
-    #endregion
+#endregion
     private Button currentBottomButton = null;
     private void OnChangeBottomButton(Button clickButton)
     {
+        string offSpriteName = currentBottomButton == null ? "" : currentBottomButton.name + "_Off";
+        string onSpriteName = clickButton.name + "_On";
+#if UNITY_IOS
+        if (currentBottomButton == offerwallButton)
+        {
+            if (!Save.data.isPackB)
+                offSpriteName = "Task_Off";
+        }
+        if (clickButton == offerwallButton)
+        {
+            if (!Save.data.isPackB)
+                onSpriteName = "Task_On";
+        }
+#endif
         if (currentBottomButton != null)
-            currentBottomButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Menu, currentBottomButton.name + "_Off");
+            currentBottomButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Menu, offSpriteName);
         currentBottomButton = clickButton;
-        currentBottomButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Menu, currentBottomButton.name + "_On");
+        currentBottomButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Menu, onSpriteName);
     }
-    #region update top token text
+#region update top token text
     public void UpdateGoldText()
     {
         gold_numText.text = Save.data.allData.user_panel.user_gold_live.GetTokenShowString();
@@ -171,13 +202,35 @@ public class Menu : MonoBehaviour, IUIBase
         slots_left_free_numText.text = freeNum.ToString();
         slots_left_free_numText.transform.parent.gameObject.SetActive(freeNum > 0);
     }
-    #endregion
-    #region stateChange
+    public void UpdateFriendWetherClickToday()
+    {
+        DateTime last = Save.data.lastClickFriendTime;
+        DateTime now = DateTime.Now;
+        bool nextDay = false;
+        if (now.Year == last.Year)
+        {
+            if (now.Month == last.Month)
+            {
+                if (now.Day > last.Day)
+                    nextDay = true;
+                else
+                    nextDay = false;
+            }
+            else if (now.Month > last.Month)
+                nextDay = true;
+        }
+        else if (now.Year > last.Year)
+            nextDay = true;
+        friend_rpGo.SetActive(nextDay);
+    }
+#endregion
+#region stateChange
     public IEnumerator Show(params int[] args)
     {
         RefreshTokenText();
         UpdateHeadIcon();
         UpdateFreeSlotsLeftNumText();
+        UpdateFriendWetherClickToday();
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = true;
@@ -230,7 +283,7 @@ public class Menu : MonoBehaviour, IUIBase
         UpdateTicketText();
         UpdateHeadIcon();
     }
-    #endregion
+#endregion
     public void OnBasePanelShow(int panelIndex)
     {
         BasePanel basePanelType = (BasePanel)panelIndex;
@@ -268,10 +321,23 @@ public class Menu : MonoBehaviour, IUIBase
                 all_tokenGo.SetActive(true);
                 top_titleText.gameObject.SetActive(false);
                 all_bottomGo.SetActive(false);
-                backButton.gameObject.SetActive(true);
-                settingButton.gameObject.SetActive(false);
                 add_ticketButton.gameObject.SetActive(true);
                 play_slots_helpButton.gameObject.SetActive(false);
+#if UNITY_ANDROID
+                backButton.gameObject.SetActive(true);
+                settingButton.gameObject.SetActive(false);
+#elif UNITY_IOS
+                if (!Save.data.isPackB)
+                {
+                    backButton.gameObject.SetActive(false);
+                    settingButton.gameObject.SetActive(true);
+                }
+                else
+                {
+                    backButton.gameObject.SetActive(true);
+                    settingButton.gameObject.SetActive(false);
+                }
+#endif
                 break;
             case BasePanel.PlaySlots:
                 all_topGo.SetActive(true);
@@ -281,7 +347,7 @@ public class Menu : MonoBehaviour, IUIBase
                 backButton.gameObject.SetActive(false);
                 settingButton.gameObject.SetActive(true);
                 add_ticketButton.gameObject.SetActive(false);
-                play_slots_helpButton.gameObject.SetActive(Save.data.isPackB);
+                play_slots_helpButton.gameObject.SetActive(false);
                 break;
             case BasePanel.Friend:
                 OnChangeBottomButton(firendButton);

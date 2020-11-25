@@ -25,15 +25,13 @@ public class DeepLink : MonoBehaviour
     
     public void ReceiveURI(string uri)
     {
-        Debug.unityLogger.logEnabled = true;
-        Debug.Log("收到DeepLink回调" + uri);
-        Debug.unityLogger.logEnabled = false;
         if (!string.IsNullOrEmpty(uri))
         {
             Master.Instance.SendAdjustDeeplinkEvent(uri);
             if (!Master.isLoadingEnd)
             {
                 Save.data.isPackB = true;
+                Master.Instance.SendAdjustPackBEvent();
             }
         }
     }

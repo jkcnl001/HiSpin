@@ -49,7 +49,12 @@ public class Me : BaseUI
     {
         string endValue = value.CheckName();
         nameInputfield.SetTextWithoutNotify(endValue);
-        Server.Instance.OperationData_ChangeHead_Name(null, null, -1, endValue);
+        //Server.Instance.OperationData_ChangeHead_Name(null, null, -1, endValue);
+        Server_New.Instance.ConnectToServer_ChangeHedOrName(RefreshName, RefreshName, null, true, -1, endValue);
+    }
+    private void RefreshName()
+    {
+        nameInputfield.SetTextWithoutNotify(Save.data.allData.user_panel.user_name);
     }
     private void OnHelpButtonClick()
     {
@@ -59,7 +64,6 @@ public class Me : BaseUI
     {
         exp_progress_fillImage.fillAmount= (float)Save.data.allData.user_panel.user_exp / Save.data.allData.user_panel.level_exp;
         lvText.text="Lv." + Save.data.allData.user_panel.user_level;
-        nameInputfield.SetTextWithoutNotify(Save.data.allData.user_panel.user_name);
         ticket_multipleText.text = string.Format("Ticket <color=#fff000>x {0}</color> Multiplier", Save.data.allData.user_panel.user_double.GetTicketMultipleString());
 
         current_levelText.text = Save.data.allData.user_panel.user_level.ToString();
@@ -71,6 +75,7 @@ public class Me : BaseUI
         level_up_reward_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.Menu, Save.data.allData.user_panel.level_type.ToString());
         level_up_reward_numText.text = string.Format("Extra {0}+{1}", Save.data.allData.user_panel.level_type, Save.data.allData.user_panel.next_level);
 
+        RefreshName();
         RefreshAvatarList();
     }
     public void RefreshAvatarList()

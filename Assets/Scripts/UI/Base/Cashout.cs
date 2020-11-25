@@ -85,7 +85,8 @@ public class Cashout : BaseUI
     }
     private void OnAboutFeeClick()
     {
-        Server.Instance.RequestData_GetLocalcountry(OnRequestLocalcountyCallback, null);
+        //Server.Instance.RequestData_GetLocalcountry(OnRequestLocalcountyCallback, null);
+        OnRequestLocalcountyCallback(Server_New.localCountry);
     }
     private void OnRequestLocalcountyCallback(string country)
     {

@@ -22,6 +22,9 @@ public class AdjustEventLogger : MonoBehaviour
     public const string TOKEN_task = "7ys6oz";
     public const string TOKEN_eamil = "nnmlyb";
     public const string TOKEN_deeplink = "jb68sg";
+    public const string TOKEN_packB = "t9pcu1";
+    public const string TOKEN_invite_button = "11h7xk";
+    public const string TOKEN_invite_page = "yplpw8";
 #elif UNITY_ANDROID
     public const string APP_TOKEN = "nwle7bsx7itc";
     public const string TOKEN_open = "3grjd1";
@@ -31,6 +34,9 @@ public class AdjustEventLogger : MonoBehaviour
     public const string TOKEN_task = "h4f80y";
     public const string TOKEN_eamil = "9o2t98";
     public const string TOKEN_deeplink = "cpubgo";
+    public const string TOKEN_packB = "qskxn0";
+    public const string TOKEN_invite_button = "idxf85";
+    public const string TOKEN_invite_page = "7ixqy9";
 #endif
     public static AdjustEventLogger Instance;
     private void Awake()
@@ -78,6 +84,7 @@ public class AdjustEventLogger : MonoBehaviour
             if (!Master.isLoadingEnd)
             {
                 Save.data.isPackB = true;
+                Master.Instance.SendAdjustPackBEvent();
             }
         }
     }
@@ -98,6 +105,7 @@ public class AdjustEventLogger : MonoBehaviour
                 if (!Master.isLoadingEnd)
                 {
                     Save.data.isPackB = true;
+                    Master.Instance.SendAdjustPackBEvent();
                 }
             }
         }

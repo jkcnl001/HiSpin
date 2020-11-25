@@ -28,7 +28,6 @@ public class GetReward : PopUI
     }
     private void OnAdCallback()
     {
-        reward_num *= reward_mutiple;
         Get();
     }
     private void OnNothanksButtonClick()
@@ -40,10 +39,12 @@ public class GetReward : PopUI
         switch (reward_area)
         {
             case GetRewardArea.PlaySlots:
-                Server.Instance.OperationData_GetSlotsReward(OnRequestCallback, null, reward_type, reward_num);
+                //Server.Instance.OperationData_GetSlotsReward(OnRequestCallback, null, reward_type, reward_num * reward_mutiple);
+                Server_New.Instance.ConnectToServer_GetSlotsReward(OnRequestCallback, null, null, true, reward_type, reward_num * reward_mutiple);
                 break;
             case GetRewardArea.LevelUp:
-                Server.Instance.OperationData_GetLevelupReward(OnRequestCallback, null, reward_mutiple);
+                //Server.Instance.OperationData_GetLevelupReward(OnRequestCallback, null, reward_mutiple);
+                Server_New.Instance.ConnectToServer_GetLevelupReward(OnRequestCallback, null, null, true, reward_mutiple);
                 break;
             default:
                 Debug.LogError("奖励获得区域错误");

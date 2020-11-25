@@ -8,9 +8,14 @@ using UnityEngine.UI;
 #if UNITY_IOS && !UNITY_EDITOR
 using System.Runtime.InteropServices;
 #endif
-
+[Obsolete("obsolete : use Server_New ",true)]
 public class Server : MonoBehaviour
 {
+#if UNITY_ANDROID
+    public const string Platform = "android";
+#elif UNITY_IOS
+    public const string Platform = "ios";
+#endif
     public const string Bi_name = Ads.AppName;
     public static Server Instance;
     public CanvasGroup canvasGroup;
@@ -18,7 +23,7 @@ public class Server : MonoBehaviour
     public Text titleText;
     public Text tipText;
     public Button retryButton;
-    static string deviceID;
+    static string deviceID = " ";
     private void Awake()
     {
         Instance = this;
@@ -130,6 +135,7 @@ public class Server : MonoBehaviour
         ChangeHead_Name,
         GetLevelUpReward,
         GetNewPlayerReward,
+        GetUUID,
     }
     static readonly Dictionary<Server_RequestType, string> getdata_uri_dic = new Dictionary<Server_RequestType, string>()
     {
@@ -148,8 +154,9 @@ public class Server : MonoBehaviour
         {Server_RequestType.ChangeHead_Name,"http://admin.crsdk.com:8000/update_user/" },
         {Server_RequestType.GetLevelUpReward,"http://admin.crsdk.com:8000/level_reward/" },
         {Server_RequestType.GetNewPlayerReward,"http://admin.crsdk.com:8000/new_data/" },
+        {Server_RequestType.GetUUID,"http://aff.luckyclub.vip:8000/get_random_id/" },
     };
-    #region request server function
+#region request server function
     Server_RequestType requestType;
     Action requestOkCallback;
     Action requestNoCallback;
@@ -290,15 +297,53 @@ public class Server : MonoBehaviour
         NewPlayerRewardMultiple = 1;
         StartCoroutine(ConnectToGetNewPlayerReward(successCallback, failCallback, NewPlayerRewardMultiple));
     }
-    #endregion
-    #region IEnumerator connecting server
+#endregion
+#region IEnumerator connecting server
     IEnumerator ConnectToGetData(Server_RequestType _RequestType, Action successCallback, Action failCallback, bool needShowConnecting)
     {
         isConnecting = true;
-        yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
+        UnityWebRequest requestCountry = UnityWebRequest.Get(getdata_uri_dic[Server_RequestType.GetLocalCountry]);
+        yield return requestCountry.SendWebRequest();
+        if (requestCountry.isNetworkError || requestCountry.isHttpError)
+        {
+            OnConnectServerFail();
+            failCallback?.Invoke();
+        }
+        else
+        {
+            string downText = requestCountry.downloadHandler.text;
+            LocalCountryData countryData = JsonMapper.ToObject<LocalCountryData>(downText);
+            localCountry = countryData.country.ToLower();
+        }
+        requestCountry.Dispose();
+
+        if(string.IsNullOrEmpty(Save.data.uuid))
+        {
+            UnityWebRequest requestUUID = UnityWebRequest.Get(getdata_uri_dic[Server_RequestType.GetUUID]);
+            yield return requestUUID.SendWebRequest();
+            if (requestUUID.isNetworkError || requestUUID.isHttpError)
+            {
+                OnConnectServerFail();
+                failCallback?.Invoke();
+            }
+            else
+            {
+                string downText = requestUUID.downloadHandler.text;
+                Save.data.uuid = downText;
+            }
+            requestUUID.Dispose();
+        }
+
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         iparams.Add(new MultipartFormDataSection("app_name", Bi_name));
+        if (_RequestType == Server_RequestType.AllData)
+        {
+            iparams.Add(new MultipartFormDataSection("country", localCountry));
+            iparams.Add(new MultipartFormDataSection("ad_ios", Platform));
+        }
         if (needShowConnecting)
             OnConnectingServer();
         UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[_RequestType], iparams);
@@ -327,7 +372,8 @@ public class Server : MonoBehaviour
                         {
                             AllData allData = JsonMapper.ToObject<AllData>(downText);
                             Save.data.allData = allData;
-                            Ads._instance.InitFyber(allData.user_panel.user_id, "");
+                            Save.data.uuid = string.IsNullOrEmpty(allData.user_uuid) ? Save.data.uuid : allData.user_uuid;
+                            Ads._instance.InitFyber(allData.user_panel.user_id);
                         }
                         catch(Exception e)
                         {
@@ -351,9 +397,10 @@ public class Server : MonoBehaviour
     IEnumerator ConnectToClickSlotsCard(Action successCallback, Action failCallback,int slotsIndex)
     {
         isConnecting = true;
-        yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         iparams.Add(new MultipartFormDataSection("lucky_id", slotsIndex.ToString()));
         OnConnectingServer();
         UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.ClickSlotsCard], iparams);
@@ -385,9 +432,10 @@ public class Server : MonoBehaviour
     IEnumerator ConnectToGetSlotsReward(Action successCallback ,Action  failCallback,int reward_type,int reward_num)
     {
         isConnecting = true;
-        yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         iparams.Add(new MultipartFormDataSection("reward_type", reward_type.ToString()));
         iparams.Add(new MultipartFormDataSection("reward_num", reward_num.ToString()));
         OnConnectingServer();
@@ -431,9 +479,10 @@ public class Server : MonoBehaviour
     IEnumerator ConnectToFinishTask(Action successCallback,Action failCallback,int taskID, bool double_reward,params Reward[] opTypes)
     {
         isConnecting = true;
-        yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         iparams.Add(new MultipartFormDataSection("task_id", taskID.ToString()));
         iparams.Add(new MultipartFormDataSection("double", double_reward ? "2" : "1"));
         OnConnectingServer();
@@ -486,9 +535,10 @@ public class Server : MonoBehaviour
     IEnumerator ConnectToBuyTicket(Action successCallback,Action failCallback,bool isRv)
     {
         isConnecting = true;
-        yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         iparams.Add(new MultipartFormDataSection("reward_type", isRv ? "1" : "0"));
         OnConnectingServer();
         UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.BuyTickets], iparams);
@@ -530,9 +580,10 @@ public class Server : MonoBehaviour
     IEnumerator ConnectToSendRVEvent(Action successCallback,Action failCallback)
     {
         isConnecting = true;
-        yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         OnConnectingServer();
         UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.WatchRvEvent], iparams);
         yield return www.SendWebRequest();
@@ -561,9 +612,10 @@ public class Server : MonoBehaviour
     IEnumerator ConnectToBindPaypal(Action successCallback,Action failCallback,string paypal)
     {
         isConnecting = true;
-        yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         iparams.Add(new MultipartFormDataSection("paypal", paypal));
         OnConnectingServer();
         UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.BindPaypal], iparams);
@@ -595,9 +647,10 @@ public class Server : MonoBehaviour
     IEnumerator ConnectToCashout(Action successCallback, Action failCallback,int type,int num,int cash)
     {
         isConnecting = true;
-        yield return new WaitUntil(() => !string.IsNullOrEmpty(deviceID));
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         iparams.Add(new MultipartFormDataSection("app_name", Bi_name));
         iparams.Add(new MultipartFormDataSection("withdrawal_type", type.ToString()));
         iparams.Add(new MultipartFormDataSection("withdrawal", num.ToString()));
@@ -673,7 +726,9 @@ public class Server : MonoBehaviour
         isConnecting = true;
         OnConnectingServer();
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.OpenBettingPrize], iparams);
         yield return www.SendWebRequest();
         isConnecting = false;
@@ -704,7 +759,9 @@ public class Server : MonoBehaviour
         isConnecting = true;
         OnConnectingServer();
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         if (head_id > 0)
             iparams.Add(new MultipartFormDataSection("title_id", head_id.ToString()));
         if(!string.IsNullOrEmpty(name))
@@ -742,7 +799,9 @@ public class Server : MonoBehaviour
         isConnecting = true;
         OnConnectingServer();
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         iparams.Add(new MultipartFormDataSection("double", multiple.ToString()));
         UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.GetLevelUpReward], iparams);
         yield return www.SendWebRequest();
@@ -782,7 +841,9 @@ public class Server : MonoBehaviour
         isConnecting = true;
         OnConnectingServer();
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
-        iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(deviceID))
+            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         iparams.Add(new MultipartFormDataSection("double", multiple.ToString()));
         UnityWebRequest www = UnityWebRequest.Post(getdata_uri_dic[Server_RequestType.GetNewPlayerReward], iparams);
         yield return www.SendWebRequest();
@@ -810,7 +871,7 @@ public class Server : MonoBehaviour
         }
         www.Dispose();
     }
-    #endregion
+#endregion
     private void ShowConnectErrorTip(string errorCode)
     {
         string errorString;
@@ -825,13 +886,16 @@ public class Server : MonoBehaviour
             case "-6":
                 errorString = "Abnormal behavior, try again later.";
                 break;
+            case "-7":
+                errorString = "";
+                break;
             default:
                 errorString = "Error code :" + errorCode;
                 break;
         }
         Master.Instance.ShowTip(errorString,3);
     }
-    #region connecting state
+#region connecting state
     const string errorTitle = "ERROR";
     const string connectingTilte = "";
     const string errorString = "Network connection is\n unavailable, please check network \n settings.";
@@ -858,212 +922,5 @@ public class Server : MonoBehaviour
         isConnecting = true;
         StartCoroutine("WaitConnecting");
     }
-    #endregion
-}
-public enum PlayerTaskTarget
-{
-    EnterSlotsOnce,//
-    PlayBettingOnce,
-    WatchRvOnce,//
-    CashoutOnce,
-    WritePaypalEmail,//
-    OwnSomeGold,//
-    WinnerOnce,//
-    InviteAFriend,
-    GetTicketFromSlotsOnce,//
-    BuyTicketByGoldOnce,
-    BuyTicketByRvOnce,
-}
-public class PlayerGetSlotsRewardReceiveData
-{
-    public int user_gold;
-    public int user_gold_live;
-    public int user_tickets;
-    public int user_doller;
-    public int user_doller_live;
-}
-public class PlayerFinishTaskReceiveData
-{
-    public int user_tickets;
-    public int user_gold;
-    public int user_gold_live;
-    public int user_doller;
-    public int user_doller_live;
-}
-public class PlayerBuyTicketReceiveData
-{
-    public int user_tickets;
-    public int user_gold;
-    public int user_gold_live;
-}
-public class PlayerBindPaypalReceiveData
-{
-    public string user_paypal;
-}
-public class PlayerCashoutReceiveData
-{
-    public int user_gold_live;
-    public int user_coin_live;
-    public int user_doller_live;
-}
-public class LocalCountryData
-{
-    public string ip;
-    public string country;
-}
-public class GetLevelupRewardReceiveData
-{
-    public int user_tickets;
-    public int user_level;
-    public int user_double;
-    public int next_double;
-    public int level_exp;
-    public int user_exp;
-    public List<int> title_list;
-    public int next_level;
-}
-public class GetNewPlayerRewardReceiveData
-{
-    public int user_doller_live;
-}
-#region newAllData
-public class AllData
-{
-    public AllData_MainData user_panel;
-    public AllData_SlotsState lucky_status;
-    public AllData_BettingWinnerData award_ranking;
-    public AllData_RefreshLeftTimeData get_time;
-    public AllData_YesterdayRankData lucky_ranking;
-    public AllData_FriendData fission_info;
-    public AllData_TaskData lucky_schedule;
-    public AllData_CashoutRecordData lucky_record;
-    public bool day_flag;//今天是否已经开奖
-}
-public class AllData_MainData
-{
-    public string user_id;
-    public int user_gold;
-    public int user_gold_live;
-    public int user_doller;
-    public int user_doller_live;
-    public string user_paypal;
-    public int user_tickets;
-    public int user_title;
-    public int cur_betting;
-    public string user_name;
-    public int user_level;
-    public int user_double;//当前票倍数
-    public int next_double;//下一级票倍数
-    public int level_exp;
-    public int user_exp;
-    public List<int> title_list;
-    public int next_level;//升级奖励票数
-    public List<int> title_level;
-    public bool new_reward;//新手奖励
-    public Reward level_type;//升级奖励类型
-    public Reward new_data_type;//新手奖励类型
-    public int new_data_num;//新手奖励数量
-    public int lucky_count;//进入老虎机总次数
-    public int lucky_total_cash;//老虎机获得的总共现金，不大于200
-}
-public class AllData_SlotsState
-{
-    public List<int> white_lucky;
-    public int lucky_exp;
-}
-public class AllData_BettingWinnerData
-{
-    public List<AllData_BettingWinnerData_Winner> ranking;
-    public int ysterday_tickets;//昨日总票数
-    public int ticktes_flag;//参与抽奖所需票数
-}
-public class AllData_BettingWinnerData_Winner
-{
-    public int user_title;
-    public string user_id;
-    public int user_num;
-}
-public class AllData_RefreshLeftTimeData
-{
-    public int server_time;
-}
-public class AllData_YesterdayRankData
-{
-    public List<AllData_YesterdayRankData_Rank> gold_rank;
-    public AllData_YesterdayRankData_Rank self_gold_info;
-    public List<AllData_YesterdayRankData_Rank> tickets_rank;
-}
-public class AllData_YesterdayRankData_Rank
-{
-    public int user_title;
-    public string user_id;
-    public int user_token;
-    public int user_num;
-}
-public class AllData_FriendData
-{
-    public AllData_FriendData_InviteRewardConfig reward_conf;
-    public double user_doller;
-    public string user_id;
-    public int user_invite_people;
-    public bool up_user;
-    public double user_total;
-    public string up_user_id;
-    public double live_balance;
-    public AllData_FriendData_FriendList up_user_info;
-}
-public class AllData_FriendData_InviteRewardConfig
-{
-    public int invite_receive;//邀请奖励领取的次数
-    public int invite_flag;//邀请奖励分界人数, <=为小于部分，>为大于部分
-    public Reward lt_flag_type;//小于部分
-    public int lt_flag_num;
-    public Reward gt_flag_type;//大于部分
-    public int gt_flag_num;
-}
-public class AllData_FriendData_FriendList
-{
-    public double yestday_team_all;
-    public List<AllData_FriendData_Friend> two_user_list;
-}
-public class AllData_FriendData_Friend
-{
-    public int user_img;
-    public double yestday_doller;
-    public int distance;//1直接好友，0间接好友
-    public string user_name;
-    public int user_level;
-    public string user_time;
-}
-public class AllData_TaskData
-{
-    public int coin_ticket;//购买票所需金币
-    public List<AllData_Task> user_task;
-}
-public class AllData_Task
-{
-    public string task_title;
-    public int task_id;
-    public PlayerTaskTarget taskTargetId;
-    public string task_describe;
-    public int task_type;
-    public Reward reward_type;
-    public int task_reward;
-    public bool task_receive;
-    public bool task_complete;
-    public int task_cur;
-    public int task_tar;
-}
-public class AllData_CashoutRecordData
-{
-    public List<AllData_CashoutRecordData_Record> record;
-}
-public class AllData_CashoutRecordData_Record
-{
-    public string apply_time;
-    public int apply_doller;
-    public CashoutType apply_type;
-    public int apply_num;
-    public int apply_status;
-}
 #endregion
+}

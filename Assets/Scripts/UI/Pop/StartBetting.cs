@@ -29,7 +29,8 @@ public class StartBetting : PopUI
     }
     private void OnGetButtonClick()
     {
-        Server.Instance.OperationData_OpenBettingPrize(OnRequstDataCallback, null);
+        //Server.Instance.OperationData_OpenBettingPrize(OnRequstDataCallback, null);
+        Server_New.Instance.ConnectToServer_OpenBettingPrize(OnRequstDataCallback, null, null, true);
     }
     private void OnRequstDataCallback()
     {

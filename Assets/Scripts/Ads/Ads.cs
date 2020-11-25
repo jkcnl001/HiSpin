@@ -12,12 +12,14 @@ public class Ads : MonoBehaviour
 	//ios FBID 728969364687204  Hi Spin
 #if UNITY_ANDROID
 	private const string IS_APP_KEY = "de040b19";
-	private const int AdGem_APP_ID = 0;
-	private const string Fyber_APP_ID = "";
+	private const int AdGem_APP_ID = 3449;
+	private const string Fyber_APP_ID = "123524";
+	private const string Fyber_Security_Token = "08f6b24fef833c25ab8dd9591a64b14c";
 #elif UNITY_IOS
 	private const string IS_APP_KEY = "debe9209";
-	private const int AdGem_APP_ID = 0;
-	private const string Fyber_APP_ID = "";
+	private const int AdGem_APP_ID = 3450;
+	private const string Fyber_APP_ID = "123525";
+	private const string Fyber_Security_Token = "10854f9e6c64bbd9e8b8a6145144f3c5";
 #endif
 	public static Ads _instance;
 	[NonSerialized]
@@ -41,17 +43,15 @@ public class Ads : MonoBehaviour
 		// SDK init
 		IronSource.Agent.init(IS_APP_KEY);
 		IronSource.Agent.loadInterstitial();
-		return;
 		AdGem.loadOfferWallBeforeShowing = true;
 		AdGem.startSession(AdGem_APP_ID, false, false, true);
 	}
 	OfferWallRequester offerWallRequester;
-	public void InitFyber(string userid,string securityToken)
+	public void InitFyber(string userid)
 	{
-		return;
 		Fyber.With(Fyber_APP_ID)
 		  .WithUserId(userid)
-		.WithSecurityToken(securityToken)
+		.WithSecurityToken(Fyber_Security_Token)
 		  .Start();
 		offerWallRequester = OfferWallRequester.Create();
 		offerWallRequester.Request();
@@ -64,10 +64,6 @@ public class Ads : MonoBehaviour
 		Debug.Log("Show "+_Co+" Offerwall");
 		return CheckOfferwallAvailable(_Co);
 #endif
-        if (_Co != Offerwall_Co.IS)
-        {
-			return false;
-        }
         switch (_Co)
         {
             case Offerwall_Co.IS:
@@ -91,6 +87,9 @@ public class Ads : MonoBehaviour
 				{
 					ofwScripts.ofwAd.Start();
 					ofwScripts.ofwAd = null;
+					offerWallRequester = OfferWallRequester.Create();
+					offerWallRequester.Request();
+					offerWallRequester.CloseOnRedirect(false);
 					return true;
 				}
                 break;
@@ -106,10 +105,8 @@ public class Ads : MonoBehaviour
             case Offerwall_Co.IS:
 				return IronSource.Agent.isOfferwallAvailable();
             case Offerwall_Co.AdGem:
-				return false;
 				return AdGem.offerWallReady;
             case Offerwall_Co.Fyber:
-				return false;
 				if (ofwScripts == null)
 					ofwScripts = transform.GetComponent<ShowOfferwallAds>();
 				return ofwScripts.ofwAd != null;
@@ -124,7 +121,8 @@ public class Ads : MonoBehaviour
 		rewardCallback = rewardedCallback;
 		rewardFailCallback = failCallback;
 #if UNITY_EDITOR
-        Server.Instance.OperationData_RvEvent(rewardCallback, null);
+		//Server.Instance.OperationData_RvEvent(rewardCallback, null);
+		Server_New.Instance.ConnectToServer_WatchRvEvent(rewardedCallback, null, null, true);
 		TaskAgent.TriggerTaskEvent(PlayerTaskTarget.WatchRvOnce, 1);
 		Debug.Log("RV:【" + des + "】");
         return true;
@@ -225,7 +223,8 @@ public class Ads : MonoBehaviour
 	{
 		if (canGetReward)
 		{
-			Server.Instance.OperationData_RvEvent(rewardCallback, null);
+			//Server.Instance.OperationData_RvEvent(rewardCallback, null);
+			Server_New.Instance.ConnectToServer_WatchRvEvent(rewardCallback, null, null, true);
 			TaskAgent.TriggerTaskEvent(PlayerTaskTarget.WatchRvOnce, 1);
 			canGetReward = false;
 		}

@@ -82,4 +82,16 @@ public static class Extension
         }
         return @string.ToString();
     }
+    public static string[] ToStringArray(this Reward[] rewards)
+    {
+        if (rewards == null)
+            return null;
+        int length = rewards.Length;
+        string[] result = new string[length];
+        for(int i = 0; i < length; i++)
+        {
+            result[i] = rewards[i].ToString();
+        }
+        return result;
+    }
 }

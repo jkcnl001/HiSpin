@@ -340,7 +340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8783918046541057544
 RectTransform:
   m_ObjectHideFlags: 0
@@ -402,7 +402,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "1.  You can earn points by friends watch ad \n    and complete tasks,
     and you can also get \n    points from a friends of friends.\n<color=#FFE200>   
-    We will give 70% of AD revenue to \n    players. So, You will earn 50% of your
+    We will give 75% of AD revenue to \n    players. So, You will earn 50% of your
     \n    close friends\u2019 AD revenue and 25% of \n    your unfamiliar friends\u2019
     AD revenue.</color>\n2. Every day UTC 10:00:00, you can review \n    yesterday\u2019s
     income from friends.\n3. Points can be exchanged for money,\n    100,000 points
@@ -1143,7 +1143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8912935551277702577
 RectTransform:
   m_ObjectHideFlags: 0

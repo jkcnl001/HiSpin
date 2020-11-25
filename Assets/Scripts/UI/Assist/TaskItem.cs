@@ -138,7 +138,8 @@ public class TaskItem : MonoBehaviour
                 case PlayerTaskTarget.BuyTicketByGoldOnce:
                     if (Save.data.allData.user_panel.user_gold_live >= Save.data.allData.lucky_schedule.coin_ticket)
                     {
-                        Server.Instance.OperationData_BuyTickets(OnFinishTaskCallback, OnErrorCallback, false);
+                        //Server.Instance.OperationData_BuyTickets(OnFinishTaskCallback, OnErrorCallback, false);
+                        Server_New.Instance.ConnectToServer_BuyTickets(OnFinishTaskCallback, OnErrorCallback, null, true, false);
                     }
                     else
                         Master.Instance.ShowTip("Sorry, you have not enough coins");
@@ -162,7 +163,8 @@ public class TaskItem : MonoBehaviour
                 case PlayerTaskTarget.WinnerOnce:
                 case PlayerTaskTarget.GetTicketFromSlotsOnce:
                 case PlayerTaskTarget.WritePaypalEmail:
-                    Server.Instance.OperationData_FinishTask(OnFinishTaskCallback, OnErrorCallback, Task_ID, false, RewardType);
+                    //Server.Instance.OperationData_FinishTask(OnFinishTaskCallback, OnErrorCallback, Task_ID, false, RewardType);
+                    Server_New.Instance.ConnectToServer_FinishTask(OnFinishTaskCallback, OnErrorCallback, null, true, Task_ID, false, RewardType);
                     break;
                 case PlayerTaskTarget.InviteAFriend:
                     UI.ShowBasePanel(BasePanel.Friend);
@@ -188,7 +190,24 @@ public class TaskItem : MonoBehaviour
     }
     private void OnErrorCallback()
     {
-        Server.Instance.RequestData(Server.Server_RequestType.TaskData, () =>
+        //Server.Instance.RequestData(Server.Server_RequestType.TaskData, () =>
+        //{
+        //    Tasks tasks = UI.GetUI(BasePanel.Task) as Tasks;
+        //    tasks.RefreshTaskInfo();
+        //    bool hasFinish = false;
+        //    foreach (var task in Save.data.allData.lucky_schedule.user_task)
+        //    {
+        //        if (task.taskTargetId == PlayerTaskTarget.InviteAFriend)
+        //            continue;
+        //        if (task.task_cur >= task.task_tar && !task.task_receive)
+        //        {
+        //            hasFinish = true;
+        //            break;
+        //        }
+        //    }
+        //    UI.OnHasTaskFinished(hasFinish);
+        //}, null);
+        Server_New.Instance.ConnectToServer_GetTaskData(() =>
         {
             Tasks tasks = UI.GetUI(BasePanel.Task) as Tasks;
             tasks.RefreshTaskInfo();
@@ -199,15 +218,16 @@ public class TaskItem : MonoBehaviour
                     continue;
                 if (task.task_cur >= task.task_tar && !task.task_receive)
                 {
-                    HasFinish = true;
+                    hasFinish = true;
                     break;
                 }
             }
             UI.OnHasTaskFinished(hasFinish);
-        }, null);
+        }, null, null, true);
     }
     private void OnAdBuyTicketCallback()
     {
-        Server.Instance.OperationData_BuyTickets(OnFinishTaskCallback, OnErrorCallback, true);
+        //Server.Instance.OperationData_BuyTickets(OnFinishTaskCallback, OnErrorCallback, true);
+        Server_New.Instance.ConnectToServer_BuyTickets(OnFinishTaskCallback, OnErrorCallback, null, true, true);
     }
 }

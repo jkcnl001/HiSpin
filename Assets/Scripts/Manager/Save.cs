@@ -19,13 +19,17 @@ public class Save
                 input_eamil_time = 0,
                 hasRateus = false,
                 isPackB = false,
-                head_icon_hasCheck=new List<bool>(),
+                head_icon_hasCheck = new List<bool>(),
+                lastClickFriendTime = System.DateTime.Now.AddDays(-1),
+            uuid = string.Empty
             };
             PlayerPrefs.SetString("local_Data", JsonMapper.ToJson(data));
             PlayerPrefs.Save();
         }
         else
             data = JsonMapper.ToObject<PlayerLocalData>(dataString);
+        if (data.lastClickFriendTime == null)
+            data.lastClickFriendTime = System.DateTime.Now.AddDays(-1);
     }
     public static void SaveLocalData()
     {
@@ -42,4 +46,6 @@ public class PlayerLocalData
     public bool hasRateus;
     public bool isPackB;
     public List<bool> head_icon_hasCheck;
+    public System.DateTime lastClickFriendTime;
+    public string uuid;
 }

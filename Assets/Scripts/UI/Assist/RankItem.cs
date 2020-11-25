@@ -14,7 +14,7 @@ public class RankItem : MonoBehaviour
         head_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + user_head_id);
         nameText.text = id;
         if (rankText != null)
-            rankText.text = "No." + (rank > 0 ? rank.ToString() : "-");
+            rankText.text = "No." + (rank > 0 ? rank.ToString() : "25+");
         numText.text = token.GetTokenShowString();
     }
 }

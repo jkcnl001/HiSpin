@@ -30,7 +30,11 @@ public class SlotItem : MonoBehaviour
             cashNum = isFree ? 50 : 200;
         reward_numText.text = cashNum.ToString();
         isAd = !isFree;
+#if UNITY_ANDROID
         ad_maskGo.SetActive(isAd);
+#elif UNITY_IOS
+        ad_maskGo.SetActive(isAd && Save.data.isPackB);
+#endif
         reward_numText.transform.parent.gameObject.SetActive(!isAd);
     }
     private void OnClick()
@@ -42,7 +46,12 @@ public class SlotItem : MonoBehaviour
     }
     private void OnAdCallback()
     {
-        Server.Instance.OperationData_ClickSlotsCard(OnSuccessCallback, null, index);
+        //Server.Instance.OperationData_ClickSlotsCard(OnSuccessCallback, null, index);
+        Server_New.Instance.ConnectToServer_ClickSlotsCard(OnSuccessCallback, OnServerResponseErrorCallback, null, true, index);
+    }
+    private void OnServerResponseErrorCallback()
+    {
+        Master.Instance.RequestAllData();
     }
     private void OnSuccessCallback()
     {

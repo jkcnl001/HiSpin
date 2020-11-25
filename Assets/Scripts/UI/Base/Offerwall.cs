@@ -21,7 +21,7 @@ public class Offerwall : BaseUI
     public Text fyber_button_contentText;
     public GameObject fyber_coinGo;
     const string loading = "Loading...";
-    const string ready = "Earn points     ";
+    const string ready = "Earn Pts     ";
     [Space(15)]
     public RectTransform topRect;
     public RectTransform viewportRect;
@@ -66,21 +66,21 @@ public class Offerwall : BaseUI
     {
         if (!Ads._instance.ShowOfferwallAd(Offerwall_Co.AdGem))
         {
-            Master.Instance.ShowTip("AdGem Offerwall is not available.");
+            Master.Instance.ShowTip("AdGem is not available.");
         }
     }
     private void OnISButtonClick()
     {
         if (!Ads._instance.ShowOfferwallAd(Offerwall_Co.IS))
         {
-            Master.Instance.ShowTip("Ironsource Offerwall is not available.");
+            Master.Instance.ShowTip("Ironsource is not available.");
         }
     }
     private void OnFyberButtonClick()
     {
         if (!Ads._instance.ShowOfferwallAd(Offerwall_Co.Fyber))
         {
-            Master.Instance.ShowTip("Fyber Offerwall is not available.");
+            Master.Instance.ShowTip("Fyber is not available.");
         }
     }
     protected override void BeforeShowAnimation(params int[] args)

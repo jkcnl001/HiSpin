@@ -27,7 +27,7 @@ public static class XCodePostProcess
         string projPath = PBXProject.GetPBXProjectPath (pathToBuiltProject);
         PBXProject proj = new PBXProject();
         proj.ReadFromString(File.ReadAllText(projPath));
-        string targetGUID = proj.TargetGuidByName("Unity-iPhone");
+        string targetGUID = proj.GetUnityMainTargetGuid();
         
         proj.SetBuildProperty(targetGUID, "ENABLE_BITCODE", "NO");
         proj.SetBuildProperty(targetGUID,"ARCHS", "arm64");
@@ -40,9 +40,9 @@ public static class XCodePostProcess
         PlistDocument plist = new PlistDocument();
         plist.ReadFromFile(plistPath);
         
-        plist.root.SetString("GADApplicationIdentifier", "ca-app-pub-0000000000000000~0000000000");
+        //plist.root.SetString("GADApplicationIdentifier", "ca-app-pub-0000000000000000~0000000000");
         plist.root.SetBoolean("Application has localized display name", true);
-        plist.root.SetString("AppLovinSdkKey", "Fs-cUqJfRU6DI-3nHAtCUubM2g2mHMT4kl_2_v9IyohMfXicNfA0eEwvSJ6gvrtpXtmu2TpTdL-QrLAMqwaXPS");
+        //plist.root.SetString("AppLovinSdkKey", "Fs-cUqJfRU6DI-3nHAtCUubM2g2mHMT4kl_2_v9IyohMfXicNfA0eEwvSJ6gvrtpXtmu2TpTdL-QrLAMqwaXPS");
         plist.WriteToFile(plistPath);
         
         string unityappControllerPath = pathToBuiltProject + "/Classes/UnityAppController.mm";

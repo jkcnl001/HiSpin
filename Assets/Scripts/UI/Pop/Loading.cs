@@ -46,7 +46,8 @@ public class Loading : MonoBehaviour,IUIBase
                 if (progress > 0.3f)
                 {
                     speed = 0;
-                    Server.Instance.RequestData(Server.Server_RequestType.AllData, () => { speed = 1; }, () => { speed = 0; }, false);
+                    //Server.Instance.RequestData(Server.Server_RequestType.AllData, () => { speed = 1; }, () => { speed = 0; }, false);
+                    Server_New.Instance.ConnectToServer_GetAllData(() => { speed = 1; }, null, null, false);
                     hasRequestData = true;
                 }
             }
@@ -72,7 +73,10 @@ public class Loading : MonoBehaviour,IUIBase
         if (webRequest.responseCode == 200)
         {
             if (webRequest.downloadHandler.text.Equals("{\"store_review\": true}"))
+            {
                 Save.data.isPackB = true;
+                Master.Instance.SendAdjustPackBEvent();
+            }
         }
     }
     public IEnumerator Show(params int[] args)

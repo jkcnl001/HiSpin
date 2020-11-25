@@ -6094,7 +6094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1009514495323318, guid: a087270898a424ca9870d6c65a0bbeaa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4835381957515430, guid: a087270898a424ca9870d6c65a0bbeaa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6650,8 +6650,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1425397671}
-  - component: {fileID: 1425397673}
   - component: {fileID: 1425397672}
+  - component: {fileID: 1425397673}
   m_Layer: 5
   m_Name: Connecting
   m_TagString: Untagged
@@ -6703,7 +6703,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1425397670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 782f76947bacaf442b1c4c46366ada82, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bc13752e17babb468c1dbb16ff03ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1425397672}

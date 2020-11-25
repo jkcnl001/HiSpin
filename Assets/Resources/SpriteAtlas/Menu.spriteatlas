@@ -31,7 +31,7 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: cbb863edee6e50648ae434482ab09119, type: 3}
-    totalSpriteSurfaceArea: 473152
+    totalSpriteSurfaceArea: 465494
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -48,7 +48,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: abc9cb955ef0a2446947cccad27a4acc, type: 3}
   - {fileID: 21300000, guid: 26f0cac5a686bd9418e7857a44af2672, type: 3}
   - {fileID: 21300000, guid: 901312069c43c09478585d088fb78e30, type: 3}
-  - {fileID: 21300000, guid: b2831266f166f734eb979be89bc0cf92, type: 3}
   - {fileID: 21300000, guid: e2d8aca640d116445b1ef155c411ce3d, type: 3}
   - {fileID: 21300000, guid: e7a98b48f9823fa46b5457ffbfa7e507, type: 3}
   - {fileID: 21300000, guid: 4f5b42688c83ceb4c85960381b75b65a, type: 3}
@@ -58,7 +57,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e0ebff7bf6c083f4b90b9f134c1028d7, type: 3}
   - {fileID: 21300000, guid: 1184811c48c02f745abffc31ac3eecc2, type: 3}
   - {fileID: 21300000, guid: 492915fc021e3bb4180358826f833f98, type: 3}
+  - {fileID: 21300000, guid: 7af4f8fc521052a419632fe1b0f621d4, type: 3}
   - {fileID: 21300000, guid: c4b72fcdb924d8942a23d5d61833b000, type: 3}
+  - {fileID: 21300000, guid: 6b2fe08e36c71f340bf20684e77accf6, type: 3}
   - {fileID: 21300000, guid: 74e3c9fedf0ca6740afa6670d477ab39, type: 3}
   - {fileID: 21300000, guid: 5ac892bfce576ff40af73a4a0ea8326d, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -75,7 +76,6 @@ SpriteAtlas:
   - yellow_point
   - Lottery_Off
   - Gold
-  - Select
   - Offerwall_On
   - Friend_Off
   - TopBG
@@ -85,7 +85,9 @@ SpriteAtlas:
   - Cash
   - red_point
   - PT
+  - Task_Off
   - Lottery_On
+  - Task_On
   - Rank_On
   - Slots_On
   m_Tag: Menu

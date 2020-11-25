@@ -89,11 +89,12 @@ public class Friends : BaseUI
 #if UNITY_EDITOR
         return;
 #endif
+        Master.Instance.SendAdjustClickInviteButtonEvent();
 #if UNITY_ANDROID
-        _AJ.CallStatic("ShareString", "Let's play to win cash prizes! Join me on HiSpin. http://luckyclub.vip:8000/HiSpin/" + Save.data.allData.user_panel.user_id);
+        _AJ.CallStatic("ShareString", "Let's play to win cash prizes! Join me on HiSpin. http://aff.luckyclub.vip:8000/Hispin/" + Save.data.allData.user_panel.user_id);
         return;
 #endif
-        GJCNativeShare.Instance.NativeShare("Let's play to win cash prizes! Join me on HiSpin. http://luckyclub.vip:8000/HiSpin/" + Save.data.allData.user_panel.user_id);
+        GJCNativeShare.Instance.NativeShare("Let's play to win cash prizes! Join me on HiSpin. http://aff.luckyclub.vip:8000/Hispin/" + Save.data.allData.user_panel.user_id);
 
     }
     private void OnMyfriendsButtonClick()
@@ -156,7 +157,7 @@ public class Friends : BaseUI
         bool noFriend = count == 0;
         bool noPtFriend = hasPtFriendCount == 0;
         lastdayGo.SetActive(!noPtFriend);
-        nofriend_tipGo.SetActive(noPtFriend);
+        nofriend_tipGo.SetActive(noFriend);
         myfriendsButton.gameObject.SetActive(!noFriend);
         if (count > 0)
             friend_headImage1.sprite = Sprites.GetSprite(SpriteAtlas_Name.HeadIcon, "head_" + friend_Infos[0].user_img);

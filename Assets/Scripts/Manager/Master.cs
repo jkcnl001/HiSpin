@@ -11,8 +11,8 @@ public class Master : MonoBehaviour
     public static float ExpandCoe = 1;
     public const float TopMoveDownOffset = 100;
     public const string PackageName = "com.HiSpin.DailyCash.HugeRewards.FreeGame";
-    public const int Version = 5;
-    public const string AppleId = "";
+    public const int Version = 6;
+    public const string AppleId = "1540900402";
     public static bool isLoadingEnd = false;
     public static Master Instance;
     public Image bgImage;
@@ -32,6 +32,7 @@ public class Master : MonoBehaviour
     {
         Instance = this;
         Application.targetFrameRate = 60;
+        Debug.unityLogger.logEnabled = false;
         UI = new UI(this, BaseRoot, MenuRoot, PopRoot);
         Save = new Save();
         Audio = new Audio(AudioRoot);
@@ -57,6 +58,8 @@ public class Master : MonoBehaviour
         if (!Save.data.isPackB)
         {
             Save.data.isPackB = Save.data.allData.fission_info.up_user;
+            if(Save.data.isPackB)
+                Master.Instance.SendAdjustPackBEvent();
         }
         UI.ShowMenuPanel();
     }
@@ -124,9 +127,10 @@ public class Master : MonoBehaviour
             }
         }
     }
-    private void RequestAllData()
+    public void RequestAllData()
     {
-        Server.Instance.RequestData(Server.Server_RequestType.AllData, OnRequestAllDataCallback, null);
+        //Server.Instance.RequestData(Server.Server_RequestType.AllData, OnRequestAllDataCallback, null);
+        Server_New.Instance.ConnectToServer_GetAllData(OnRequestAllDataCallback, null, null, true);
     }
     private void OnRequestAllDataCallback()
     {
@@ -208,8 +212,17 @@ public class Master : MonoBehaviour
 #if UNITY_EDITOR
         return;
 #endif
+        string player_id = "None";
+        if(Save.data==null||Save.data.allData==null||Save.data.allData.user_panel==null||string.IsNullOrEmpty(Save.data.allData.user_panel.user_id))
+        {
+            player_id = "None";
+        }
+        else
+        {
+            player_id = Save.data.allData.user_panel.user_id;
+        }
         AdjustEventLogger.Instance.AdjustEvent(AdjustEventLogger.TOKEN_open,
-            ("player_id", string.IsNullOrEmpty(Save.data.allData.user_panel.user_id) ? "None" : Save.data.allData.user_panel.user_id),
+            ("player_id", player_id),
             ("install_version", Version.ToString())
             );
     }
@@ -238,7 +251,7 @@ public class Master : MonoBehaviour
         AdjustEventLogger.Instance.AdjustEvent(AdjustEventLogger.TOKEN_stage_end,
             ("player_id", Save.data.allData.user_panel.user_id),
             //第几个老虎机
-            ("id", Save.data.allData.user_panel.lucky_count.ToString()),
+            ("id", (Save.data.allData.user_panel.lucky_count + 1).ToString()),
             //老虎机类型
             ("type", isAd ? "1" : "0"),
             //累计美元
@@ -309,7 +322,31 @@ public class Master : MonoBehaviour
                 ("order_id", uri)
             );
     }
-
+    public void SendAdjustPackBEvent()
+    {
+#if UNITY_EDITOR
+        return;
+#endif
+        AdjustEventLogger.Instance.AdjustEventNoParam(AdjustEventLogger.TOKEN_packB);
+    }
+    public void SendAdjustClickInviteButtonEvent()
+    {
+#if UNITY_EDITOR
+        return;
+#endif
+        AdjustEventLogger.Instance.AdjustEvent(AdjustEventLogger.TOKEN_invite_button,
+            ("player_id", Save.data.allData.user_panel.user_id)
+            );
+    }
+    public void SendAdjustEnterInvitePageEvent()
+    {
+#if UNITY_EDITOR
+        return;
+#endif
+        AdjustEventLogger.Instance.AdjustEvent(AdjustEventLogger.TOKEN_invite_page,
+            ("player_id", Save.data.allData.user_panel.user_id)
+            );
+    }
     public ParticleSystem left_particle;
     public ParticleSystem right_particle;
     public void ShowEffect(Reward reward,float time = 0.5f)
