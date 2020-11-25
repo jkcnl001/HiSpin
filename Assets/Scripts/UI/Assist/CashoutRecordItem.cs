@@ -20,6 +20,8 @@ public class CashoutRecordItem : MonoBehaviour
         consume_iconImage.sprite = Sprites.GetSprite(SpriteAtlas_Name.Cashout, comsumeType.ToString());
         if (comsumeType == CashoutType.Cash)
             consume_numText.text = consumeNum.GetCashShowString();
+        else if (comsumeType == CashoutType.PT)
+            consume_numText.text = consumeNum.GetTokenShowString() + " <size=60>Pt</size>";
         else
             consume_numText.text = consumeNum.GetTokenShowString();
         consume_timeText.text = consumeTime;

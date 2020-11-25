@@ -94,17 +94,31 @@ public class Setting : MonoBehaviour, IUIBase
     {
         SendEmail();
     }
-    private void SendEmail()
+    public static void SendEmail()
     {
+        string adid;
+        if (Save.data == null || Save.data.allData == null || Save.data.allData.user_panel == null || string.IsNullOrEmpty(Save.data.allData.user_panel.user_id))
+        {
+            adid = "-";
+        }
+        else
+            adid = Save.data.allData.user_panel.user_id;
+        string uuid;
+        if (Save.data == null || string.IsNullOrEmpty(Save.data.uuid))
+        {
+            uuid = "-";
+        }
+        else
+            uuid = Save.data.uuid;
         AndroidJavaClass javaClass = new AndroidJavaClass("com.Gradle.AndroidUtil");
         int androidVersion = javaClass.CallStatic<int>("GetAndroidVersion");
         string email = "hispin.support@luckyclub.vip";
-        string subject = MyEscapeURL("Question from ID " + Save.data.allData.user_panel.user_id);
-        string body = MyEscapeURL(string.Format("\n\n----------------------------------\nID:{0}\nVersion:{3}\nModel:{1}({2})\n----------------------------------\n", Save.data.allData.user_panel.user_id, SystemInfo.deviceModel, androidVersion.ToString(), Master.Version));
+        string subject = MyEscapeURL("Question from ID " +adid);
+        string body = MyEscapeURL(string.Format("\n\n----------------------------------\nID:{0}\nUUID:{4}\nVersion:{3}\nModel:{1}({2})\n----------------------------------\n", adid, SystemInfo.deviceModel, androidVersion.ToString(), Master.Version, uuid));
         Application.OpenURL("mailto:" + email + "?subject=" + subject + "&body=" + body);
     }
 
-    string MyEscapeURL(string url)
+    static string MyEscapeURL(string url)
     {
         //%20是空格在url中的编码，这个方法将url中非法的字符转换成%20格式
         return WWW.EscapeURL(url).Replace("+", "%20");

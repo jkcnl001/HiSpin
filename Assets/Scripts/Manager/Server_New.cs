@@ -91,6 +91,7 @@ public class Server_New : MonoBehaviour
         GetLevelUpReward,
         GetNewPlayerReward,
         GetUUID,
+        GetCashoutRecordList,
     }
     static readonly Dictionary<Server_RequestType, string> getdata_uri_dic = new Dictionary<Server_RequestType, string>()
     {
@@ -110,6 +111,7 @@ public class Server_New : MonoBehaviour
         {Server_RequestType.GetLevelUpReward,"http://admin.crsdk.com:8000/level_reward/" },
         {Server_RequestType.GetNewPlayerReward,"http://admin.crsdk.com:8000/new_data/" },
         {Server_RequestType.GetUUID,"http://aff.luckyclub.vip:8000/get_random_id/" },
+        {Server_RequestType.GetCashoutRecordList,"http://admin.crsdk.com:8000/lucky_record/" },
     };
     Server_RequestType RequestType;
     Action ServerResponseOkCallback;
@@ -130,30 +132,30 @@ public class Server_New : MonoBehaviour
     private IEnumerator ConnectToServerThread(Server_RequestType _RequestType, Action _ServerResponseOkCallback, Action _ServerResponseErrorCallback, Action _NetworkErrorCallback, bool _ShowConnectingWindow, params string[] _Args)
     {
         List<IMultipartFormSection> iparams = new List<IMultipartFormSection>();
+        #region request uuid
+        if (string.IsNullOrEmpty(Save.data.uuid))
+        {
+            UnityWebRequest requestUUID = UnityWebRequest.Get(getdata_uri_dic[Server_RequestType.GetUUID]);
+            yield return requestUUID.SendWebRequest();
+            if (requestUUID.isNetworkError || requestUUID.isHttpError)
+            {
+                OnConnectServerFail();
+                _NetworkErrorCallback?.Invoke();
+            }
+            else
+            {
+                string downText = requestUUID.downloadHandler.text;
+                Save.data.uuid = downText;
+            }
+            requestUUID.Dispose();
+        }
+        #endregion
         iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
         if (!string.IsNullOrEmpty(deviceID))
             iparams.Add(new MultipartFormDataSection("device_id", deviceID));
         switch (_RequestType)
         {
             case Server_RequestType.AllData:
-                #region request uuid
-                if (string.IsNullOrEmpty(Save.data.uuid))
-                {
-                    UnityWebRequest requestUUID = UnityWebRequest.Get(getdata_uri_dic[Server_RequestType.GetUUID]);
-                    yield return requestUUID.SendWebRequest();
-                    if (requestUUID.isNetworkError || requestUUID.isHttpError)
-                    {
-                        OnConnectServerFail();
-                        _NetworkErrorCallback?.Invoke();
-                    }
-                    else
-                    {
-                        string downText = requestUUID.downloadHandler.text;
-                        Save.data.uuid = downText;
-                    }
-                    requestUUID.Dispose();
-                }
-                #endregion
                 #region request country
                 if (string.IsNullOrEmpty(localCountry))
                 {
@@ -229,6 +231,8 @@ public class Server_New : MonoBehaviour
                 isConnecting = false;
                 OnConnectServerSuccess();
                 yield break;
+            case Server_RequestType.GetCashoutRecordList:
+                break;
             default:
                 break;
         }
@@ -327,11 +331,11 @@ public class Server_New : MonoBehaviour
                     case Server_RequestType.WatchRvEvent:
                         break;
                     case Server_RequestType.BindPaypal:
-                        PlayerBindPaypalReceiveData paypalData = JsonMapper.ToObject<PlayerBindPaypalReceiveData>(www.downloadHandler.text);
+                        PlayerBindPaypalReceiveData paypalData = JsonMapper.ToObject<PlayerBindPaypalReceiveData>(downText);
                         Save.data.allData.user_panel.user_paypal = paypalData.user_paypal;
                         break;
                     case Server_RequestType.Cashout:
-                        PlayerCashoutReceiveData receiveCashoutData = JsonMapper.ToObject<PlayerCashoutReceiveData>(www.downloadHandler.text);
+                        PlayerCashoutReceiveData receiveCashoutData = JsonMapper.ToObject<PlayerCashoutReceiveData>(downText);
                         CashoutType cashoutType = (CashoutType)int.Parse(_Args[0]);
                         switch (cashoutType)
                         {
@@ -374,6 +378,10 @@ public class Server_New : MonoBehaviour
                         break;
                     case Server_RequestType.GetUUID:
                         throw new ArgumentNullException("can not use this connecting.");
+                    case Server_RequestType.GetCashoutRecordList:
+                        AllData_CashoutRecordData casoutRecordData = JsonMapper.ToObject<AllData_CashoutRecordData>(downText);
+                        Save.data.allData.lucky_record = casoutRecordData;
+                        break;
                     default:
                         break;
                 }
@@ -414,7 +422,7 @@ public class Server_New : MonoBehaviour
         int argsLength = 2 + opTypes.Length;
         string[] args = new string[argsLength];
         args[0] = _TaskID.ToString();
-        args[1] = _Double.ToString();
+        args[1] = _Double ? "2" : "1";
         for(int i = 2; i < argsLength; i++)
         {
             args[i] = opTypes[i - 2].ToString();
@@ -435,7 +443,7 @@ public class Server_New : MonoBehaviour
     }
     public void ConnectToServer_Cashout(Action _ServerResponseOkCallback, Action _ServerResponseErrorCallback, Action _NetworkErrorCallback, bool _ShowConnectingWindow,CashoutType _CashoutNeedType,int _CashoutNeedTypeNum,int _ExchangeCashNum)
     {
-        ConnectToServer(Server_RequestType.BindPaypal, _ServerResponseOkCallback, _ServerResponseErrorCallback, _NetworkErrorCallback, _ShowConnectingWindow, ((int)_CashoutNeedType).ToString(), _CashoutNeedTypeNum.ToString(), _ExchangeCashNum.ToString());
+        ConnectToServer(Server_RequestType.Cashout, _ServerResponseOkCallback, _ServerResponseErrorCallback, _NetworkErrorCallback, _ShowConnectingWindow, ((int)_CashoutNeedType).ToString(), _CashoutNeedTypeNum.ToString(), _ExchangeCashNum.ToString());
     }
     public void ConnectToServer_OpenBettingPrize(Action _ServerResponseOkCallback, Action _ServerResponseErrorCallback, Action _NetworkErrorCallback, bool _ShowConnectingWindow)
     {
@@ -452,6 +460,10 @@ public class Server_New : MonoBehaviour
     public void ConnectToServer_GetNewPlayerReward(Action _ServerResponseOkCallback, Action _ServerResponseErrorCallback, Action _NetworkErrorCallback, bool _ShowConnectingWindow,int _RewardMultiple=1)
     {
         ConnectToServer(Server_RequestType.GetNewPlayerReward, _ServerResponseOkCallback, _ServerResponseErrorCallback, _NetworkErrorCallback, _ShowConnectingWindow, _RewardMultiple.ToString());
+    }
+    public void ConnectToServer_GetCashoutRecordList(Action _ServerResponseOkCallback, Action _ServerResponseErrorCallback, Action _NetworkErrorCallback, bool _ShowConnectingWindow)
+    {
+        ConnectToServer(Server_RequestType.GetCashoutRecordList, _ServerResponseOkCallback, _ServerResponseErrorCallback, _NetworkErrorCallback, _ShowConnectingWindow);
     }
     private void ShowConnectErrorTip(string errorCode)
     {
@@ -548,7 +560,7 @@ public class PlayerBindPaypalReceiveData
 public class PlayerCashoutReceiveData
 {
     public int user_gold_live;
-    public int user_coin_live;
+    public double user_coin_live;
     public int user_doller_live;
 }
 public class LocalCountryData

@@ -112,7 +112,6 @@ public class Ads : MonoBehaviour
 				return ofwScripts.ofwAd != null;
             default:
 				return false;
-				break;
         }
     }
 	public bool ShowRewardVideo(Action rewardedCallback, int clickAdTime,string des,Action failCallback)

@@ -18,10 +18,12 @@ public class CashoutRecord : BaseUI
             anchor_rect.sizeDelta += new Vector2(0, 1920 * (Master.ExpandCoe - 1) - Master.TopMoveDownOffset);
             anchor_rect.GetComponentInChildren<ScrollRect>().normalizedPosition = Vector2.one;
         }
+        foreach (var record in cashoutRecordItems)
+            record.gameObject.SetActive(false);
     }
     protected override void BeforeShowAnimation(params int[] args)
     {
-        InitRecord();
+        Server_New.Instance.ConnectToServer_GetCashoutRecordList(InitRecord, null, null, true);
     }
     public void InitRecord()
     {

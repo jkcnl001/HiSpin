@@ -67,7 +67,7 @@ public class Cashout : BaseUI
     }
     private void OnPtCashoutButtonClick(int cashoutNum)
     {
-        if (0 >= cashoutNum * PtCashoutRate * 100)
+        if (Save.data.allData.fission_info.live_balance >= cashoutNum * PtCashoutRate * 100)
             UI.ShowPopPanel(PopPanel.CashoutPop, (int)AsCashoutArea.Cashout, cashoutNum, (int)CashoutType.PT, cashoutNum * PtCashoutRate * 100);
         else
             Master.Instance.ShowTip("Sorry, your balance is not enough.");
@@ -102,8 +102,8 @@ public class Cashout : BaseUI
             emailText.text = Save.data.allData.user_panel.user_paypal;
         else
             emailText.text = "Please bind paypal account";
-        pt_numText.text = (int)Save.data.allData.fission_info.user_doller + "<size=40>  PT</size>";
-        pt_cashout_numText.text = "≈$" + ((int)((float)Save.data.allData.fission_info.user_doller / PtCashoutRate)).GetCashShowString();
+        pt_numText.text = (int)Save.data.allData.fission_info.live_balance + "<size=40>  PT</size>";
+        pt_cashout_numText.text = "≈$" + ((int)((float)Save.data.allData.fission_info.live_balance / PtCashoutRate)).GetCashShowString();
         cash_numText.text = "$ " + Save.data.allData.user_panel.user_doller_live.GetCashShowString();
         gold_numText.text = Save.data.allData.user_panel.user_gold_live.GetTokenShowString();
     }

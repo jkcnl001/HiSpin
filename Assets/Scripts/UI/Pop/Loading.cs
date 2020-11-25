@@ -6,6 +6,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CanvasGroup))]
 public class Loading : MonoBehaviour,IUIBase
 {
+    public Button contact_usButton;
+    public Text uuidText;
     public Slider progressSlider;
     public Text progressText;
     public Text loadingText;
@@ -15,6 +17,11 @@ public class Loading : MonoBehaviour,IUIBase
         canvasGroup = GetComponent<CanvasGroup>();
         loadingText.text = "loading";
         StartCoroutine(LoadingSlider());
+        contact_usButton.AddClickEvent(Setting.SendEmail);
+        if (Master.IsBigScreen)
+        {
+            contact_usButton.transform.localPosition -= new Vector3(0, Master.TopMoveDownOffset, 0);
+        }
     }
     IEnumerator LoadingSlider()
     {
@@ -47,7 +54,14 @@ public class Loading : MonoBehaviour,IUIBase
                 {
                     speed = 0;
                     //Server.Instance.RequestData(Server.Server_RequestType.AllData, () => { speed = 1; }, () => { speed = 0; }, false);
-                    Server_New.Instance.ConnectToServer_GetAllData(() => { speed = 1; }, null, null, false);
+                    Server_New.Instance.ConnectToServer_GetAllData(() => 
+                    { 
+                        speed = 1;
+                        if (string.IsNullOrEmpty(Save.data.uuid))
+                            uuidText.text = "";
+                        else
+                            uuidText.text = "UUID: " + Save.data.uuid;
+                    }, null, null, false);
                     hasRequestData = true;
                 }
             }
@@ -84,6 +98,10 @@ public class Loading : MonoBehaviour,IUIBase
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = true;
+        if (string.IsNullOrEmpty(Save.data.uuid))
+            uuidText.text = "";
+        else
+            uuidText.text = "UUID: " + Save.data.uuid;
         yield return null;
     }
 
