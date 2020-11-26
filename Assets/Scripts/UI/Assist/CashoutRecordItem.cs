@@ -30,7 +30,7 @@ public class CashoutRecordItem : MonoBehaviour
         switch (result)
         {
             case 0:
-                resultText.text = "under review";
+                resultText.text = "Reviewing";
                 helpButton.gameObject.SetActive(false);
                 break;
             case 1:
