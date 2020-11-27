@@ -28,23 +28,23 @@ public class GetReward : PopUI
     }
     private void OnAdCallback()
     {
-        Get();
+        Get(true);
     }
     private void OnNothanksButtonClick()
     {
-        Ads._instance.ShowInterstialAd(Get, "放弃多倍" + reward_type);
+        Ads._instance.ShowInterstialAd(() => { Get(false); }, "放弃多倍" + reward_type);
     }
-    private void Get()
+    private void Get(bool multiple)
     {
         switch (reward_area)
         {
             case GetRewardArea.PlaySlots:
                 //Server.Instance.OperationData_GetSlotsReward(OnRequestCallback, null, reward_type, reward_num * reward_mutiple);
-                Server_New.Instance.ConnectToServer_GetSlotsReward(OnRequestCallback, null, null, true, reward_type, reward_num * reward_mutiple);
+                Server_New.Instance.ConnectToServer_GetSlotsReward(OnRequestCallback, null, null, true, reward_type, multiple ? reward_num * reward_mutiple : reward_num);
                 break;
             case GetRewardArea.LevelUp:
                 //Server.Instance.OperationData_GetLevelupReward(OnRequestCallback, null, reward_mutiple);
-                Server_New.Instance.ConnectToServer_GetLevelupReward(OnRequestCallback, null, null, true, reward_mutiple);
+                Server_New.Instance.ConnectToServer_GetLevelupReward(OnRequestCallback, null, null, true, multiple ? reward_mutiple : 1);
                 break;
             default:
                 Debug.LogError("奖励获得区域错误");

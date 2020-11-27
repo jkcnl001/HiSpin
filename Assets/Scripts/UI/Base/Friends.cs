@@ -91,10 +91,10 @@ public class Friends : BaseUI
 #endif
         Master.Instance.SendAdjustClickInviteButtonEvent();
 #if UNITY_ANDROID
-        _AJ.CallStatic("ShareString", "Let's play to win cash prizes! Join me on HiSpin. http://aff.luckyclub.vip:8000/Hispin/" + Save.data.allData.user_panel.user_id);
+        _AJ.CallStatic("ShareString", "I earned $5 in the game, you can try it. http://aff.luckyclub.vip:8000/Hispin/" + Save.data.allData.user_panel.user_id);
         return;
 #endif
-        GJCNativeShare.Instance.NativeShare("Let's play to win cash prizes! Join me on HiSpin. http://aff.luckyclub.vip:8000/Hispin/" + Save.data.allData.user_panel.user_id);
+        GJCNativeShare.Instance.NativeShare("I earned $5 in the game, you can try it. http://aff.luckyclub.vip:8000/Hispin/" + Save.data.allData.user_panel.user_id);
 
     }
     private void OnMyfriendsButtonClick()

@@ -133,18 +133,6 @@ public class Menu : MonoBehaviour, IUIBase
     {
         string offSpriteName = currentBottomButton == null ? "" : currentBottomButton.name + "_Off";
         string onSpriteName = clickButton.name + "_On";
-#if UNITY_IOS
-        if (currentBottomButton == offerwallButton)
-        {
-            if (!Save.data.isPackB)
-                offSpriteName = "Task_Off";
-        }
-        if (clickButton == offerwallButton)
-        {
-            if (!Save.data.isPackB)
-                onSpriteName = "Task_On";
-        }
-#endif
         if (currentBottomButton != null)
             currentBottomButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Menu, offSpriteName);
         currentBottomButton = clickButton;
@@ -234,6 +222,9 @@ public class Menu : MonoBehaviour, IUIBase
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = true;
+#if UNITY_IOS
+        offerwallButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Menu, Save.data.isPackB ? "Offerwall_Off" : "Task_Off");
+#endif
         yield return null;
     }
     public void RefreshTokenText()
@@ -282,6 +273,12 @@ public class Menu : MonoBehaviour, IUIBase
         UpdateCashText();
         UpdateTicketText();
         UpdateHeadIcon();
+#if UNITY_IOS
+        if (currentBottomButton == offerwallButton)
+            offerwallButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Menu, Save.data.isPackB ? "Offerwall_On" : "Task_On");
+        else
+            offerwallButton.image.sprite = Sprites.GetSprite(SpriteAtlas_Name.Menu, Save.data.isPackB ? "Offerwall_Off" : "Task_Off");
+#endif
     }
 #endregion
     public void OnBasePanelShow(int panelIndex)
@@ -323,20 +320,11 @@ public class Menu : MonoBehaviour, IUIBase
                 all_bottomGo.SetActive(false);
                 add_ticketButton.gameObject.SetActive(true);
                 play_slots_helpButton.gameObject.SetActive(false);
-#if UNITY_ANDROID
                 backButton.gameObject.SetActive(true);
                 settingButton.gameObject.SetActive(false);
-#elif UNITY_IOS
+#if UNITY_IOS
                 if (!Save.data.isPackB)
-                {
-                    backButton.gameObject.SetActive(false);
-                    settingButton.gameObject.SetActive(true);
-                }
-                else
-                {
-                    backButton.gameObject.SetActive(true);
-                    settingButton.gameObject.SetActive(false);
-                }
+                    OnChangeBottomButton(offerwallButton);
 #endif
                 break;
             case BasePanel.PlaySlots:

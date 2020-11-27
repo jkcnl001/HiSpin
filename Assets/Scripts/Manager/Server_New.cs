@@ -264,7 +264,7 @@ public class Server_New : MonoBehaviour
                         AllData allData = JsonMapper.ToObject<AllData>(downText);
                         Save.data.allData = allData;
                         Save.data.uuid = string.IsNullOrEmpty(allData.user_uuid) ? Save.data.uuid : allData.user_uuid;
-                        Ads._instance.InitFyber(allData.user_panel.user_id);
+                        Ads._instance.InitFyber(allData.user_uuid);
                         break;
                     case Server_RequestType.TaskData:
                         AllData_TaskData taskData = JsonMapper.ToObject<AllData_TaskData>(downText);
