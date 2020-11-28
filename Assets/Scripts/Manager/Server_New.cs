@@ -24,7 +24,7 @@ public class Server_New : MonoBehaviour
     public Text tipText;
     public Button retryButton;
     public static string localCountry = "";
-    static string deviceID = "";
+    static string adID = "";
     private void Awake()
     {
         Instance = this;
@@ -61,16 +61,16 @@ public class Server_New : MonoBehaviour
     private void GetAdID()
     {
 #if UNITY_EDITOR
-        deviceID = SystemInfo.deviceUniqueIdentifier;
+        adID = SystemInfo.deviceUniqueIdentifier;
 #elif UNITY_ANDROID
         Application.RequestAdvertisingIdentifierAsync(
            (string advertisingId, bool trackingEnabled, string error) =>
            {
-               deviceID = advertisingId;
+               adID = advertisingId;
            }
        );
 #elif UNITY_IOS && !UNITY_EDITOR
-         deviceID = Getidfa();
+         adID = Getidfa();
 #endif
     }
     public enum Server_RequestType
@@ -151,8 +151,11 @@ public class Server_New : MonoBehaviour
         }
         #endregion
         iparams.Add(new MultipartFormDataSection("uuid", Save.data.uuid));
-        if (!string.IsNullOrEmpty(deviceID))
-            iparams.Add(new MultipartFormDataSection("device_id", deviceID));
+        if (!string.IsNullOrEmpty(adID))
+        {
+            Save.data.adid = adID;
+            iparams.Add(new MultipartFormDataSection("device_id", adID));
+        }
         switch (_RequestType)
         {
             case Server_RequestType.AllData:

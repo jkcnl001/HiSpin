@@ -48,4 +48,5 @@ public class PlayerLocalData
     public List<bool> head_icon_hasCheck;
     public System.DateTime lastClickFriendTime;
     public string uuid;
+    public string adid;
 }

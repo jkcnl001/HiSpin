@@ -11,7 +11,7 @@ public class Master : MonoBehaviour
     public static float ExpandCoe = 1;
     public const float TopMoveDownOffset = 100;
     public const string PackageName = "com.HiSpin.DailyCash.HugeRewards.FreeGame";
-    public const int Version = 7;
+    public const int Version = 8;
     public const string AppleId = "1540900402";
     public static bool isLoadingEnd = false;
     public static Master Instance;

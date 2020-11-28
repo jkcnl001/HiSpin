@@ -55,8 +55,8 @@ public class SlotItem : MonoBehaviour
     }
     private void OnSuccessCallback()
     {
-        Save.data.allData.user_panel.lucky_count++;
         Master.Instance.SendAdjustEnterSlotsEvent(isAd);
+        Save.data.allData.user_panel.lucky_count++;
         TaskAgent.TriggerTaskEvent(PlayerTaskTarget.EnterSlotsOnce, 1);
         UI.ShowBasePanel(BasePanel.PlaySlots, index, isAd ? 1 : 0, cashNum, Save.data.allData.lucky_status.lucky_exp);
         UI.MenuPanel.UpdateFreeSlotsLeftNumText();

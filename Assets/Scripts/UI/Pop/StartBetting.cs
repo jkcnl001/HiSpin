@@ -46,7 +46,6 @@ public class StartBetting : PopUI
         {
             Vector3 flyEndPos = fly_targetRect.position;
             Vector3 startPos = yesterday_ticket_numText.transform.position;
-            Vector3 normalizeLength = (flyEndPos - startPos).normalized;
             int cardCount = all_fly_cards.Count;
             int startCardIndex = 0;
             int endCardIndex = 0;
@@ -67,8 +66,9 @@ public class StartBetting : PopUI
                 for(int i = endCardIndex; i < startCardIndex; i++)
                 {
                     all_fly_cards[i].Rotate(new Vector3(0, 0, Time.deltaTime * 100));
-                    all_fly_cards[i].transform.position += normalizeLength * Time.deltaTime*1800;
-                    if (Mathf.Abs(all_fly_cards[i].transform.position.x - flyEndPos.x) < 5f)
+                    float progress = Mathf.Clamp(flyTimer - flyInterval * i, 0, 1);
+                    all_fly_cards[i].transform.position = Vector3.Lerp(startPos, flyEndPos, progress);
+                    if (progress == 1)
                     {
                         all_fly_cards[i].gameObject.SetActive(false);
                         Audio.PlayOneShot(AudioPlayArea.FlyOver);
